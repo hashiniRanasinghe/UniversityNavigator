@@ -29,9 +29,22 @@
 		530E62B52DEE932000D82040 /* UniversityNavigatorUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = UniversityNavigatorUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		534C1BF22DEE98300045B6E3 /* Exceptions for "UniversityNavigator" folder in "UniversityNavigator" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Views/Home/HomeViewController.swift,
+			);
+			target = 530E629A2DEE931E00D82040 /* UniversityNavigator */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		530E629D2DEE931E00D82040 /* UniversityNavigator */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				534C1BF22DEE98300045B6E3 /* Exceptions for "UniversityNavigator" folder in "UniversityNavigator" target */,
+			);
 			path = UniversityNavigator;
 			sourceTree = "<group>";
 		};
