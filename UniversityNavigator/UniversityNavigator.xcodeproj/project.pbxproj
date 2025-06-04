@@ -30,12 +30,19 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
-		534C1BF22DEE98300045B6E3 /* Exceptions for "UniversityNavigator" folder in "UniversityNavigator" target */ = {
+		530D24DF2DF08B1400419EA1 /* Exceptions for "UniversityNavigator" folder in "UniversityNavigatorTests" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
-				Views/Home/HomeViewController.swift,
+				Assets/logo.png,
 			);
-			target = 530E629A2DEE931E00D82040 /* UniversityNavigator */;
+			target = 530E62AA2DEE932000D82040 /* UniversityNavigatorTests */;
+		};
+		530D24E02DF08B1400419EA1 /* Exceptions for "UniversityNavigator" folder in "UniversityNavigatorUITests" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Assets/logo.png,
+			);
+			target = 530E62B42DEE932000D82040 /* UniversityNavigatorUITests */;
 		};
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
@@ -43,7 +50,8 @@
 		530E629D2DEE931E00D82040 /* UniversityNavigator */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
-				534C1BF22DEE98300045B6E3 /* Exceptions for "UniversityNavigator" folder in "UniversityNavigator" target */,
+				530D24DF2DF08B1400419EA1 /* Exceptions for "UniversityNavigator" folder in "UniversityNavigatorTests" target */,
+				530D24E02DF08B1400419EA1 /* Exceptions for "UniversityNavigator" folder in "UniversityNavigatorUITests" target */,
 			);
 			path = UniversityNavigator;
 			sourceTree = "<group>";

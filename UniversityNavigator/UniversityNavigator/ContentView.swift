@@ -1,24 +1,22 @@
-//
-//  ContentView.swift
-//  UniversityNavigator
-//
-//  Created by Hashini Ranasinghe on 2025-06-03.
-//
-
 import SwiftUI
 
 struct ContentView: View {
+    @State private var showHomePage = false
+    
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+        NavigationView {
+            if showHomePage {
+                HomePageView()
+            } else {
+                LandingPageView(showHomePage: $showHomePage)
+            }
         }
-        .padding()
+        .navigationBarHidden(true)
     }
 }
 
-#Preview {
-    ContentView()
+struct ContentView_Previews: PreviewProvider {
+    static var previews: some View {
+        ContentView()
+    }
 }
