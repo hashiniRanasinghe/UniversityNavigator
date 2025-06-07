@@ -1,9 +1,3 @@
-//
-//  LocationModel.swift
-//  UniversityNavigator
-//
-//  Created by Hashini Ranasinghe on 2025-06-04.
-//
 
 import Foundation
 import SwiftUI
