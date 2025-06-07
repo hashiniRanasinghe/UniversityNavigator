@@ -33,9 +33,15 @@
 		530D24DF2DF08B1400419EA1 /* Exceptions for "UniversityNavigator" folder in "UniversityNavigatorTests" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
+
+				Assets/library1.jpg,
+				Assets/library2.png,
+				Assets/library3.jpg,
+
 				"Assets/ezora-canteen.png",
 				Assets/hcafe.jpg,
 				Assets/lawLibrary.jpg,
+        develop
 				Assets/logo.png,
 				"Assets/reid-library.png",
 			);
@@ -44,9 +50,15 @@
 		530D24E02DF08B1400419EA1 /* Exceptions for "UniversityNavigator" folder in "UniversityNavigatorUITests" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
+
+				Assets/library1.jpg,
+				Assets/library2.png,
+				Assets/library3.jpg,
+
 				"Assets/ezora-canteen.png",
 				Assets/hcafe.jpg,
 				Assets/lawLibrary.jpg,
+        develop
 				Assets/logo.png,
 				"Assets/reid-library.png",
 			);
