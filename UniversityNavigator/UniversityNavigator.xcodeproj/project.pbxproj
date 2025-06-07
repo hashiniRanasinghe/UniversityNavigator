@@ -34,6 +34,25 @@
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 
+				Assets/Amaricano.jpg,
+				Assets/EzoneCafe.png,
+				Assets/FishPie.jpg,
+				Assets/FlavouredMilk.jpg,
+				Assets/FriedRice.jpg,
+				Assets/HotChips.jpg,
+				Assets/IcedCoffee.jpg,
+				Assets/InstantNoodles.jpg,
+				Assets/logo.png,
+				Assets/Nescafe.jpg,
+				Assets/Pancake.jpg,
+				Assets/Pasta.jpg,
+				Assets/RiceandCurry.jpg,
+				Assets/SaladPlate.jpg,
+				Assets/Samosa.jpg,
+				Assets/Sandwich.jpg,
+				Assets/SausageBun.jpg,
+
+
 				Assets/library1.jpg,
 				Assets/library2.png,
 				Assets/library3.jpg,
@@ -44,6 +63,7 @@
         develop
 				Assets/logo.png,
 				"Assets/reid-library.png",
+
 			);
 			target = 530E62AA2DEE932000D82040 /* UniversityNavigatorTests */;
 		};
@@ -51,6 +71,25 @@
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 
+				Assets/Amaricano.jpg,
+				Assets/EzoneCafe.png,
+				Assets/FishPie.jpg,
+				Assets/FlavouredMilk.jpg,
+				Assets/FriedRice.jpg,
+				Assets/HotChips.jpg,
+				Assets/IcedCoffee.jpg,
+				Assets/InstantNoodles.jpg,
+				Assets/logo.png,
+				Assets/Nescafe.jpg,
+				Assets/Pancake.jpg,
+				Assets/Pasta.jpg,
+				Assets/RiceandCurry.jpg,
+				Assets/SaladPlate.jpg,
+				Assets/Samosa.jpg,
+				Assets/Sandwich.jpg,
+				Assets/SausageBun.jpg,
+
+
 				Assets/library1.jpg,
 				Assets/library2.png,
 				Assets/library3.jpg,
@@ -61,6 +100,7 @@
         develop
 				Assets/logo.png,
 				"Assets/reid-library.png",
+
 			);
 			target = 530E62B42DEE932000D82040 /* UniversityNavigatorUITests */;
 		};
