@@ -9,17 +9,17 @@ import SwiftUI
 
 struct HomePageView: View {
     @State private var searchText = ""
+    @State private var selectedTab = "Home"
     
     var body: some View {
         VStack(spacing: 0) {
-            // Header
+    
             VStack(spacing: 20) {
                 Text("Campus Navigator")
                     .font(.system(size: 28, weight: .bold))
                     .foregroundColor(.black)
                     .padding(.top, 20)
                 
-                // Search Bar
                 HStack {
                     Image(systemName: "magnifyingglass")
                         .foregroundColor(.gray)
@@ -43,12 +43,14 @@ struct HomePageView: View {
             
             ScrollView {
                 VStack(spacing: 25) {
-                    // Category Icons
+
                     HStack(spacing: 0) {
-                        CategoryButton(icon: "book", title: "Library", color: .blue)
-                        CategoryButton(icon: "cup.and.saucer", title: "Cafe", color: .red)
-                        CategoryButton(icon: "building.2", title: "Halls", color: .green)
-                        CategoryButton(icon: "dumbbell", title: "Gym", color: .purple)
+                        CategoryButton(icon: "book", title:
+                                        "Library", color: .blue)
+                        CategoryButton(icon: "cup.and.saucer",
+                                       title: "Cafe", color: .blue)
+                        CategoryButton(icon: "building.2", title: "Halls", color: .blue)
+                        CategoryButton(icon: "dumbbell", title: "Gym", color: .blue)
                     }
                     .padding(.horizontal, 20)
                     
@@ -121,18 +123,10 @@ struct HomePageView: View {
             
             Spacer()
             
-            // Bottom Navigation
-            HStack {
-                BottomNavItem(icon: "house.fill", title: "Home", isSelected: true)
-                BottomNavItem(icon: "location.fill", title: "Map", isSelected: false)
-                BottomNavItem(icon: "square.grid.2x2", title: "Item 3", isSelected: false)
-                BottomNavItem(icon: "ellipsis", title: "Item 4", isSelected: false)
-                BottomNavItem(icon: "person.fill", title: "Profile", isSelected: false)
+            BottomNavigationBar(selectedTab: selectedTab) { tab in
+                selectedTab = tab
+                // Navigate or handle tab switch here
             }
-            .padding(.horizontal, 20)
-            .padding(.vertical, 15)
-            .background(Color.white)
-            .shadow(color: .black.opacity(0.1), radius: 5, x: 0, y: -2)
         }
         .background(Color.white)
         .ignoresSafeArea(.all, edges: .bottom)
