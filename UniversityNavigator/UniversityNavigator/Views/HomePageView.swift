@@ -11,6 +11,10 @@ struct HomePageView: View {
     @State private var searchText = ""
     @State private var selectedTab = "Home"
     
+    let pastelGreen = Color(red: 0.6, green: 0.85, blue: 0.7)    // soft green
+    let pastelRed = Color(red: 1.0, green: 0.7, blue: 0.7)       // soft red
+    let pastelOrange = Color(red: 1.0, green: 0.8, blue: 0.6)    // soft orange
+    
     var body: some View {
         VStack(spacing: 0) {
   
@@ -66,29 +70,29 @@ struct HomePageView: View {
                             Spacer()
                         }
                         .padding(.horizontal, 20)
-                        
-                        let pastelGreen = Color(red: 0.6, green: 0.85, blue: 0.7)    // soft green
-                        let pastelRed = Color(red: 1.0, green: 0.7, blue: 0.7)       // soft red (pinkish)
-                        let pastelOrange = Color(red: 1.0, green: 0.8, blue: 0.6)    // soft orange
+//                        
+//                        let pastelGreen = Color(red: 0.6, green: 0.85, blue: 0.7)    // soft green
+//                        let pastelRed = Color(red: 1.0, green: 0.7, blue: 0.7)       // soft red
+//                        let pastelOrange = Color(red: 1.0, green: 0.8, blue: 0.6)    // soft orange
 
                         ScrollView(.horizontal, showsIndicators: false) {
                             HStack(spacing: 15) {
                                 LocationCard(
                                     title: "Reid Library",status: "Busy",
-                                    statusColor: pastelRed,spotsAvailable: "10/100 Spots Available",
+                                    statusColor: .pink,spotsAvailable: "10/100 Spots Available",
                                     imageName: "library"
                                     
                                 )
                                 
                                 LocationCard(
                                     title: "Fitness Centre",status: "Free",
-                                    statusColor: pastelGreen,spotsAvailable: "27/50 Spots Available",
+                                    statusColor: .green,spotsAvailable: "27/50 Spots Available",
                                     imageName: "gym"
                                 )
                                 
                                 LocationCard(
                                     title: "Ezora Canteen",status: "Moderate",
-                                    statusColor: pastelOrange,spotsAvailable: "15/30 Spots Available",
+                                    statusColor: .orange,spotsAvailable: "15/30 Spots Available",
                                     imageName: "cafe"
                                 )
                             }
@@ -189,6 +193,7 @@ struct LocationCard: View {
                             if let libraryImage = UIImage(named: "reid-library.png") {
                                 Image(uiImage: libraryImage)
                                     .resizable()
+//                                    .frame(width: 200, height: 80)
                                     .aspectRatio(contentMode: .fill)
                                     .clipped()
                             }
@@ -211,13 +216,15 @@ struct LocationCard: View {
                             }
 
                         } else if imageName == "cafe" {
-                            if let cafeImage = UIImage(named: "ezora-canteen.png") {
+                            if let cafeImage = UIImage(named: "reid-library.png") {
                                 Image(uiImage: cafeImage)
                                     .resizable()
                                     .aspectRatio(contentMode: .fill)
                                     .clipped()
-                                    .frame(height: 50)
+//                                    .frame(width: 200, height: 120)
 //                                    .frame(height: 90)
+                                    .frame(width: 200, height: 120)
+                                    .clipShape(UnevenRoundedRectangle(topLeadingRadius: 12, topTrailingRadius: 12))
                             } else {
                                 Text("Canteen image not found")
                                     .foregroundColor(.red)
@@ -265,7 +272,7 @@ struct QuickDirectionCard: View {
     
     var body: some View {
         VStack(spacing: 0){
-            // Image placeholder
+
             Rectangle()
                 .fill(Color.gray.opacity(0.3))
                 .frame(height: 80)
@@ -278,8 +285,11 @@ struct QuickDirectionCard: View {
                                 Image(uiImage: libraryImage)
                                 .resizable()
                                     .aspectRatio(contentMode: .fill)
-                                    .clipped()
-                                    .frame(height: 60)
+//                                    .clipped()
+//                                    .frame(height: 60)
+                                    .frame(height: 80)
+                                     .frame(maxWidth: .infinity)
+                                     .clipShape(UnevenRoundedRectangle(topLeadingRadius: 8, topTrailingRadius: 8))
                             } else {
                                 Text("image not found")
                                     .foregroundColor(.red)
@@ -290,7 +300,10 @@ struct QuickDirectionCard: View {
                                 Image(uiImage: officeImage)
                                     .resizable()
                                     .aspectRatio(contentMode: .fill)
-                                    .clipped()
+//                                    .clipped()
+                                    .frame(height: 80)
+                                     .frame(maxWidth: .infinity)
+                                     .clipShape(UnevenRoundedRectangle(topLeadingRadius: 8, topTrailingRadius: 8))
                             } else {
                                 Text("image not found")
                                     .foregroundColor(.red)
@@ -301,7 +314,10 @@ struct QuickDirectionCard: View {
                                 Image(uiImage: studentImage)
                                     .resizable()
                                     .aspectRatio(contentMode: .fill)
-                                    .clipped()
+//                                    .clipped()
+                                    .frame(height: 80)
+                                     .frame(maxWidth: .infinity)
+                                     .clipShape(UnevenRoundedRectangle(topLeadingRadius: 8, topTrailingRadius: 8))
                             } else {
                                 Text("image not found")
                                     .foregroundColor(.red)
@@ -312,8 +328,11 @@ struct QuickDirectionCard: View {
                                 Image(uiImage: foodImage)
                                     .resizable()
                                     .aspectRatio(contentMode: .fill)
-                                    .clipped()
-                                    .frame(height: 60)
+//                                    .clipped()
+                                    .frame(height: 80)
+                                     .frame(maxWidth: .infinity)
+                                     .clipShape(UnevenRoundedRectangle(topLeadingRadius: 8, topTrailingRadius: 8))
+//                                    .frame(height: 60)
                             } else {
                                 Text("Image not found")
                                     .foregroundColor(.red)
