@@ -11,16 +11,21 @@ struct HomePageView: View {
     @State private var searchText = ""
     @State private var selectedTab = "Home"
     
+    let pastelGreen = Color(red: 0.6, green: 0.85, blue: 0.7)    // soft green
+    let pastelRed = Color(red: 1.0, green: 0.7, blue: 0.7)       // soft red
+    let pastelOrange = Color(red: 1.0, green: 0.8, blue: 0.6)    // soft orange
+    
     var body: some View {
         VStack(spacing: 0) {
-    
-            VStack(spacing: 20) {
-                Text("Campus Navigator")
+  
+                VStack(spacing: 20) {
+                    Text("Campus Navigator")
                     .font(.system(size: 28, weight: .bold))
                     .foregroundColor(.black)
                     .padding(.top, 20)
                 
-                HStack {
+                // search bar
+        HStack {
                     Image(systemName: "magnifyingglass")
                         .foregroundColor(.gray)
                         .padding(.leading, 15)
@@ -41,20 +46,22 @@ struct HomePageView: View {
             .padding(.horizontal, 20)
             .padding(.bottom, 20)
             
+            
             ScrollView {
                 VStack(spacing: 25) {
-
+                    // category buttons
                     HStack(spacing: 0) {
-                        CategoryButton(icon: "book", title:
-                                        "Library", color: .blue)
-                        CategoryButton(icon: "cup.and.saucer",
-                                       title: "Cafe", color: .blue)
+                        CategoryButton(icon: "book", title:"Library", color: .blue)
+                        CategoryButton(icon: "cup.and.saucer",title: "Cafe", color: .blue)
                         CategoryButton(icon: "building.2", title: "Halls", color: .blue)
                         CategoryButton(icon: "dumbbell", title: "Gym", color: .blue)
                     }
                     .padding(.horizontal, 20)
                     
-                    // Open Now Section
+
+                    
+                    
+                    //open Now
                     VStack(alignment: .leading, spacing: 15) {
                         HStack {
                             Text("Open Now")
@@ -63,30 +70,29 @@ struct HomePageView: View {
                             Spacer()
                         }
                         .padding(.horizontal, 20)
-                        
+//                        
+//                        let pastelGreen = Color(red: 0.6, green: 0.85, blue: 0.7)    // soft green
+//                        let pastelRed = Color(red: 1.0, green: 0.7, blue: 0.7)       // soft red
+//                        let pastelOrange = Color(red: 1.0, green: 0.8, blue: 0.6)    // soft orange
+
                         ScrollView(.horizontal, showsIndicators: false) {
                             HStack(spacing: 15) {
                                 LocationCard(
-                                    title: "Reid Library",
-                                    status: "Busy",
-                                    statusColor: .red,
-                                    spotsAvailable: "10/100 Spots Available",
+                                    title: "Reid Library",status: "Busy",
+                                    statusColor: .pink,spotsAvailable: "10/100 Spots Available",
                                     imageName: "library"
+                                    
                                 )
                                 
                                 LocationCard(
-                                    title: "Fitness Centre",
-                                    status: "Free",
-                                    statusColor: .green,
-                                    spotsAvailable: "27/50 Spots Available",
+                                    title: "Fitness Centre",status: "Free",
+                                    statusColor: .green,spotsAvailable: "27/50 Spots Available",
                                     imageName: "gym"
                                 )
                                 
                                 LocationCard(
-                                    title: "Ezora",
-                                    status: "Moderate",
-                                    statusColor: .orange,
-                                    spotsAvailable: "15/30 Spots Available",
+                                    title: "Ezora Canteen",status: "Moderate",
+                                    statusColor: .orange,spotsAvailable: "15/30 Spots Available",
                                     imageName: "cafe"
                                 )
                             }
@@ -94,7 +100,7 @@ struct HomePageView: View {
                         }
                     }
                     
-                    // Quick Directions Section
+                    //quick directions
                     VStack(alignment: .leading, spacing: 15) {
                         HStack {
                             Text("Quick Directions")
@@ -111,8 +117,8 @@ struct HomePageView: View {
                             }
                             
                             HStack(spacing: 12) {
-                                QuickDirectionCard(title: "Student Hub", imageName: "student")
-                                QuickDirectionCard(title: "Food Court", imageName: "food")
+                                QuickDirectionCard(title: "Hackett Cafe", imageName: "hcafe")
+                                QuickDirectionCard(title: "Beasley Law Library ", imageName: "lawLibrary")
                             }
                         }
                         .padding(.horizontal, 20)
@@ -123,16 +129,22 @@ struct HomePageView: View {
             
             Spacer()
             
+            
+            // bottom nav bar
             BottomNavigationBar(selectedTab: selectedTab) { tab in
                 selectedTab = tab
-                // Navigate or handle tab switch here
+           
+                
+                
             }
         }
         .background(Color.white)
         .ignoresSafeArea(.all, edges: .bottom)
     }
+
 }
 
+// category btn
 struct CategoryButton: View {
     let icon: String
     let title: String
@@ -167,17 +179,62 @@ struct LocationCard: View {
     
     var body: some View {
         VStack(spacing: 0) {
-            // Image placeholder
+         
+//            let logoImage = UIImage(named: "Logo-light.png")
+            
             Rectangle()
                 .fill(Color.gray.opacity(0.3))
                 .frame(width: 200, height: 120)
-                .cornerRadius(12, corners: [.topLeft, .topRight])
+                .clipShape(UnevenRoundedRectangle(topLeadingRadius: 12, topTrailingRadius: 12))
+    
                 .overlay(
-                    Image(systemName: imageName == "library" ? "books.vertical.fill" :
-                         imageName == "gym" ? "dumbbell.fill" : "cup.and.saucer.fill")
-                        .font(.system(size: 30))
-                        .foregroundColor(.gray)
+                    Group {
+                        if imageName == "library" {
+                            if let libraryImage = UIImage(named: "reid-library.png") {
+                                Image(uiImage: libraryImage)
+                                    .resizable()
+//                                    .frame(width: 200, height: 80)
+                                    .aspectRatio(contentMode: .fill)
+                                    .clipped()
+                            }
+                            else {
+                                Text("Library image not found")
+                                    .foregroundColor(.red)
+                                    .font(.caption)
+                            }
+
+                        } else if imageName == "gym" {
+                            if let gymImage = UIImage(named: "fitness-centre.png") {
+                                Image(uiImage: gymImage)
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fill)
+                                    .clipped()
+                            } else {
+                                Text("Gym image not found")
+                                    .foregroundColor(.red)
+                                    .font(.caption)
+                            }
+
+                        } else if imageName == "cafe" {
+                            if let cafeImage = UIImage(named: "reid-library.png") {
+                                Image(uiImage: cafeImage)
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fill)
+                                    .clipped()
+//                                    .frame(width: 200, height: 120)
+//                                    .frame(height: 90)
+                                    .frame(width: 200, height: 120)
+                                    .clipShape(UnevenRoundedRectangle(topLeadingRadius: 12, topTrailingRadius: 12))
+                            } else {
+                                Text("Canteen image not found")
+                                    .foregroundColor(.red)
+                                    .font(.caption)
+                            }
+                        }
+                    }
                 )
+
+
             
             VStack(alignment: .leading, spacing: 8) {
                 HStack {
@@ -187,6 +244,7 @@ struct LocationCard: View {
                     
                     Spacer()
                     
+                    // status badge
                     Text(status)
                         .font(.system(size: 12, weight: .medium))
                         .foregroundColor(.white)
@@ -200,11 +258,11 @@ struct LocationCard: View {
                     .font(.system(size: 12))
                     .foregroundColor(.gray)
             }
-            .padding(12)
+             .padding(12)
         }
-        .background(Color.white)
-        .cornerRadius(12)
-        .shadow(color: .black.opacity(0.1), radius: 5, x: 0, y: 2)
+            .background(Color.white)
+            .cornerRadius(12)
+            .shadow(color: .black.opacity(0.1), radius: 5, x: 0, y: 2)
     }
 }
 
@@ -213,19 +271,77 @@ struct QuickDirectionCard: View {
     let imageName: String
     
     var body: some View {
-        VStack(spacing: 0) {
-            // Image placeholder
+        VStack(spacing: 0){
+
             Rectangle()
                 .fill(Color.gray.opacity(0.3))
                 .frame(height: 80)
-                .cornerRadius(8, corners: [.topLeft, .topRight])
+//                .cornerRadius(8, corners: [.topLeft, .topRight])
+                .clipShape(UnevenRoundedRectangle(topLeadingRadius: 8, topTrailingRadius: 8))
                 .overlay(
-                    Image(systemName: imageName == "library" ? "books.vertical.fill" :
-                         imageName == "office" ? "building.2.fill" :
-                         imageName == "student" ? "person.2.fill" : "fork.knife")
-                        .font(.system(size: 20))
-                        .foregroundColor(.gray)
+                    Group {
+                        if imageName == "library" {
+                            if let libraryImage = UIImage(named: "reid-library.png") {
+                                Image(uiImage: libraryImage)
+                                .resizable()
+                                    .aspectRatio(contentMode: .fill)
+//                                    .clipped()
+//                                    .frame(height: 60)
+                                    .frame(height: 80)
+                                     .frame(maxWidth: .infinity)
+                                     .clipShape(UnevenRoundedRectangle(topLeadingRadius: 8, topTrailingRadius: 8))
+                            } else {
+                                Text("image not found")
+                                    .foregroundColor(.red)
+                                    .font(.caption)
+                            }
+                        } else if imageName == "office" {
+                            if let officeImage = UIImage(named: "program-office.png") {
+                                Image(uiImage: officeImage)
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fill)
+//                                    .clipped()
+                                    .frame(height: 80)
+                                     .frame(maxWidth: .infinity)
+                                     .clipShape(UnevenRoundedRectangle(topLeadingRadius: 8, topTrailingRadius: 8))
+                            } else {
+                                Text("image not found")
+                                    .foregroundColor(.red)
+                                    .font(.caption)
+                            }
+                        } else if imageName == "hcafe" {
+                            if let studentImage = UIImage(named: "hcafe.jpg") {
+                                Image(uiImage: studentImage)
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fill)
+//                                    .clipped()
+                                    .frame(height: 80)
+                                     .frame(maxWidth: .infinity)
+                                     .clipShape(UnevenRoundedRectangle(topLeadingRadius: 8, topTrailingRadius: 8))
+                            } else {
+                                Text("image not found")
+                                    .foregroundColor(.red)
+                                    .font(.caption)
+                            }
+                        } else if imageName == "lawLibrary" {
+                            if let foodImage = UIImage(named: "lawLibrary.jpg") {
+                                Image(uiImage: foodImage)
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fill)
+//                                    .clipped()
+                                    .frame(height: 80)
+                                     .frame(maxWidth: .infinity)
+                                     .clipShape(UnevenRoundedRectangle(topLeadingRadius: 8, topTrailingRadius: 8))
+//                                    .frame(height: 60)
+                            } else {
+                                Text("Image not found")
+                                    .foregroundColor(.red)
+                                    .font(.caption)
+                            }
+                        }
+                    }
                 )
+
             
             VStack(spacing: 8) {
                 Text(title)
@@ -233,7 +349,10 @@ struct QuickDirectionCard: View {
                     .foregroundColor(.black)
                     .multilineTextAlignment(.center)
                 
-                Button(action: {}) {
+                // directions button
+                Button(action: {
+                    // TODO: implement navigation
+                }) {
                     Text("Directions")
                         .font(.system(size: 12, weight: .medium))
                         .foregroundColor(.white)
@@ -252,6 +371,7 @@ struct QuickDirectionCard: View {
     }
 }
 
+// bottom navigation item - might not be used directly
 struct BottomNavItem: View {
     let icon: String
     let title: String
@@ -268,27 +388,6 @@ struct BottomNavItem: View {
                 .foregroundColor(isSelected ? .blue : .gray)
         }
         .frame(maxWidth: .infinity)
-    }
-}
-
-// Helper extension for corner radius
-extension View {
-    func cornerRadius(_ radius: CGFloat, corners: UIRectCorner) -> some View {
-        clipShape(RoundedCorner(radius: radius, corners: corners))
-    }
-}
-
-struct RoundedCorner: Shape {
-    var radius: CGFloat = .infinity
-    var corners: UIRectCorner = .allCorners
-
-    func path(in rect: CGRect) -> Path {
-        let path = UIBezierPath(
-            roundedRect: rect,
-            byRoundingCorners: corners,
-            cornerRadii: CGSize(width: radius, height: radius)
-        )
-        return Path(path.cgPath)
     }
 }
 
