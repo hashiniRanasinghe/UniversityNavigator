@@ -15,7 +15,7 @@ struct LandingPageView: View {
             Spacer()
             VStack(spacing: 20) {
                 // logo light
-                ZStack {
+                    ZStack {
                     if let logoImage = UIImage(named: "Logo-light.png") {
                         Image(uiImage: logoImage)
                             .resizable()
@@ -25,9 +25,10 @@ struct LandingPageView: View {
             }
             Spacer()
             
+            
             Button(action: {
                 withAnimation(.easeInOut(duration: 0.5)) {
-                    showHomePage = true
+                        showHomePage = true
                 }
             }) {
                 Text("Let's Start")
@@ -40,7 +41,7 @@ struct LandingPageView: View {
             }
             .padding(.horizontal, 40)
             .padding(.bottom, 50)
-        }
+            }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(Color.white)
     }

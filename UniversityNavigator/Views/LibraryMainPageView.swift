@@ -381,14 +381,30 @@ Text(pcStatus)
                         }
                     }
                 }
+                Spacer()
                 
-                
-                HStack(spacing: 6) {
-                    Image(systemName: "map")
-                        .font(.system(size: 10))
-                        .foregroundColor(.gray)
+                HStack(spacing: 12) {
+                    Spacer()
                     
                     Button(action: {
+                    //                    Image(systemName: "map")
+                    //                        .font(.system(size: 10))
+                    //                        .foregroundColor(.gray)
+                        // TODO: Navigate to library details or map
+                    }) {
+                        Text("Get Directions")
+                            .font(.system(size: 14, weight: .medium))
+                            .foregroundColor(.white)
+                            .padding(.horizontal, 20)
+                            .padding(.vertical, 12)
+                            .background(Color.black)
+                            .cornerRadius(25)
+                    }
+                    
+                    Button(action: {
+                    //                    Image(systemName: "map")
+                    //                        .font(.system(size: 10))
+                    //                        .foregroundColor(.gray)
                         // TODO: Navigate to library details or map
                     }) {
                         Text("View Details")
@@ -403,7 +419,7 @@ Text(pcStatus)
                     Spacer()
                 }
             }
-            .padding(16)
+            .padding(20)
             
             
         }
