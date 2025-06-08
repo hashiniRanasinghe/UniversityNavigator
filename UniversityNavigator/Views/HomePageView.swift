@@ -15,6 +15,13 @@ struct HomePageView: View {
     let pastelRed = Color(red: 1.0, green: 0.7, blue: 0.7)       // soft red
     let pastelOrange = Color(red: 1.0, green: 0.8, blue: 0.6)    // soft orange
     
+    //low crowd
+    let freeColor = Color(red: 0.3, green: 0.8, blue: 0.5)     // soft green
+    //medium crowd
+    let moderateColor = Color(red: 1.0, green: 0.7, blue: 0.3) // soft orange
+    //high crowd
+    let fullColor = Color(red: 0.9, green: 0.4, blue: 0.4)     // soft red
+    
     var body: some View {
         VStack(spacing: 0) {
   
@@ -79,20 +86,21 @@ struct HomePageView: View {
                             HStack(spacing: 15) {
                                 LocationCard(
                                     title: "Reid Library",status: "Busy",
-                                    statusColor: .pink,spotsAvailable: "10/100 Spots Available",
+                                    statusColor: fullColor,spotsAvailable: "10/100 Spots Available",
                                     imageName: "library"
                                     
                                 )
                                 
                                 LocationCard(
                                     title: "Fitness Centre",status: "Free",
-                                    statusColor: .green,spotsAvailable: "27/50 Spots Available",
+                                    statusColor: freeColor,
+                                    spotsAvailable: "27/50 Spots Available",
                                     imageName: "gym"
                                 )
                                 
                                 LocationCard(
                                     title: "Ezora Canteen",status: "Moderate",
-                                    statusColor: .orange,spotsAvailable: "15/30 Spots Available",
+                                    statusColor: moderateColor,spotsAvailable: "15/30 Spots Available",
                                     imageName: "cafe"
                                 )
                             }

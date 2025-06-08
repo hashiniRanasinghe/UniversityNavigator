@@ -87,7 +87,7 @@ struct GymPageView: View {
                                                         .foregroundColor(.white)
                                                         .padding(.horizontal, 12)
                                                         .padding(.vertical, 6)
-                                                        .background(Color.green)
+                                                        .background(Color.orange)
                                                         .cornerRadius(12)
                                                 }
                                                 
