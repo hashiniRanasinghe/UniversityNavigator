@@ -106,12 +106,13 @@ struct BarryJLibraryView: View {
                                 }
                             }
 
-                            // availability section
+                  
                             Text("Availability")
                                 .font(.system(size: 18, weight: .bold))
                                 .foregroundColor(.black)
 
-                            // availability stats
+                            
+                   
                             HStack(spacing: 0) {
                                 // pcs available
                                 VStack(alignment: .leading, spacing: 8) {
