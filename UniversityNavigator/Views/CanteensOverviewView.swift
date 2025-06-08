@@ -1,6 +1,6 @@
 import SwiftUI
 
-// MARK: - Model
+
 struct CafeModel: Identifiable {
     let id = UUID()
     let name: String
@@ -12,7 +12,7 @@ struct CafeModel: Identifiable {
     let isOpen: Bool
 }
 
-// MARK: - Sample Data
+
 let sampleCafes: [CafeModel] = [
     CafeModel(name: "Ezone Cafe",
               address: "222 - Ezone North, Floor G",

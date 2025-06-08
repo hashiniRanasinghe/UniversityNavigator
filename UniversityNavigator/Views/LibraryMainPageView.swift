@@ -15,6 +15,12 @@ struct CampusLibrariesView: View {
     
     let categories = ["All Libraries", "Open Now", "PC Available"]
     
+    //colors for availability status
+    let availableColor = Color(red: 0.3, green: 0.8, blue: 0.5)     // soft green
+    let moderateColor = Color(red: 1.0, green: 0.7, blue: 0.3) // soft orange
+    let busyColor = Color(red: 0.9, green: 0.4, blue: 0.4)     // soft red
+    
+    
     var body: some View {
         VStack(spacing: 0) {
             // Header
@@ -40,8 +46,8 @@ struct CampusLibrariesView: View {
             }
             
             ScrollView {
-                VStack(spacing: 20) {
-                    // Category Filters
+                VStack(spacing: 25) {
+                
                     ScrollView(.horizontal, showsIndicators: false) {
                         HStack(spacing: 12) {
                             ForEach(categories, id: \.self) { category in
@@ -53,7 +59,7 @@ struct CampusLibrariesView: View {
                                         .foregroundColor(selectedCategory == category ? .white : .black)
                                         .padding(.horizontal, 16)
                                         .padding(.vertical, 10)
-                                        .background(selectedCategory == category ? (category == "All Libraries" ? Color.blue.opacity(0.3) : Color.black) : Color.clear)
+                                        .background(selectedCategory == category ? Color.black : Color.clear)
                                         .cornerRadius(20)
                                         .overlay(
                                             RoundedRectangle(cornerRadius: 20)
@@ -65,52 +71,79 @@ struct CampusLibrariesView: View {
                         .padding(.horizontal, 20)
                     }
                     
-                    // Libraries List
-                    VStack(spacing: 15) {
+                    // library section 1
+                    VStack(alignment: .leading, spacing: 15) {
+                        HStack {
+                            Text("Main Libraries")
+                                .font(.system(size: 20, weight: .bold))
+                                .foregroundColor(.black)
+                            Spacer()
+                        }
+                        .padding(.horizontal, 20)
+                        
                         LibraryCard(
                             name: "Barry J Marshall Library",
                             building: "446 Building",
-                            hours: "7.30am-8.30pm",
+                            weekdayHours: "7.30am-8.30pm",
+                            weekendHours: "8.00am-6.00pm",
                             pcsAvailable: 26,
                             totalPcs: 60,
                             seatsAvailable: 39,
                             totalSeats: 100,
                             isOpen: true,
-                            imageName: "barry_library"
+                            imageName: "barry_library",
+                            pcStatus: "Available",
+                            pcStatusColor: availableColor
                         )
                         
                         LibraryCard(
                             name: "Reid Library",
                             building: "139 Building",
-                            hours: "7.30am-8.30pm",
+                            weekdayHours: "7.30am-8.30pm",
+                            weekendHours: "9.00am-8.00pm",
                             pcsAvailable: 25,
                             totalPcs: 50,
                             seatsAvailable: 30,
                             totalSeats: 100,
                             isOpen: true,
-                            imageName: "reid_library"
+                            imageName: "reid_library",
+                            pcStatus: "Moderate",
+                            pcStatusColor: moderateColor
                         )
+                    }
+                    
+                    //libraries section 2
+                    VStack(alignment: .leading, spacing: 15) {
+                        HStack {
+                            Text("Specialized Libraries")
+                                .font(.system(size: 20, weight: .bold))
+                                .foregroundColor(.black)
+                             Spacer()
+                        }
+                        .padding(.horizontal, 20)
                         
                         LibraryCard(
                             name: "Beasley Law Library",
                             building: "338 - Law, Floor G",
-                            hours: "7.30am-8.30pm",
+                            weekdayHours: "7.30am-8.30pm",
+                            weekendHours: "10.00am-6.00pm",
                             pcsAvailable: 15,
                             totalPcs: 30,
                             seatsAvailable: 45,
                             totalSeats: 80,
                             isOpen: true,
-                            imageName: "law_library"
+                            imageName: "law_library",
+                            pcStatus: "Busy",
+                            pcStatusColor: busyColor
                         )
                     }
-                    .padding(.horizontal, 20)
                 }
                 .padding(.bottom, 120)
             }
             
             Spacer()
             
-            // Bottom Navigation Bar
+        
             BottomNavigationBar(selectedTab: selectedTab) { tab in
                 selectedTab = tab
             }
@@ -123,132 +156,232 @@ struct CampusLibrariesView: View {
 struct LibraryCard: View {
     let name: String
     let building: String
-    let hours: String
+    let weekdayHours: String
+    let weekendHours: String
     let pcsAvailable: Int
     let totalPcs: Int
     let seatsAvailable: Int
     let totalSeats: Int
     let isOpen: Bool
     let imageName: String
+    let pcStatus: String
+    let pcStatusColor: Color
     
     var body: some View {
         VStack(spacing: 0) {
-            // Library Image with smaller height
+   
             ZStack(alignment: .topTrailing) {
                 Rectangle()
                     .fill(Color.gray.opacity(0.3))
-                    .frame(height: 80)
+//                    .fill(Color.white.opacity(0.2))
+                    .frame(height: 140)
                     .clipShape(UnevenRoundedRectangle(topLeadingRadius: 12, topTrailingRadius: 12))
+//                    .background(
+//                        RoundedRectangle(cornerRadius: 16, style: .continuous)
+//                            .fill(Color.white.opacity(0.15))
+//                    )
+//                    .frame(height: 140)
+//                    .clipShape(RoundedCornerShape(topLeft: 16, topRight: 16))
                     .overlay(
                         Group {
                             if imageName == "barry_library" {
-                                if let barryImage = UIImage(named: "library1.jpg") {
+                                if let barryImage =
+//                                    UIImage(named: "library1.jpg") {
+                                    UIImage(named: "library1.jpg") {
                                     Image(uiImage: barryImage)
                                         .resizable()
                                         .aspectRatio(contentMode: .fill)
-                                        .frame(height: 80)
+                                        .frame(height: 140)
                                                          .frame(maxWidth: .infinity)
-                                                                .clipShape(UnevenRoundedRectangle(topLeadingRadius: 8, topTrailingRadius: 8))
+                                                                .clipShape(UnevenRoundedRectangle(topLeadingRadius: 12, topTrailingRadius: 12))
                                 } else {
-                                    Image(systemName: "building.2")
-                                        .font(.system(size: 24))
-                                        .foregroundColor(.gray)
+                                  
+                                    ZStack {
+                                        Color.gray.opacity(0.3)
+                                        VStack {
+                                            Image(systemName: "building.2")
+                                                .font(.system(size: 30))
+                                                .foregroundColor(.gray)
+                                            Text("Barry Library")
+                                                .font(.system(size: 12))
+                                                .foregroundColor(.gray)
+                                        }
+                                    }
                                 }
                             } else if imageName == "reid_library" {
                                 if let reidImage = UIImage(named: "library2.png") {
                                     Image(uiImage: reidImage)
                                         .resizable()
                                         .aspectRatio(contentMode: .fill)
-                                        .frame(height: 80)
+                                        .frame(height: 140)
                                                          .frame(maxWidth: .infinity)
-                                                                .clipShape(UnevenRoundedRectangle(topLeadingRadius: 8, topTrailingRadius: 8))
+                                                                .clipShape(UnevenRoundedRectangle(topLeadingRadius: 12, topTrailingRadius: 12))
                                 } else {
-                                    Image(systemName: "books.vertical")
-                                        .font(.system(size: 24))
-                                        .foregroundColor(.gray)
+                                    //fallback for reid library
+                                    ZStack {
+                                        Color.gray.opacity(0.4)
+                                        VStack {
+                                            Image(systemName: "books.vertical")
+                                                .font(.system(size: 30))
+                                                .foregroundColor(.gray)
+                                            Text("Reid Library")
+                                                .font(.system(size: 12))
+                                                .foregroundColor(.gray)
+                                        }
+                                    }
                                 }
                             } else if imageName == "law_library" {
                                 if let lawImage = UIImage(named: "library3.jpg") {
                                     Image(uiImage: lawImage)
                                         .resizable()
                                         .aspectRatio(contentMode: .fill)
-                                        .frame(height: 80)
+                                        .frame(height: 140)
                                                          .frame(maxWidth: .infinity)
-                                                                .clipShape(UnevenRoundedRectangle(topLeadingRadius: 8, topTrailingRadius: 8))
+                                                                .clipShape(UnevenRoundedRectangle(topLeadingRadius: 12, topTrailingRadius: 12))
                                 } else {
-                                    Image(systemName: "scale.3d")
-                                        .font(.system(size: 24))
-                                        .foregroundColor(.gray)
+                                    // law library
+                                    ZStack {
+                                        Color.gray.opacity(0.4)
+                                        VStack {
+                                            Image(systemName: "scale.3d")
+                                                .font(.system(size: 30))
+                                                .foregroundColor(.gray)
+                                            Text("Law Library")
+                                                .font(.system(size: 12))
+                                                .foregroundColor(.gray)
+                                        }
+                                    }
                                 }
                             } else {
-                                Image(systemName: "building.columns")
-                                    .font(.system(size: 24))
-                                    .foregroundColor(.gray)
+                                //generic fallback
+                                ZStack {
+                                    Color.gray.opacity(0.3)
+                                    Image(systemName: "building.columns")
+                                        .font(.system(size: 30))
+                                        .foregroundColor(.gray)
+                                }
                             }
                         }
                     )
                 
-                // Open Status Badge
-                Text(isOpen ? "Open" : "Closed")
-                    .font(.system(size: 10, weight: .medium))
+ 
+                    Text(isOpen ? "Open" : "Closed")
+                    .font(.system(size: 12, weight: .medium))
                     .foregroundColor(.white)
-                    .padding(.horizontal, 8)
-                    .padding(.vertical, 4)
+                    .padding(.horizontal, 12)
+                    .padding(.vertical, 6)
                     .background(isOpen ? Color.green : Color.red)
-                    .cornerRadius(8)
-                    .padding(.top, 8)
-                    .padding(.trailing, 8)
+                    .cornerRadius(12)
+                    .padding(.top, 12)
+                    .padding(.trailing, 12)
             }
             
-            // Library Info with more padding
-            VStack(alignment: .leading, spacing: 4) {
-                HStack(alignment: .top) {
-                    VStack(alignment: .leading, spacing: 2) {
+  
+            VStack(alignment: .leading, spacing: 8) {
+         
+                    VStack(spacing: 6) {
+                    HStack(spacing: 8) {
+                        Image(systemName: "clock")
+                            .font(.system(size: 14))
+                            .foregroundColor(.gray)
                         
-                        Text(name)
-                            .font(.system(size: 14, weight: .semibold))
+                        Text("Open (weekdays): \(weekdayHours)")
+                            .font(.system(size: 14))
+                            .foregroundColor(.gray)
+                  
+                        
+                        Spacer()
+                    }
+                    
+                HStack(spacing: 8) {
+                        Image(systemName: "clock")
+                            .font (.system(size: 14))
+                            .foregroundColor(.gray)
+                        
+                        Text("Open (weekend): \(weekendHours)")
+                            .font(.system(size: 14))
+                            .foregroundColor(.gray)
+                        
+                        Spacer()
+                        
+Text(pcStatus)
+                            .font(.system(size: 10, weight: .medium))
+                            .foregroundColor(.white)
+                            .padding(.horizontal, 8)
+                            .padding(.vertical, 4)
+                            .background(pcStatusColor)
+                            .cornerRadius(8)
+                    }
+                }
+                
+        
+            HStack(spacing: 8) {
+                    Image(systemName: "location")
+                        .font(.system(size: 14))
+                        .foregroundColor(.gray)
+                    
+                    Text(building)
+                        .font(.system(size: 14))
+                        .foregroundColor(.gray)
+                    
+                    Spacer()
+                }
+                
+     
+                HStack(alignment: .bottom) {
+                    VStack(alignment: .leading, spacing: 4) {
+                        Text("\(pcsAvailable)/\(totalPcs)")
+                            .font(.system(size: 24, weight: .bold))
                             .foregroundColor(.black)
-          
                         
-                        HStack(spacing: 4) {
-                            Image(systemName: "location")
-                                .font(.system(size: 13))
+                    VStack(alignment: .leading, spacing: 2) {
+                            Text("PCs")
+                                .font(.system(size: 12))
                                 .foregroundColor(.gray)
-                            
-                            Text(building)
+                        
+                            Text("Available")
                                 .font(.system(size: 12))
                                 .foregroundColor(.gray)
                         }
                         
-                        HStack(spacing: 8) {
-                            Image(systemName: "clock")
-                                .font(.system(size: 13))
-                                .foregroundColor(.gray)
-                            
-                            Text("Open: \(hours)")
-                                .font(.system(size: 13))
-                                .foregroundColor(.gray)
+                  
+                        
+                        GeometryReader { geometry in
+                            ZStack(alignment: .leading) {
+                                    Rectangle()
+                                    .fill(Color.gray.opacity(0.3))
+                                    .frame(height: 4)
+                                    .cornerRadius(2)
+                                
+                                Rectangle()
+                                    .fill(pcsAvailable > 0 ? Color.green : Color.red)
+                                    .frame(width: geometry.size.width * CGFloat(pcsAvailable) / CGFloat(totalPcs), height: 4)
+                                    .cornerRadius(2)
+                            }
                         }
+                            .frame(height: 4)
+                            .frame(maxWidth: 150)
                     }
-          
-
+                    
                     Spacer()
                     
-                    // Availability Info - PCs
-                    VStack(alignment: .trailing, spacing: 6) {
+            
+                    VStack(alignment: .trailing, spacing: 4) {
+                        Text("\(seatsAvailable)/\(totalSeats)")
+                            .font(.system(size: 18, weight: .semibold))
+                            .foregroundColor(.black)
+                        
                         VStack(alignment: .trailing, spacing: 2) {
-                            Text("PCs")
-                                .font(.system(size: 10))
+                            Text("Seats")
+                                .font(.system(size: 12))
                                 .foregroundColor(.gray)
                             Text("Available")
-                                .font(.system(size: 10))
+                                .font(.system(size: 12))
                                 .foregroundColor(.gray)
-                            Text("\(pcsAvailable)/\(totalPcs)")
-                                .font(.system(size: 12, weight: .semibold))
-                                .foregroundColor(.black)
                         }
                     }
                 }
+                
                 
                 HStack(spacing: 6) {
                     Image(systemName: "map")
@@ -258,36 +391,26 @@ struct LibraryCard: View {
                     Button(action: {
                         // TODO: Navigate to library details or map
                     }) {
-                        Text("View")
-                            .font(.system(size: 10, weight: .medium))
+                        Text("View Details")
+                            .font(.system(size: 14, weight: .medium))
                             .foregroundColor(.white)
-                            .padding(.horizontal, 12)
-                            .padding(.vertical, 6)
+                            .padding(.horizontal, 20)
+                            .padding(.vertical, 12)
                             .background(Color.black)
-                            .cornerRadius(12)
+                            .cornerRadius(25)
                     }
                     
                     Spacer()
-                    
-                    // Availability Info - Seats
-                    VStack(alignment: .trailing, spacing: 2) {
-                        Text("Seats")
-                            .font(.system(size: 10))
-                            .foregroundColor(.gray)
-                        Text("Available")
-                            .font(.system(size: 10))
-                            .foregroundColor(.gray)
-                        Text("\(seatsAvailable)/\(totalSeats)")
-                            .font(.system(size: 12, weight: .semibold))
-                            .foregroundColor(.black)
-                    }
                 }
             }
-            .padding(12)
-            .background(Color.white)
-            .cornerRadius(12)
-            .shadow(color: .black.opacity(0.1), radius: 5, x: 0, y: 2)
+            .padding(16)
+            
+            
         }
+        .background(Color.white)
+        .cornerRadius(12)
+        .shadow(color: .black.opacity(0.1), radius: 5, x: 0, y: 2)
+        .padding(.horizontal, 20)
     }
 }
 
