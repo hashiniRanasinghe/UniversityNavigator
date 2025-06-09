@@ -12,6 +12,7 @@ import SwiftUI
 struct CampusLibrariesView: View {
     @State private var selectedTab = "Places"
     @State private var selectedCategory = "All Libraries"
+    @Environment(\.dismiss) private var dismiss
     
     let categories = ["All Libraries", "Open Now", "PC Available"]
     
@@ -27,13 +28,13 @@ struct CampusLibrariesView: View {
             VStack(spacing: 0) {
                 HStack {
                     Button(action: {
-                        // TODO: Navigate back
+                        dismiss()
                     }) {
                         Image(systemName: "chevron.left")
                             .font(.system(size: 20, weight: .medium))
                             .foregroundColor(.black)
                     }
-                    
+//
                     Text("Campus Libraries")
                         .font(.system(size: 24, weight: .bold))
                         .foregroundColor(.black)
@@ -149,6 +150,7 @@ struct CampusLibrariesView: View {
             }
         }
         .background(Color.white)
+        .navigationBarBackButtonHidden(true)
         .ignoresSafeArea(.all, edges: .bottom)
     }
 }

@@ -58,11 +58,19 @@ struct HomePageView: View {
                 VStack(spacing: 25) {
                     // category buttons
                     HStack(spacing: 0) {
-                        CategoryButton(icon: "book", title:"Library", color: .blue)
-                        CategoryButton(icon: "cup.and.saucer",title: "Cafe", color: .blue)
-                        CategoryButton(icon: "building.2", title: "Halls", color: .blue)
-                        CategoryButton(icon: "dumbbell", title: "Gym", color: .blue)
-                    }
+                              NavigationLink(destination: CampusLibrariesView()) {
+                                  CategoryButton(icon: "book", title: "Library", color: .blue)
+                              }
+                              NavigationLink(destination: CampusCafeteriasView()) {
+                                  CategoryButton(icon: "cup.and.saucer", title: "Cafe", color: .blue)
+                              }
+                              NavigationLink(destination: CampusLectureHallsView()) {
+                                  CategoryButton(icon: "building.2", title: "Halls", color: .blue)
+                              }
+                              NavigationLink(destination: GymPageView()) {
+                                  CategoryButton(icon: "dumbbell", title: "Gym", color: .blue)
+                              }
+                          }
                     .padding(.horizontal, 20)
                     
 
@@ -148,6 +156,7 @@ struct HomePageView: View {
         }
         .background(Color.white)
         .ignoresSafeArea(.all, edges: .bottom)
+        .navigationBarBackButtonHidden(true)
     }
 
 }

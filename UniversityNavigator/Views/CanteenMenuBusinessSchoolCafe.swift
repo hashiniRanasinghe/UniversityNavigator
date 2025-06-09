@@ -11,6 +11,7 @@ struct CanteenMenuBusinessSchoolCafeView: View {
     @State private var selectedTab = "Places"
     @State private var selectedCategory = "All Foods"
     @State private var searchText = ""
+    @Environment(\.dismiss) private var dismiss
     
     let categories = ["All Foods", "Available Now", "Beverages"]
     
@@ -20,7 +21,7 @@ struct CanteenMenuBusinessSchoolCafeView: View {
             VStack(spacing: 0) {
                 HStack {
                     Button(action: {
-                        
+                        dismiss()
                     }) {
                         Image(systemName: "chevron.left")
                             .font(.system(size: 20, weight: .medium))
@@ -253,6 +254,7 @@ struct CanteenMenuBusinessSchoolCafeView: View {
         }
         .background(Color.white)
         .ignoresSafeArea(.all, edges: .bottom)
+        .navigationBarBackButtonHidden(true)
     }
 }
 

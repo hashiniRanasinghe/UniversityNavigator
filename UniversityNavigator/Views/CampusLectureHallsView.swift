@@ -13,6 +13,7 @@ struct CampusLectureHallsView: View {
     @State private var selectedTab = "Places"
     @State private var selectedCategory = "All Lecture Halls"
     @State private var searchText = ""
+    @Environment(\.dismiss) private var dismiss
     
     let categories = ["All Lecture Halls", "Occupied", "Free"]
     
@@ -27,14 +28,12 @@ struct CampusLectureHallsView: View {
             VStack(spacing: 0) {
                 HStack {
                     Button(action: {
-                        // TODO: Navigate back to previous screen
-                        // print("back button tapped")
+                        dismiss()
                     }) {
                         Image(systemName: "chevron.left")
                             .font(.system(size: 20, weight: .medium))
                             .foregroundColor(.black)
                     }
-                    
                     Text("Campus Lecture Halls")
                         .font(.system(size: 24, weight: .bold))
                         .foregroundColor(.black)
@@ -152,6 +151,7 @@ struct CampusLectureHallsView: View {
         }
         .background(Color.white)
         .ignoresSafeArea(.all, edges: .bottom)
+        .navigationBarBackButtonHidden(true)
     }
 }
 

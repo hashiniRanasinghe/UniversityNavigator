@@ -17,6 +17,7 @@ struct GymPageView: View {
     let pastelOrange = Color(red: 1.0, green: 0.8, blue: 0.6)  // soft orange
 
     var body: some View {
+        
         VStack(spacing: 0) {
             HStack {
                 Button(action: {
@@ -223,7 +224,7 @@ struct GymPageView: View {
                                 .font(.system(size: 14))
                                 .padding(.horizontal, 15)
                                 .padding(.vertical, 12)
-                                .background(Color.gray.opacity(0.1))
+                                .background(Color.black.opacity(0.1))
                                 .cornerRadius(8)
 
                                 Button(action: {
@@ -268,8 +269,11 @@ struct GymPageView: View {
             }
         }
         .background(Color.white)
+        .navigationBarBackButtonHidden(true)
         .ignoresSafeArea(.all, edges: .bottom)
+
     }
+
 }
 
 struct FacilityCard: View {
@@ -299,6 +303,11 @@ struct FacilityCard: View {
         .cornerRadius(12)
         .shadow(color: .black.opacity(0.1), radius: 5, x: 0, y: 2)
     }
+//    func navigationItem;.hidesBackButton = true
+//    func customBackAction() {
+//         navigationController?.popViewController(animated: true)
+//     }
+
 }
 
 struct GymPageView_Previews: PreviewProvider {

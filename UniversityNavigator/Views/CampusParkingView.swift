@@ -9,6 +9,7 @@ import SwiftUI
 
 struct CampusParkingView: View {
     @State private var selectedTab = "Places"
+    @Environment(\.dismiss) private var dismiss
     
     //low crowd
     let freeColor = Color(red: 0.3, green: 0.8, blue: 0.5)     // soft green
@@ -24,7 +25,7 @@ struct CampusParkingView: View {
             VStack(spacing: 0) {
                 HStack {
                     Button(action: {
-                        // TODO: Navigate back
+                        dismiss()
                     }) {
                         Image(systemName: "chevron.left")
                             .font(.system(size: 20, weight: .medium))
@@ -104,6 +105,7 @@ struct CampusParkingView: View {
         }
         .background(Color.white)
         .ignoresSafeArea(.all, edges: .bottom)
+        .navigationBarBackButtonHidden(true)
     }
 }
 
