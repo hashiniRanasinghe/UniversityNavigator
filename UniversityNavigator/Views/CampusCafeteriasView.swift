@@ -11,6 +11,7 @@ import SwiftUI
 struct CampusCafeteriasView: View {
     @State private var selectedTab = "Places"
     @State private var selectedCategory = "All Cafes"
+    @Environment(\.dismiss) private var dismiss
     
     let categories = ["All Cafes", "Open Now", "Less Crowded"]
     
@@ -27,7 +28,7 @@ struct CampusCafeteriasView: View {
             VStack(spacing: 0) {
                 HStack {
                     Button(action: {
-                        // TODO: navigate back to previous screen
+                        dismiss()
                     }) {
                         Image(systemName: "chevron.left")
                             .font(.system(size: 20, weight: .medium))
@@ -134,6 +135,7 @@ struct CampusCafeteriasView: View {
         }
         .background(Color.white)
         .ignoresSafeArea(.all, edges: .bottom)
+        .navigationBarBackButtonHidden(true)
     }
 }
 

@@ -43,7 +43,8 @@ let sampleCafes: [CafeModel] = [
 // MARK: - Main View
 struct CanteensOverviewView: View {
     @State private var selectedFilter: String = "All Cafes"
-
+    @Environment(\.dismiss) private var dismiss
+    
     // Apply filter based on selected option
     var filteredCafes: [CafeModel] {
         switch selectedFilter {
@@ -81,6 +82,7 @@ struct CanteensOverviewView: View {
             .navigationBarTitle("Campus Cafeterias", displayMode: .inline)
         }
         .navigationViewStyle(StackNavigationViewStyle())
+        .navigationBarBackButtonHidden(true)
     }
 }
 

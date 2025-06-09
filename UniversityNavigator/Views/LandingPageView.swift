@@ -43,6 +43,7 @@ struct LandingPageView: View {
             .padding(.bottom, 50)
             }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .navigationBarBackButtonHidden(true)
         .background(Color.white)
     }
 }

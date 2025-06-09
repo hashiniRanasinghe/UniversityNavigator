@@ -1,13 +1,14 @@
 //
-//  BarryJLibraryView.swift
+//  ReidLibrary.swift
 //  UniversityNavigator
 //
-//  Created by Hashini Ranasinghe on 2025-06-08.
+//  Created by Hashini Ranasinghe on 2025-06-09.
 //
 
 import SwiftUI
 
-struct BarryJLibraryView: View {
+
+struct ReidLibrary: View {
     @State private var selectedTab = "Home"
     @Environment(\.dismiss) private var dismiss
 
@@ -17,7 +18,7 @@ struct BarryJLibraryView: View {
 
     var body: some View {
         VStack(spacing: 0) {
-
+            // header
             HStack {
                 Button(action: {
                     dismiss()
@@ -29,7 +30,7 @@ struct BarryJLibraryView: View {
 
                 Spacer()
 
-                Text("Barry J Marshall Library")
+                Text("Reid Library")
                     .font(.system(size: 20, weight: .semibold))
                     .foregroundColor(.black)
 
@@ -49,7 +50,7 @@ struct BarryJLibraryView: View {
                     VStack(spacing: 0) {
 
                         ZStack {
-                            if let libraryImg = UIImage(named: "library1.jpg") {
+                            if let libraryImg = UIImage(named: "library2.png") {
                                 Image(uiImage: libraryImg)
                                     .resizable()
                                     .aspectRatio(contentMode: .fill)
@@ -100,7 +101,7 @@ struct BarryJLibraryView: View {
                                         .font(.system(size: 13))
                                         .foregroundColor(.gray)
 
-                                    Text("446 Building")
+                                    Text("139 Building")
                                         .font(.system(size: 13))
                                         .foregroundColor(.gray)
                                 }
@@ -121,22 +122,22 @@ struct BarryJLibraryView: View {
                                         .foregroundColor(.gray)
 
                                     HStack(spacing: 4) {
-                                        Text("26")
+                                        Text("2")
                                             .font(
                                                 .system(size: 20, weight: .bold)
                                             )
                                             .foregroundColor(.black)
 
-                                        Text("/60")
+                                        Text("/50")
                                             .font(.system(size: 16))
                                             .foregroundColor(.gray)
                                     }
 
                                     // progress bar for pcs
-                                    ProgressView(value: 26, total: 60)
+                                    ProgressView(value: 2, total: 50)
                                         .progressViewStyle(
                                             LinearProgressViewStyle(
-                                                tint: .green)
+                                                tint: .orange)
                                         )
                                         .frame(width: 120, height: 8)
                                         .background(Color.gray.opacity(0.3))
@@ -158,7 +159,7 @@ struct BarryJLibraryView: View {
                                         .foregroundColor(.gray)
 
                                     HStack(spacing: 4) {
-                                        Text("39")
+                                        Text("10")
                                             .font(
                                                 .system(size: 20, weight: .bold)
                                             )
@@ -267,37 +268,10 @@ struct BarryJLibraryView: View {
     }
 }
 
-struct LibraryFacilityCard: View {
-    let icon: String
-    let title: String
-    let color: Color
 
-    var body: some View {
-        VStack(spacing: 12) {
-            ZStack {
-                Circle()
-                    .fill(color.opacity(0.1))
-                    .frame(width: 50, height: 50)
 
-                Image(systemName: icon)
-                    .font(.system(size: 20))
-                    .foregroundColor(color)
-            }
-
-            Text(title)
-                .font(.system(size: 14, weight: .medium))
-                .foregroundColor(.black)
-        }
-        .frame(maxWidth: .infinity)
-        .padding(.vertical, 20)
-        .background(Color.white)
-        .cornerRadius(12)
-        .shadow(color: .black.opacity(0.1), radius: 5, x: 0, y: 2)
-    }
-}
-
-struct BarryJLibraryView_Previews: PreviewProvider {
+struct ReidLibrary_Previews: PreviewProvider {
     static var previews: some View {
-        BarryJLibraryView()
+        ReidLibrary()
     }
 }

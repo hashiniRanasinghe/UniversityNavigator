@@ -1,13 +1,14 @@
 //
-//  BarryJLibraryView.swift
+//  BeasleyLibrary.swift
 //  UniversityNavigator
 //
-//  Created by Hashini Ranasinghe on 2025-06-08.
+//  Created by Hashini Ranasinghe on 2025-06-09.
 //
 
 import SwiftUI
 
-struct BarryJLibraryView: View {
+
+struct BeasleyLibrary: View {
     @State private var selectedTab = "Home"
     @Environment(\.dismiss) private var dismiss
 
@@ -17,7 +18,7 @@ struct BarryJLibraryView: View {
 
     var body: some View {
         VStack(spacing: 0) {
-
+            // header
             HStack {
                 Button(action: {
                     dismiss()
@@ -29,7 +30,7 @@ struct BarryJLibraryView: View {
 
                 Spacer()
 
-                Text("Barry J Marshall Library")
+                Text("Beasley Law Library")
                     .font(.system(size: 20, weight: .semibold))
                     .foregroundColor(.black)
 
@@ -49,7 +50,7 @@ struct BarryJLibraryView: View {
                     VStack(spacing: 0) {
 
                         ZStack {
-                            if let libraryImg = UIImage(named: "library1.jpg") {
+                            if let libraryImg = UIImage(named: "library3.jpg") {
                                 Image(uiImage: libraryImg)
                                     .resizable()
                                     .aspectRatio(contentMode: .fill)
@@ -88,7 +89,7 @@ struct BarryJLibraryView: View {
                                         .font(.system(size: 13))
                                         .foregroundColor(.gray)
 
-                                    Text("Open: 7:30am-8:30pm")
+                                    Text("Open: 7:30am-8:00pm")
                                         .font(.system(size: 13))
                                         .foregroundColor(.gray)
                                 }
@@ -100,7 +101,7 @@ struct BarryJLibraryView: View {
                                         .font(.system(size: 13))
                                         .foregroundColor(.gray)
 
-                                    Text("446 Building")
+                                    Text("139 Building")
                                         .font(.system(size: 13))
                                         .foregroundColor(.gray)
                                 }
@@ -121,22 +122,22 @@ struct BarryJLibraryView: View {
                                         .foregroundColor(.gray)
 
                                     HStack(spacing: 4) {
-                                        Text("26")
+                                        Text("11")
                                             .font(
                                                 .system(size: 20, weight: .bold)
                                             )
                                             .foregroundColor(.black)
 
-                                        Text("/60")
+                                        Text("/40")
                                             .font(.system(size: 16))
                                             .foregroundColor(.gray)
                                     }
 
                                     // progress bar for pcs
-                                    ProgressView(value: 26, total: 60)
+                                    ProgressView(value: 11, total: 40)
                                         .progressViewStyle(
                                             LinearProgressViewStyle(
-                                                tint: .green)
+                                                tint: .orange)
                                         )
                                         .frame(width: 120, height: 8)
                                         .background(Color.gray.opacity(0.3))
@@ -158,22 +159,22 @@ struct BarryJLibraryView: View {
                                         .foregroundColor(.gray)
 
                                     HStack(spacing: 4) {
-                                        Text("39")
+                                        Text("55")
                                             .font(
                                                 .system(size: 20, weight: .bold)
                                             )
                                             .foregroundColor(.black)
 
-                                        Text("/100")
+                                        Text("/60")
                                             .font(.system(size: 16))
                                             .foregroundColor(.gray)
                                     }
 
                                     // progress bar for seats
-                                    ProgressView(value: 39, total: 100)
+                                    ProgressView(value: 55, total: 60)
                                         .progressViewStyle(
                                             LinearProgressViewStyle(
-                                                tint: .orange)
+                                                tint: .green)
                                         )
                                         .frame(width: 120, height: 8)
                                         .background(Color.gray.opacity(0.3))
@@ -267,37 +268,9 @@ struct BarryJLibraryView: View {
     }
 }
 
-struct LibraryFacilityCard: View {
-    let icon: String
-    let title: String
-    let color: Color
 
-    var body: some View {
-        VStack(spacing: 12) {
-            ZStack {
-                Circle()
-                    .fill(color.opacity(0.1))
-                    .frame(width: 50, height: 50)
-
-                Image(systemName: icon)
-                    .font(.system(size: 20))
-                    .foregroundColor(color)
-            }
-
-            Text(title)
-                .font(.system(size: 14, weight: .medium))
-                .foregroundColor(.black)
-        }
-        .frame(maxWidth: .infinity)
-        .padding(.vertical, 20)
-        .background(Color.white)
-        .cornerRadius(12)
-        .shadow(color: .black.opacity(0.1), radius: 5, x: 0, y: 2)
-    }
-}
-
-struct BarryJLibraryView_Previews: PreviewProvider {
+struct BeasleyLibrary_Previews: PreviewProvider {
     static var previews: some View {
-        BarryJLibraryView()
+        BeasleyLibrary()
     }
 }
