@@ -4,6 +4,7 @@
 //
 //  Created by Hashini Ranasinghe on 2025-06-04.
 //
+//DONE -HASHINI
 
 import SwiftUI
 
@@ -56,9 +57,12 @@ struct HomePageView: View {
             
             ScrollView {
                 VStack(spacing: 25) {
-                    // category buttons
+                    // category btns
                     HStack(spacing: 0) {
-                              NavigationLink(destination: CampusLibrariesView()) {
+                        NavigationLink(destination:
+//                                        MapView())
+                        CampusLibrariesView())
+                        {
                                   CategoryButton(icon: "book", title: "Library", color: .blue)
                               }
                               NavigationLink(destination: CampusCafeteriasView()) {
@@ -161,7 +165,7 @@ struct HomePageView: View {
 
 }
 
-// category btn
+// category btns
 struct CategoryButton: View {
     let icon: String
     let title: String
@@ -261,7 +265,7 @@ struct LocationCard: View {
                     
                     Spacer()
                     
-                    // status badge
+                    // sts badge
                     Text(status)
                         .font(.system(size: 12, weight: .medium))
                         .foregroundColor(.white)
@@ -366,7 +370,7 @@ struct QuickDirectionCard: View {
                     .foregroundColor(.black)
                     .multilineTextAlignment(.center)
                 
-                // directions button
+                // directions btn
                 Button(action: {
                     // TODO: implement navigation
                 }) {
@@ -388,7 +392,7 @@ struct QuickDirectionCard: View {
     }
 }
 
-// bottom navigation item - might not be used directly
+
 struct BottomNavItem: View {
     let icon: String
     let title: String

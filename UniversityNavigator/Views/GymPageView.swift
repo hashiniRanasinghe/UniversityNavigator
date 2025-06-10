@@ -4,7 +4,7 @@
 //
 //  Created by Hashini Ranasinghe on 2025-06-07.
 //
-
+//DONE -HASHINI
 import SwiftUI
 
 struct GymPageView: View {
@@ -91,7 +91,7 @@ struct GymPageView: View {
                                     .cornerRadius(12)
                             }
 
-                            //hours
+                            //hrs
                             HStack(spacing: 20) {
                                 HStack(spacing: 8) {
                                     Image(systemName: "clock")
