@@ -45,100 +45,102 @@ struct CampusLectureHallsView: View {
                 .padding(.bottom, 20)
             }
             
-            ScrollView {
-                VStack(spacing: 25) {
+            // Fixed search bar and categories section
+            VStack(spacing: 15) {
+                HStack {
+                    Image(systemName: "magnifyingglass")
+                        .foregroundColor(.gray)
+                        .font(.system(size: 16))
                     
-                    // search bar section
-                    VStack(spacing: 15) {
-                        HStack {
-                            Image(systemName: "magnifyingglass")
-                                .foregroundColor(.gray)
-                                .font(.system(size: 16))
-                            
-                            TextField("Search lecture halls...", text: $searchText)
-                                .font(.system(size: 16))
-                                .foregroundColor(.black)
-                            
-                        }
-                        .padding(.horizontal, 16)
-                        .padding(.vertical, 12)
-                        .background(Color.gray.opacity(0.1))
-                        .cornerRadius(25)
-                        .padding(.horizontal, 20)
-                        
-                        // filter categories - horizontal scroll
-                        ScrollView(.horizontal, showsIndicators: false) {
-                            HStack(spacing: 12) {
-                                ForEach(categories, id: \.self) { category in
-                                    Button(action: {
-                                        selectedCategory = category
-                                        // maybe add haptic feedback here?
-                                    }) {
-                                        Text(category)
-                                            .font(.system(size: 14, weight: .medium))
-                                            .foregroundColor(selectedCategory == category ? .white : .black)
-                                            .padding(.horizontal, 16)
-                                            .padding(.vertical, 10)
-                                            .background(selectedCategory == category ? Color.black : Color.clear)
-                                            .cornerRadius(20)
-                                            .overlay(
-                                                RoundedRectangle(cornerRadius: 20)
-                                                    .stroke(Color.black, lineWidth: 1)
-                                            )
-                                    }
-                                }
-                            }
-                            .padding(.horizontal, 20)
-                        }
-                    }
+                    TextField("Search lecture halls...", text: $searchText)
+                        .font(.system(size: 16))
+                        .foregroundColor(.black)
                     
-                    // lecture halls list
-                    VStack(alignment: .leading, spacing: 15) {
-                        
-                        LectureHallCard(
-                            name: "Anatomy Lecture Room 181",
-                            building: "344 - Anatomy, Floor 1",
-                            currentLecture: "Introduction to Human Anatomy",
-                            cohort: "MBBS 2022/2023 Cohort",
-                            lecturer: "Mrs. A.T.Weerasinghe",
-                            isOccupied: true,
-                            imageName: "anatomy_hall",
-                            status: "Occupied",
-                            statusColor: occupiedColor,
-                            nextClass: nil
-                        )
-                        
-                        LectureHallCard(
-                            name: "Law Lecture Room2",
-                            building: "338- Law, Floor 1",
-                            currentLecture: nil,
-                            cohort: nil,
-                            lecturer: nil,
-                            isOccupied: false,
-                            imageName: "law_hall",
-                            status: "Scheduled",
-                            statusColor: scheduledColor,
-                            nextClass: "Next Class at 2.00 PM"
-                        )
-                        
-                        // maybe add more halls later
-                        LectureHallCard(
-                            name: "Engineering Lecture Hall A",
-                            building: "330 - Engineering, Floor 2",
-                            currentLecture: nil,
-                            cohort: nil,
-                            lecturer: nil,
-                            isOccupied: false,
-                            imageName: "engineering_hall",
-                            status: "Free",
-                            statusColor: freeColor,
-                            nextClass: "Available until 4.00 PM"
-                        )
-                        
-                        // additional hall for testing
-                        // LectureHallCard(...)
-                    }
                 }
+                .padding(.horizontal, 16)
+                .padding(.vertical, 12)
+                .background(Color.gray.opacity(0.1))
+                .cornerRadius(25)
+                .padding(.horizontal, 20)
+                .padding(.bottom, 10)
+                
+                // filter categories
+                ScrollView(.horizontal, showsIndicators: false) {
+                    HStack(spacing: 12) {
+                        ForEach(categories, id: \.self) { category in
+                            Button(action: {
+                                selectedCategory = category
+                                
+                            }) {
+                                Text(category)
+                                    .font(.system(size: 14, weight: .medium))
+                                    .foregroundColor(selectedCategory == category ? .white : .black)
+                                    .padding(.horizontal, 16)
+                                    .padding(.vertical, 10)
+                                    .background(selectedCategory == category ? Color.black : Color.clear)
+                                    .cornerRadius(20)
+                                    .overlay(
+                                        RoundedRectangle(cornerRadius: 20)
+                                            .stroke(Color.black, lineWidth: 1)
+                                    )
+                            }
+                        }
+                    }
+                    .padding(.horizontal, 20)
+                }
+            }
+            .padding(.bottom, 15)
+            
+            .background(Color.white)
+            
+            // Scrollable view -Start
+            ScrollView {
+                VStack(alignment: .leading, spacing: 15) {
+                    
+                    LectureHallCard(
+                        name: "Anatomy Lecture Room 181",
+                        building: "344 - Anatomy, Floor 1",
+                        currentLecture: "Introduction to Human Anatomy",
+                        cohort: "MBBS 2022/2023 Cohort",
+                        lecturer: "Mrs. A.T.Weerasinghe",
+                        isOccupied: true,
+                        imageName: "anatomy_hall",
+                        status: "Occupied",
+                        statusColor: occupiedColor,
+                        nextClass: nil
+                    )
+                    
+                    LectureHallCard(
+                        name: "Law Lecture Room2",
+                        building: "338- Law, Floor 1",
+                        currentLecture: nil,
+                        cohort: nil,
+                        lecturer: nil,
+                        isOccupied: false,
+                        imageName: "law_hall",
+                        status: "Scheduled",
+                        statusColor: scheduledColor,
+                        nextClass: "Next Class at 2.00 PM"
+                    )
+                    
+                    // maybe add more halls later
+                    LectureHallCard(
+                        name: "Engineering Lecture Hall A",
+                        building: "330 - Engineering, Floor 2",
+                        currentLecture: nil,
+                        cohort: nil,
+                        lecturer: nil,
+                        isOccupied: false,
+                        imageName: "engineering_hall",
+                        status: "Free",
+                        statusColor: freeColor,
+                        nextClass: "Available until 4.00 PM"
+                    )
+                    
+                    // additional hall for testing
+                    // LectureHallCard(...)
+                }
+                .padding(.top, 10)
                 .padding(.bottom, 120) // space for bottom nav
             }
             
@@ -180,7 +182,7 @@ struct LectureHallCard: View {
                         Group {
                             if imageName == "anatomy_hall" {
                                 // try to load anatomy hall image
-                                if let anatomyImage = UIImage(named: "anatomy_hall.jpg") {
+                                if let anatomyImage = UIImage(named: "AnatomyLectureRoom.jpg") {
                                     Image(uiImage: anatomyImage)
                                         .resizable()
                                         .aspectRatio(contentMode: .fill)
@@ -202,7 +204,7 @@ struct LectureHallCard: View {
                                     }
                                 }
                             } else if imageName == "law_hall" {
-                                if let lawHallImage = UIImage(named: "law_hall.jpg") {
+                                if let lawHallImage = UIImage(named: "LawLectureRoom.jpg") {
                                     Image(uiImage: lawHallImage)
                                         .resizable()
                                         .aspectRatio(contentMode: .fill)
@@ -225,7 +227,7 @@ struct LectureHallCard: View {
                                 }
                             } else if imageName == "engineering_hall" {
                                 // engineering hall image
-                                if let engImage = UIImage(named: "eng_hall.png") {
+                                if let engImage = UIImage(named: "EngineeringLectureHall.jpg") {
                                     Image(uiImage: engImage)
                                         .resizable()
                                         .aspectRatio(contentMode: .fill)
@@ -289,16 +291,20 @@ struct LectureHallCard: View {
                             .foregroundColor(.gray)
                         
                         Spacer()
+                        
+                        
                     }
+                    .padding(.bottom, 20)
+                    
                 }
                 
                 // current lecture info or next class info
                 if let lecture = currentLecture {
                     VStack(alignment: .leading, spacing: 6) {
-                        HStack(spacing: 8) {
+                        HStack(spacing: 14) {
                             Image(systemName: "book.closed")
                                 .font(.system(size: 14))
-                                .foregroundColor(.gray)
+                                .foregroundColor(.black)
                             Text(lecture)
                                 .font(.system(size: 16, weight: .medium))
                                 .foregroundColor(.black)
@@ -306,7 +312,7 @@ struct LectureHallCard: View {
                         
                         if let cohortText = cohort {
                             HStack(spacing: 8) {
-                                Image(systemName: "person.3")
+                                Image(systemName: "person.2")
                                     .font(.system(size: 14))
                                     .foregroundColor(.gray)
                                 Text(cohortText)
@@ -316,7 +322,7 @@ struct LectureHallCard: View {
                         }
                         
                         if let lecturerName = lecturer {
-                            HStack(spacing: 8) {
+                            HStack(spacing: 14) {
                                 Image(systemName: "person.circle")
                                     .font(.system(size: 14))
                                     .foregroundColor(.gray)
@@ -334,7 +340,7 @@ struct LectureHallCard: View {
                         HStack(spacing: 8) {
                             Image(systemName: "calendar.badge.clock")
                                 .font(.system(size: 14))
-                                .foregroundColor(.gray)
+                                .foregroundColor(.black)
                             Text("No Ongoing Lectures")
                                 .font(.system(size: 16, weight: .medium))
                                 .foregroundColor(.black)
@@ -381,8 +387,12 @@ struct LectureHallCard: View {
                                 .font(.system(size: 14, weight: .medium))
                         }
                         .foregroundColor(.white)
-                        .padding(.horizontal, 20)
-                        .padding(.vertical, 12)
+//                        .padding(.horizontal, 20)
+//                        .padding(.vertical, 12)
+//                        .background(Color.black)
+//                        .cornerRadius(25)
+                        .frame(maxWidth: .infinity)
+                        .padding(.vertical, 16)
                         .background(Color.black)
                         .cornerRadius(25)
                     }

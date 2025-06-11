@@ -29,9 +29,34 @@
 		537965962DF54F4000EBDBB5 /* UniversityNavigatorUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = UniversityNavigatorUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		22FFAB0A2DF934900021ED7A /* Exceptions for "UniversityNavigator" folder in "UniversityNavigatorTests" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Assets/AnatomyLectureRoom.jpg,
+				Assets/EngineeringLectureHall.jpg,
+				Assets/LawLectureRoom.jpg,
+			);
+			target = 5379658B2DF54F4000EBDBB5 /* UniversityNavigatorTests */;
+		};
+		22FFAB0B2DF934900021ED7A /* Exceptions for "UniversityNavigator" folder in "UniversityNavigatorUITests" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Assets/AnatomyLectureRoom.jpg,
+				Assets/EngineeringLectureHall.jpg,
+				Assets/LawLectureRoom.jpg,
+			);
+			target = 537965952DF54F4000EBDBB5 /* UniversityNavigatorUITests */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		5379657E2DF54F3E00EBDBB5 /* UniversityNavigator */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				22FFAB0A2DF934900021ED7A /* Exceptions for "UniversityNavigator" folder in "UniversityNavigatorTests" target */,
+				22FFAB0B2DF934900021ED7A /* Exceptions for "UniversityNavigator" folder in "UniversityNavigatorUITests" target */,
+			);
 			path = UniversityNavigator;
 			sourceTree = "<group>";
 		};
