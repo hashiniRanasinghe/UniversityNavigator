@@ -4,14 +4,21 @@
 //
 //  Created by Hashini Ranasinghe on 2025-06-09.
 //
-//DONE -HASHINI
+//DONE
 import SwiftUI
-
+import CoreLocation
 
 struct BeasleyLibrary: View {
     @State private var selectedTab = "Library"
     @Environment(\.dismiss) private var dismiss
 
+    let beasleyLawLibraryLocation = CampusLocation(
+        name: "Beasley Law Library",
+        category: .library,
+        coordinate: CLLocationCoordinate2D(latitude: -31.9780, longitude: 115.8160),
+        description: "Specialized law library"
+    )
+    
     let pastelGreen = Color(red: 0.6, green: 0.85, blue: 0.7)
     let pastelRed = Color(red: 1.0, green: 0.7, blue: 0.7)
     let pastelOrange = Color(red: 1.0, green: 0.8, blue: 0.6)
@@ -236,21 +243,18 @@ struct BeasleyLibrary: View {
                     .padding(.horizontal, 20)
                     .padding()
 
-                    Button(action: {
-                        // TODO: Navigate to directions - need to implement this
-                        // print("navigating to directions")
-                    }) {
+                    NavigationLink(destination: MapView(targetLocation: beasleyLawLibraryLocation)) {
                         Text("Get Directions")
-                            .font(.system(size: 16, weight: .semibold))
+                            .font(.system(size: 14, weight: .medium))
                             .foregroundColor(.white)
-                            .frame(maxWidth: .infinity)
-                            .padding(.vertical, 16)
+                            .padding(.vertical, 10)
+                            .padding(.horizontal, 20)
                             .background(Color.black)
-                            .cornerRadius(25)
+                            .cornerRadius(20)
                     }
                     .padding(.horizontal, 100)
                     .padding(.bottom, 20)
-                    .padding(.top, 10)
+                    .padding(.top, 0)
                 }
                 .padding(.bottom, 100)
             }

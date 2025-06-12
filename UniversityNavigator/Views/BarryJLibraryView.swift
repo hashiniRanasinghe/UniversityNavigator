@@ -4,13 +4,21 @@
 //
 //  Created by Hashini Ranasinghe on 2025-06-08.
 //
-//DONE -HASHINI
+//DONE 
 import SwiftUI
+import CoreLocation
 
 struct BarryJLibraryView: View {
     @State private var selectedTab = "Library"
     @Environment(\.dismiss) private var dismiss
 
+    let barryMarshallLibraryLocation = CampusLocation(
+        name: "Barry J Marshall Library",
+        category: .library,
+        coordinate: CLLocationCoordinate2D(latitude: -31.9805, longitude: 115.8190),
+        description: "Medical and health sciences library"
+    )
+    
     let pastelGreen = Color(red: 0.6, green: 0.85, blue: 0.7)
     let pastelRed = Color(red: 1.0, green: 0.7, blue: 0.7)
     let pastelOrange = Color(red: 1.0, green: 0.8, blue: 0.6)
@@ -235,63 +243,57 @@ struct BarryJLibraryView: View {
                     .padding(.horizontal, 20)
                     .padding()
 
-                    Button(action: {
-                        // TODO: Navigate to directions - need to implement this
-                        // print("navigating to directions")
-                    }) {
+                    NavigationLink(destination: MapView(targetLocation: barryMarshallLibraryLocation)) {
                         Text("Get Directions")
-                            .font(.system(size: 16, weight: .semibold))
+                            .font(.system(size: 14, weight: .medium))
                             .foregroundColor(.white)
-                            .frame(maxWidth: .infinity)
-                            .padding(.vertical, 16)
+                            .padding(.vertical, 10)
+                            .padding(.horizontal, 20)
                             .background(Color.black)
-                            .cornerRadius(25)
+                            .cornerRadius(20)
                     }
                     .padding(.horizontal, 100)
                     .padding(.bottom, 20)
-                    .padding(.top, 10)
+                    .padding(.top, 0)
                 }
                 .padding(.bottom, 100)
             }
 
             Spacer()
 
-//            BottomNavigationBar(selectedTab: selectedTab) { tab in
-//                selectedTab = tab
-//
-//            }
             
             BottomNavigationBar(selectedTab: selectedTab) { tab in
                 selectedTab = tab
                 
-                // Handle navigation based on selected tab
+              
                 switch tab {
                 case "Home":
-                    // Navigate to home
+         
                     break
                 case "Map":
-                    // Navigate to map
+          
                     break
                 case "Library":
-                    // Navigate to library
+
                     break
                 case "Cafe":
-                    // Navigate to cafe
+                 
                     break
                 case "Halls":
-                    // Navigate to halls
+    
                     break
                 case "Gym":
-                    // Navigate to gym
+     
                     break
                 case "Parking":
-                    // Navigate to parking
+           
                     break
                 default:
                     break
                 }
             }
         }
+
         .background(Color.white)
         .ignoresSafeArea(.all, edges: .bottom)
         .navigationBarBackButtonHidden(true)
