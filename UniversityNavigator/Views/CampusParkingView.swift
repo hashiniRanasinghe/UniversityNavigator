@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct CampusParkingView: View {
-    @State private var selectedTab = "Places"
+    @State private var selectedTab = "Parking"
     @Environment(\.dismiss) private var dismiss
     
     //low crowd
@@ -99,8 +99,39 @@ struct CampusParkingView: View {
             
             
         
+//            BottomNavigationBar(selectedTab: selectedTab) { tab in
+//                selectedTab = tab
+//            }
+            
             BottomNavigationBar(selectedTab: selectedTab) { tab in
                 selectedTab = tab
+                
+                // Handle navigation based on selected tab
+                switch tab {
+                case "Home":
+                    // Navigate to home
+                    break
+                case "Map":
+                    // Navigate to map
+                    break
+                case "Library":
+                    // Navigate to library
+                    break
+                case "Cafe":
+                    // Navigate to cafe
+                    break
+                case "Halls":
+                    // Navigate to halls
+                    break
+                case "Gym":
+                    // Navigate to gym
+                    break
+                case "Parking":
+                    // Navigate to parking
+                    break
+                default:
+                    break
+                }
             }
         }
         .background(Color.white)

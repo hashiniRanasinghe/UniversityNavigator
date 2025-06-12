@@ -10,7 +10,7 @@
 import SwiftUI
 
 struct CampusLibrariesView: View {
-    @State private var selectedTab = "Places"
+    @State private var selectedTab = "Library"
     @State private var selectedCategory = "All Libraries"
     @Environment(\.dismiss) private var dismiss
     
@@ -145,8 +145,38 @@ struct CampusLibrariesView: View {
             Spacer()
             
         
+//            BottomNavigationBar(selectedTab: selectedTab) { tab in
+//                selectedTab = tab
+//            }
             BottomNavigationBar(selectedTab: selectedTab) { tab in
                 selectedTab = tab
+                
+                // Handle navigation based on selected tab
+                switch tab {
+                case "Home":
+                    // Navigate to home
+                    break
+                case "Map":
+                    // Navigate to map
+                    break
+                case "Library":
+                    // Navigate to library
+                    break
+                case "Cafe":
+                    // Navigate to cafe
+                    break
+                case "Halls":
+                    // Navigate to halls
+                    break
+                case "Gym":
+                    // Navigate to gym
+                    break
+                case "Parking":
+                    // Navigate to parking
+                    break
+                default:
+                    break
+                }
             }
         }
         .background(Color.white)

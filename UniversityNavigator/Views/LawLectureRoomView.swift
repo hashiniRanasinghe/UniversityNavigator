@@ -1,21 +1,21 @@
 //
-//  AnatomyLectureRoomView.swift
+//  LawLectureRoomView.swift
 //  UniversityNavigator
 //
-//  Created by Kuluni 005  on 2025-06-11.
+//  Created by Yalini 004  on 2025-06-12.
 //
 
 import SwiftUI
 
-struct AnatomyLectureRoomView: View {
+struct LawLectureRoomView: View {
     @State private var selectedTab = "Halls"
     @Environment(\.dismiss) private var dismiss
     
     // Static values instead of parameters
-    private let hallName = "Anatomy Lecture Room 181"
-    private let building = "344 - Anatomy, Floor 1"
-    private let seats = 75
-    private let imageName = "AnatomyLectureRoom"
+    private let hallName = "Law Lecture Room 2"
+    private let building = "338 - Law, Floor 1"
+    private let seats = 120
+    private let imageName = "LawLectureRoom"
     
     // Status colors
     let freeColor = Color(red: 0.3, green: 0.8, blue: 0.5)     // soft green
@@ -120,20 +120,20 @@ struct AnatomyLectureRoomView: View {
                         // Schedule Card
                         VStack(spacing: 12) {
                             ScheduleItem(
-                                time: "9.00 - 11.00",
-                                title: "Introduction to Human Anatomy",
-                                lecturer: "Mrs. A.T.Weerasinghe",
-                                status: "Occupied",
-                                statusColor: occupiedColor
+                                time: "9.00 - 14.00",
+                                title: nil,
+                                lecturer:nil,
+                                status: "Free",
+                                statusColor: freeColor
                             )
                             
                             //Divider()
                                // .background(Color.gray.opacity(0.3))
                             
                             ScheduleItem(
-                                time: "11.30 - 13.30",
-                                title: "Anatomy of the Human Body",
-                                lecturer: "Mr. D.M.Herath",
+                                time: "14.00 - 17.00",
+                                title: "Introduction to Law",
+                                lecturer: "Mrs. D.H.Herath",
                                 status: "Scheduled",
                                 statusColor: scheduledColor
                             )
@@ -141,13 +141,7 @@ struct AnatomyLectureRoomView: View {
 //                            Divider()
 //                                .background(Color.gray.opacity(0.3))
                             
-                            ScheduleItem(
-                                time: "14.30 - 16.30",
-                                title: nil,
-                                lecturer: nil,
-                                status: "Free",
-                                statusColor: freeColor
-                            )
+                            
                         }
                         .padding(20)
                         .background(Color.white)
@@ -273,7 +267,7 @@ struct AnatomyLectureRoomView: View {
 //    }
 }
 
-struct ScheduleItem: View {
+struct ScheduleItemLawLectureRoom: View {
     let time: String
     let title: String?
     let lecturer: String?
@@ -315,7 +309,7 @@ struct ScheduleItem: View {
     }
 }
 
-struct ResourceItem: View {
+struct ResourceItemLawLectureRoom: View {
     let icon: String
     let title: String
     let color: Color
@@ -370,7 +364,7 @@ struct ResourceItem: View {
 //    }
 //}
 
-struct NavItem: View {
+struct NavItemLawLectureRoom: View {
     let icon: String
     let title: String
     let isSelected: Bool
@@ -393,8 +387,8 @@ struct NavItem: View {
 }
 
 // Preview
-struct AnatomyLectureRoomViewPreviews: PreviewProvider {
+struct LawLectureRoomViewPreviews: PreviewProvider {
     static var previews: some View {
-        AnatomyLectureRoomView()
+        LawLectureRoomView()
     }
 }

@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct CanteenMenuEzoneCafeView: View {
-    @State private var selectedTab = "Places"
+    @State private var selectedTab = "Cafe"
     @State private var selectedCategory = "All Foods"
     @State private var searchText = ""
     @Environment(\.dismiss) private var dismiss
@@ -247,148 +247,179 @@ struct CanteenMenuEzoneCafeView: View {
                 .padding(.top, 10)
                 
                 // Bottom Navigation Bar
+                //                BottomNavigationBar(selectedTab: selectedTab) { tab in
+                //                    selectedTab = tab
+                //                }
+                //            }
                 BottomNavigationBar(selectedTab: selectedTab) { tab in
                     selectedTab = tab
+                    
+                    // Handling navigation based on selected tab
+                    switch tab {
+                    case "Home":
+                        // Navigate to home
+                        break
+                    case "Map":
+                        // Navigate to map
+                        break
+                    case "Library":
+                        // Navigate to library
+                        break
+                    case "Cafe":
+                        // Navigate to cafe
+                        break
+                    case "Halls":
+                        // Navigate to halls
+                        break
+                    case "Gym":
+                        // Navigate to gym
+                        break
+                    case "Parking":
+                        // Navigate to parking
+                        break
+                    default:
+                        break
+                    }
                 }
             }
+            .background(Color.white)
+            .navigationBarBackButtonHidden(true)
+            .ignoresSafeArea(.all, edges: .bottom)
         }
-        .background(Color.white)
-        .navigationBarBackButtonHidden(true)
-        .ignoresSafeArea(.all, edges: .bottom)
     }
-}
-
-struct MenuItemCardEzone: View {
-    let title: String
-    let price: String
-    let isAvailable: Bool
-    let imageName: String
     
-    var body: some View {
-        VStack(spacing: 0) {
-            // Image
-            Rectangle()
-                .fill(Color.gray.opacity(0.3))
-                .frame(height: 100)
-                .clipShape(UnevenRoundedRectangle(topLeadingRadius: 12, topTrailingRadius: 12))
-                .overlay(
-                    Group {
-                        if imageName == "rice_curry" {
-                            if let riceImage = UIImage(named: "RiceandCurry.jpg") {
-                                Image(uiImage: riceImage)
-                                    .resizable()
-                                    .aspectRatio(contentMode: .fill)
-                                    .clipped()
-                            } else {
-                                Image(systemName: "bowl.fill")
-                                    .font(.system(size: 24))
-                                    .foregroundColor(.gray)
-                            }
-                        } else if imageName == "pancakes" {
-                            if let pancakeImage = UIImage(named: "Pancake.jpg") {
-                                Image(uiImage: pancakeImage)
-                                    .resizable()
-                                    .aspectRatio(contentMode: .fill)
-                                    .clipped()
-                            } else {
-                                Image(systemName: "circle.fill")
-                                    .font(.system(size: 24))
-                                    .foregroundColor(.gray)
-                            }
-                        } else if imageName == "nescafe" {
-                            if let nescafeImage = UIImage(named: "Nescafe.jpg") {
-                                Image(uiImage: nescafeImage)
-                                    .resizable()
-                                    .aspectRatio(contentMode: .fill)
-                                    .clipped()
-                            } else {
-                                Image(systemName: "cup.and.saucer.fill")
-                                    .font(.system(size: 24))
-                                    .foregroundColor(.gray)
-                            }
-                        } else if imageName == "hot_chips" {
-                            if let chipsImage = UIImage(named: "HotChips.jpg") {
-                                Image(uiImage: chipsImage)
-                                    .resizable()
-                                    .aspectRatio(contentMode: .fill)
-                                    .clipped()
-                            } else {
-                                Image(systemName: "flame.fill")
-                                    .font(.system(size: 24))
-                                    .foregroundColor(.gray)
-                            }
-                        } else if imageName == "iced_coffee" {
-                            if let icedCoffeeImage = UIImage(named: "IcedCoffee.jpg") {
-                                Image(uiImage: icedCoffeeImage)
+    struct MenuItemCardEzone: View {
+        let title: String
+        let price: String
+        let isAvailable: Bool
+        let imageName: String
+        
+        var body: some View {
+            VStack(spacing: 0) {
+                // Image
+                Rectangle()
+                    .fill(Color.gray.opacity(0.3))
+                    .frame(height: 100)
+                    .clipShape(UnevenRoundedRectangle(topLeadingRadius: 12, topTrailingRadius: 12))
+                    .overlay(
+                        Group {
+                            if imageName == "rice_curry" {
+                                if let riceImage = UIImage(named: "RiceandCurry.jpg") {
+                                    Image(uiImage: riceImage)
+                                        .resizable()
+                                        .aspectRatio(contentMode: .fill)
+                                        .clipped()
+                                } else {
+                                    Image(systemName: "bowl.fill")
+                                        .font(.system(size: 24))
+                                        .foregroundColor(.gray)
+                                }
+                            } else if imageName == "pancakes" {
+                                if let pancakeImage = UIImage(named: "Pancake.jpg") {
+                                    Image(uiImage: pancakeImage)
+                                        .resizable()
+                                        .aspectRatio(contentMode: .fill)
+                                        .clipped()
+                                } else {
+                                    Image(systemName: "circle.fill")
+                                        .font(.system(size: 24))
+                                        .foregroundColor(.gray)
+                                }
+                            } else if imageName == "nescafe" {
+                                if let nescafeImage = UIImage(named: "Nescafe.jpg") {
+                                    Image(uiImage: nescafeImage)
+                                        .resizable()
+                                        .aspectRatio(contentMode: .fill)
+                                        .clipped()
+                                } else {
+                                    Image(systemName: "cup.and.saucer.fill")
+                                        .font(.system(size: 24))
+                                        .foregroundColor(.gray)
+                                }
+                            } else if imageName == "hot_chips" {
+                                if let chipsImage = UIImage(named: "HotChips.jpg") {
+                                    Image(uiImage: chipsImage)
+                                        .resizable()
+                                        .aspectRatio(contentMode: .fill)
+                                        .clipped()
+                                } else {
+                                    Image(systemName: "flame.fill")
+                                        .font(.system(size: 24))
+                                        .foregroundColor(.gray)
+                                }
+                            } else if imageName == "iced_coffee" {
+                                if let icedCoffeeImage = UIImage(named: "IcedCoffee.jpg") {
+                                    Image(uiImage: icedCoffeeImage)
                                     
-                                    .resizable()
-                                    .aspectRatio(contentMode: .fill)
-                                    .frame(height: 100)
-                                    .frame(maxWidth: .infinity)
-                                    .clipShape(UnevenRoundedRectangle(topLeadingRadius: 8, topTrailingRadius: 8))
+                                        .resizable()
+                                        .aspectRatio(contentMode: .fill)
+                                        .frame(height: 100)
+                                        .frame(maxWidth: .infinity)
+                                        .clipShape(UnevenRoundedRectangle(topLeadingRadius: 8, topTrailingRadius: 8))
                                     
                                     //.clipped()
+                                } else {
+                                    Image(systemName: "cup.and.saucer")
+                                        .font(.system(size: 24))
+                                        .foregroundColor(.gray)
+                                }
+                            } else if imageName == "sandwiches" {
+                                if let sandwichImage = UIImage(named: "Sandwich.jpg") {
+                                    Image(uiImage: sandwichImage)
+                                        .resizable()
+                                        .aspectRatio(contentMode: .fill)
+                                        .clipped()
+                                } else {
+                                    Image(systemName: "rectangle.stack.fill")
+                                        .font(.system(size: 24))
+                                        .foregroundColor(.gray)
+                                }
                             } else {
-                                Image(systemName: "cup.and.saucer")
+                                Image(systemName: "fork.knife")
                                     .font(.system(size: 24))
                                     .foregroundColor(.gray)
                             }
-                        } else if imageName == "sandwiches" {
-                            if let sandwichImage = UIImage(named: "Sandwich.jpg") {
-                                Image(uiImage: sandwichImage)
-                                    .resizable()
-                                    .aspectRatio(contentMode: .fill)
-                                    .clipped()
-                            } else {
-                                Image(systemName: "rectangle.stack.fill")
-                                    .font(.system(size: 24))
-                                    .foregroundColor(.gray)
-                            }
-                        } else {
-                            Image(systemName: "fork.knife")
-                                .font(.system(size: 24))
-                                .foregroundColor(.gray)
                         }
-                    }
-                )
-            
-            // Content
-            VStack(alignment: .leading, spacing: 8) {
-                Text(title)
-                    .font(.system(size: 14, weight: .semibold))
-                    .foregroundColor(.black)
-                    .multilineTextAlignment(.leading)
+                    )
                 
-                HStack {
-                    Text(price)
-                        .font(.system(size: 14, weight: .bold))
+                // Content
+                VStack(alignment: .leading, spacing: 8) {
+                    Text(title)
+                        .font(.system(size: 14, weight: .semibold))
                         .foregroundColor(.black)
+                        .multilineTextAlignment(.leading)
                     
-                    Text("-")
-                        .font(.system(size: 12))
-                        .foregroundColor(.gray)
-                    
-                    Text(isAvailable ? "Available" : "Unavailable")
-                        .font(.system(size: 12, weight: .medium))
-                        .foregroundColor(isAvailable ? .green : .red)
-                    
-                    Spacer()
+                    HStack {
+                        Text(price)
+                            .font(.system(size: 14, weight: .bold))
+                            .foregroundColor(.black)
+                        
+                        Text("-")
+                            .font(.system(size: 12))
+                            .foregroundColor(.gray)
+                        
+                        Text(isAvailable ? "Available" : "Unavailable")
+                            .font(.system(size: 12, weight: .medium))
+                            .foregroundColor(isAvailable ? .green : .red)
+                        
+                        Spacer()
+                    }
                 }
+                .padding(12)
+                .frame(maxWidth: .infinity, alignment: .leading)
             }
-            .padding(12)
-            .frame(maxWidth: .infinity, alignment: .leading)
+            .background(Color.white)
+            .cornerRadius(12)
+            .shadow(color: .black.opacity(0.1), radius: 5, x: 0, y: 2)
+            .opacity(isAvailable ? 1.0 : 0.7)
         }
-        .background(Color.white)
-        .cornerRadius(12)
-        .shadow(color: .black.opacity(0.1), radius: 5, x: 0, y: 2)
-        .opacity(isAvailable ? 1.0 : 0.7)
+        
+        
     }
     
-
-}
-
-struct CanteenMenuEzoneCafeView_Previews: PreviewProvider {
-    static var previews: some View {
-        CanteenMenuEzoneCafeView()
+    struct CanteenMenuEzoneCafeView_Previews: PreviewProvider {
+        static var previews: some View {
+            CanteenMenuEzoneCafeView()
+        }
     }
 }
