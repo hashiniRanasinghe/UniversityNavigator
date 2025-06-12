@@ -6,6 +6,7 @@
 //
 //DONE -HASHINI
 import SwiftUI
+import CoreLocation
 
 struct GymPageView: View {
     @State private var selectedTab = "Gym"
@@ -16,6 +17,14 @@ struct GymPageView: View {
     let pastelRed = Color(red: 1.0, green: 0.7, blue: 0.7)  // soft red
     let pastelOrange = Color(red: 1.0, green: 0.8, blue: 0.6)  // soft orange
 
+    let gymLocation = CampusLocation(
+        name: "UWA Sports Centre",
+        category: .gym,
+        coordinate: CLLocationCoordinate2D(latitude: -31.9820, longitude: 115.8190),
+        description: "Main sports and fitness facilities"
+    )
+
+    
     var body: some View {
         
         VStack(spacing: 0) {
@@ -51,26 +60,17 @@ struct GymPageView: View {
                     VStack(spacing: 0) {
 
                         ZStack {
-                            AsyncImage(url: URL(string: "your_gym_image_url")) {
-                                image in
-                                image
+                            if let libraryImg = UIImage(named: "fitness-centre.jpg") {
+                                Image(uiImage: libraryImg)
                                     .resizable()
                                     .aspectRatio(contentMode: .fill)
-                            } placeholder: {
-                                Rectangle()
-                                    .fill(
-                                        LinearGradient(
-                                            colors: [
-                                                Color.orange.opacity(0.6),
-                                                Color.red.opacity(0.4),
-                                            ],
-                                            startPoint: .topLeading,
-                                            endPoint: .bottomTrailing
-                                        )
-                                    )
+                                    .frame(height: 120)
+                                    .clipped()
+                            } else {
+                                Text("Image not found")
                             }
-                            .frame(height: 120)
-                            .clipped()
+//                            .frame(height: 120)
+//                            .clipped()
                         }
 
                         VStack(alignment: .leading, spacing: 10) {
@@ -168,8 +168,9 @@ struct GymPageView: View {
                     .shadow(color: .black.opacity(0.1), radius: 5, x: 0, y: 2)
                     .padding(.horizontal, 20)
                     .padding(.bottom, 5)
-
                     // end region card view
+                    
+                    
                     VStack(alignment: .leading, spacing: 10) {
                         HStack {
                             Text("Facilities")
@@ -179,6 +180,7 @@ struct GymPageView: View {
                         }
                         .padding(.horizontal, 20)
 
+                        
                         //facilities
                         VStack(spacing: 15) {
                             HStack(spacing: 15) {
@@ -244,9 +246,7 @@ struct GymPageView: View {
                         .padding(.horizontal, 20)
                     }
 
-                    Button(action: {
-                        // TODO: Navigate to directions
-                    }) {
+                    NavigationLink(destination: MapView(targetLocation: gymLocation)) {
                         Text("Get Directions")
                             .font(.system(size: 16, weight: .semibold))
                             .foregroundColor(.white)
@@ -258,6 +258,8 @@ struct GymPageView: View {
                     .padding(.horizontal, 100)
                     .padding(.bottom, 20)
                     .padding(.top, 10)
+                    
+            
                 }
                 .padding(.bottom, 100)
             }

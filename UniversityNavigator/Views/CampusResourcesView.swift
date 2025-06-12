@@ -7,16 +7,31 @@
 //
 
 import SwiftUI
+import CoreLocation
 
 struct CampusResourcesView: View {
     @State private var selectedTab = "Places"
     @Environment(\.dismiss) private var dismiss
     
-    // status colors
+
     let freeColor = Color(red: 0.3, green: 0.8, blue: 0.5)     // soft green
     let moderateColor = Color(red: 1.0, green: 0.7, blue: 0.3) // soft orange
     let fullColor = Color(red: 0.9, green: 0.4, blue: 0.4)     // soft red
     
+    let campusLocations: [CampusLocation] = [
+        CampusLocation(name: "Reid Library", category: .library,
+                       coordinate: CLLocationCoordinate2D(latitude: -31.9790, longitude: 115.8175),
+                       description: "Main university library"),
+        CampusLocation(name: "Hackett Cafe", category: .cafeteria,
+                       coordinate: CLLocationCoordinate2D(latitude: -31.9795, longitude: 115.8180),
+                       description: "Main campus cafe and dining area"),
+        CampusLocation(name: "Beasley Law Library", category: .library,
+                       coordinate: CLLocationCoordinate2D(latitude: -31.9780, longitude: 115.8160),
+                       description: "Specialized law library"),
+        CampusLocation(name: "Administration Building", category: .admin,
+                       coordinate: CLLocationCoordinate2D(latitude: -31.9785, longitude: 115.8175),
+                       description: "Main administration and student services")
+    ]
 
     var body: some View {
         VStack(spacing: 0) {
@@ -41,13 +56,13 @@ struct CampusResourcesView: View {
                 .padding(.top, 20)
                 .padding(.bottom, 20)
             }
-            
-            ScrollView {
+                
+                ScrollView {
                 VStack(spacing: 25) {
                     //program office
                         VStack(alignment: .leading, spacing: 15) {
                         HStack {
-                            Text("Program Office")
+                            Text("Administration Building")
                                 .font(.system(size: 20, weight: .bold))
                                 .foregroundColor(.black)
                             Spacer()
@@ -63,7 +78,8 @@ struct CampusResourcesView: View {
                             email: "pgoffice@crawley.com",
                             phone: "0491 920 357",
                             availabilityStatus: "Free",
-                            availabilityColor: freeColor
+                            availabilityColor: freeColor,
+                            targetLocation: campusLocations.first { $0.name == "Administration Building" }
                         )
                     }
                     
@@ -86,7 +102,8 @@ struct CampusResourcesView: View {
                             email: "pgoffice@crawley.com",
                             phone: "0491 570 159",
                             availabilityStatus: "Free",
-                            availabilityColor: freeColor
+                            availabilityColor: freeColor,
+                            targetLocation: campusLocations.first { $0.name == "Administration Building" }
                         )
                     }
                 }
@@ -95,7 +112,7 @@ struct CampusResourcesView: View {
             Spacer()
             
 
-            BottomNavigationBar(selectedTab: selectedTab) { tab in
+                BottomNavigationBar(selectedTab: selectedTab) { tab in
                 selectedTab = tab
             }
         }
@@ -115,6 +132,7 @@ struct ResourceCard: View {
     let phone: String
     let availabilityStatus: String
     let availabilityColor: Color
+    let targetLocation: CampusLocation?
     
     var body: some View {
         VStack(spacing: 0) {
@@ -240,7 +258,7 @@ struct ResourceCard: View {
                     
                     Spacer()
                 }
-          
+                
                 
                 
                 HStack(alignment: .bottom) {
@@ -256,10 +274,8 @@ struct ResourceCard: View {
                     
                     Spacer()
                     
-                   
-                    Button(action: {
-                        // TODO: Navigate to directions
-                    }) {
+                    
+                    NavigationLink(destination: MapView(targetLocation: targetLocation)) {
                         Text("Get Directions")
                             .font(.system(size: 14, weight: .medium))
                             .foregroundColor(.white)
@@ -268,9 +284,8 @@ struct ResourceCard: View {
                             .background(Color.black)
                             .cornerRadius(25)
                     }
-                }
-                
-            }
+                }}
+            
             .padding(16)
         }
         
