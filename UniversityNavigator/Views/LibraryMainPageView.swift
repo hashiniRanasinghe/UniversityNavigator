@@ -92,7 +92,7 @@ struct CampusLibrariesView: View {
                     // library section 1
                     VStack(alignment: .leading, spacing: 15) {
                         HStack {
-                            Text("Main Libraries")
+                            Text("Barry J Marshall Library")
                                 .font(.system(size: 20, weight: .bold))
                                 .foregroundColor(.black)
                             Spacer()
@@ -114,7 +114,16 @@ struct CampusLibrariesView: View {
                             pcStatusColor: availableColor,
                             targetLocation: libraryLocations.first { $0.name == "Barry J Marshall Library" }
                         )
-                        
+                    }
+                    //libraries section 2
+                        VStack(alignment: .leading, spacing: 15) {
+                            HStack {
+                                Text("Reid Library")
+                                    .font(.system(size: 20, weight: .bold))
+                                    .foregroundColor(.black)
+                                 Spacer()
+                            }
+                            .padding(.horizontal, 20)
                         LibraryCard(
                             name: "Reid Library",
                             building: "139 Building",
@@ -132,10 +141,10 @@ struct CampusLibrariesView: View {
                         )
                     }
                     
-                    //libraries section 2
+                    //libraries section 3
                     VStack(alignment: .leading, spacing: 15) {
                         HStack {
-                            Text("Specialized Libraries")
+                            Text("Beasley Law Library")
                                 .font(.system(size: 20, weight: .bold))
                                 .foregroundColor(.black)
                              Spacer()
