@@ -10,15 +10,15 @@ import SwiftUI
 //struct BottomNavigationBar: View {
 //    var selectedTab: String
 //    var onTabSelected: (String) -> Void
-//    
+//
 //    var body: some View {
 //        HStack {
 //            BottomNavItem(icon: "house.fill", title: "Home", isSelected: selectedTab == "Home")
 //                .onTapGesture { onTabSelected("Home") }
-//            
+//
 //            BottomNavItem(icon: "location.fill", title: "Map", isSelected: selectedTab == "Map")
 //                .onTapGesture { onTabSelected("Map") }
-//            
+//
 //            BottomNavItem(icon: "square.grid.2x2", title: "Halls", isSelected: selectedTab == "Halls")
 //                .onTapGesture { onTabSelected("Halls") }
 //        }
@@ -33,15 +33,15 @@ import SwiftUI
 //    var selectedTab: String
 //    var onTabSelected: (String) -> Void
 //    @State private var showMoreMenu = false
-//    
+//
 //    // Define which tabs should show in the main nav vs More menu
 //    private var mainTabs = ["Home", "Map"]
 //    private var moreTabs = ["Library", "Cafe", "Halls", "Gym", "Parking"]
-//    
+//
 //    private var isMoreTabSelected: Bool {
 //        moreTabs.contains(selectedTab)
 //    }
-//    
+//
 //    var body: some View {
 //        ZStack {
 //            // Main Navigation Bar
@@ -51,13 +51,13 @@ import SwiftUI
 //                        showMoreMenu = false
 //                        onTabSelected("Home")
 //                    }
-//                
+//
 //                BottomNavItem(icon: "location.fill", title: "Map", isSelected: selectedTab == "Map")
 //                    .onTapGesture {
 //                        showMoreMenu = false
 //                        onTabSelected("Map")
 //                    }
-//                
+//
 //                // Dynamic third tab - shows current selection or "More"
 //                if isMoreTabSelected {
 //                    BottomNavItem(
@@ -83,12 +83,12 @@ import SwiftUI
 //            .padding(.vertical, 15)
 //            .background(Color.white)
 //            .shadow(color: .black.opacity(0.1), radius: 5, x: 0, y: -2)
-//            
+//
 //            // More Menu Dropdown
 //            if showMoreMenu {
 //                VStack(spacing: 0) {
 //                    Spacer()
-//                    
+//
 //                    VStack(spacing: 0) {
 //                        // Menu Items
 //                        MoreMenuItem(
@@ -99,10 +99,10 @@ import SwiftUI
 //                            onTabSelected("Library")
 //                            showMoreMenu = false
 //                        }
-//                        
+//
 //                        Divider()
 //                            .background(Color.gray.opacity(0.3))
-//                        
+//
 //                        MoreMenuItem(
 //                            icon: "cup.and.saucer.fill",
 //                            title: "Cafe",
@@ -111,10 +111,10 @@ import SwiftUI
 //                            onTabSelected("Cafe")
 //                            showMoreMenu = false
 //                        }
-//                        
+//
 //                        Divider()
 //                            .background(Color.gray.opacity(0.3))
-//                        
+//
 //                        MoreMenuItem(
 //                            icon: "building.2.fill",
 //                            title: "Halls",
@@ -123,10 +123,10 @@ import SwiftUI
 //                            onTabSelected("Halls")
 //                            showMoreMenu = false
 //                        }
-//                        
+//
 //                        Divider()
 //                            .background(Color.gray.opacity(0.3))
-//                        
+//
 //                        MoreMenuItem(
 //                            icon: "dumbbell.fill",
 //                            title: "Gym",
@@ -135,10 +135,10 @@ import SwiftUI
 //                            onTabSelected("Gym")
 //                            showMoreMenu = false
 //                        }
-//                        
+//
 //                        Divider()
 //                            .background(Color.gray.opacity(0.3))
-//                        
+//
 //                        MoreMenuItem(
 //                            icon: "car.fill",
 //                            title: "Parking",
@@ -164,7 +164,7 @@ import SwiftUI
 //            }
 //        }
 //    }
-//    
+//
 //    // Helper function to get icon for each tab
 //    private func iconForTab(_ tab: String) -> String {
 //        switch tab {
@@ -189,7 +189,7 @@ import SwiftUI
 //    let title: String
 //    let isSelected: Bool
 //    let action: () -> Void
-//    
+//
 //    var body: some View {
 //        Button(action: action) {
 //            HStack(spacing: 15) {
@@ -197,13 +197,13 @@ import SwiftUI
 //                    .font(.system(size: 18))
 //                    .foregroundColor(isSelected ? .blue : .black)
 //                    .frame(width: 24)
-//                
+//
 //                Text(title)
 //                    .font(.system(size: 16, weight: isSelected ? .semibold : .medium))
 //                    .foregroundColor(isSelected ? .blue : .black)
-//                
+//
 //                Spacer()
-//                
+//
 //                if isSelected {
 //                    Image(systemName: "checkmark")
 //                        .font(.system(size: 14, weight: .medium))
@@ -225,13 +225,13 @@ import SwiftUI
 //    let icon: String
 //    let title: String
 //    let isSelected: Bool
-//    
+//
 //    var body: some View {
 //        VStack(spacing: 4) {
 //            Image(systemName: icon)
 //                .font(.system(size: 20))
 //                .foregroundColor(isSelected ? .black : .gray)
-//            
+//
 //            Text(title)
 //                .font(.system(size: 12, weight: .medium))
 //                .foregroundColor(isSelected ? .black : .gray)

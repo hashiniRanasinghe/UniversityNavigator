@@ -6,25 +6,42 @@
 //
 
 //import SwiftUI
-//DONE -HASHINI
-import SwiftUI
 
+//DONE
+import SwiftUI
+import CoreLocation
 struct CampusLibrariesView: View {
     @State private var selectedTab = "Library"
     @State private var selectedCategory = "All Libraries"
     @Environment(\.dismiss) private var dismiss
+    @State private var showingMapView = false
     
     let categories = ["All Libraries", "Open Now", "PC Available"]
     
-    //colors for availability status
+    //colors
     let availableColor = Color(red: 0.3, green: 0.8, blue: 0.5)     // soft green
     let moderateColor = Color(red: 1.0, green: 0.7, blue: 0.3) // soft orange
     let busyColor = Color(red: 0.9, green: 0.4, blue: 0.4)     // soft red
     
     
+
+    
+
+    let libraryLocations: [CampusLocation] = [
+        CampusLocation(name: "Barry J Marshall Library", category: .library,
+                      coordinate: CLLocationCoordinate2D(latitude: -31.9785, longitude: 115.8170),
+                      description: "Barry J Marshall Library - 446 Building"),
+        CampusLocation(name: "Reid Library", category: .library,
+                      coordinate: CLLocationCoordinate2D(latitude: -31.9790, longitude: 115.8175),
+                      description: "Reid Library - 139 Building"),
+        CampusLocation(name: "Beasley Law Library", category: .library,
+                      coordinate: CLLocationCoordinate2D(latitude: -31.9780, longitude: 115.8160),
+                      description: "Beasley Law Library - 338 Law Building")
+    ]
+    
     var body: some View {
         VStack(spacing: 0) {
-            // Header
+
             VStack(spacing: 0) {
                 HStack {
                     Button(action: {
@@ -94,7 +111,8 @@ struct CampusLibrariesView: View {
                             isOpen: true,
                             imageName: "barry_library",
                             pcStatus: "Available",
-                            pcStatusColor: availableColor
+                            pcStatusColor: availableColor,
+                            targetLocation: libraryLocations.first { $0.name == "Barry J Marshall Library" }
                         )
                         
                         LibraryCard(
@@ -109,7 +127,8 @@ struct CampusLibrariesView: View {
                             isOpen: true,
                             imageName: "reid_library",
                             pcStatus: "Moderate",
-                            pcStatusColor: moderateColor
+                            pcStatusColor: moderateColor,
+                            targetLocation: libraryLocations.first { $0.name == "Reid Library" }
                         )
                     }
                     
@@ -135,7 +154,8 @@ struct CampusLibrariesView: View {
                             isOpen: true,
                             imageName: "law_library",
                             pcStatus: "Busy",
-                            pcStatusColor: busyColor
+                            pcStatusColor: busyColor,
+                            targetLocation: libraryLocations.first { $0.name == "Beasley Law Library" }
                         )
                     }
                 }
@@ -198,6 +218,21 @@ struct LibraryCard: View {
     let imageName: String
     let pcStatus: String
     let pcStatusColor: Color
+    let targetLocation: CampusLocation?
+    
+    
+    private var destinationView: some View {
+        switch name {
+        case "Barry J Marshall Library":
+            return AnyView(BarryJLibraryView())
+        case "Reid Library":
+            return AnyView(ReidLibrary())
+        case "Beasley Law Library":
+            return AnyView(BeasleyLibrary())
+        default:
+            return AnyView(EmptyView())
+        }
+    }
     
     var body: some View {
         VStack(spacing: 0) {
@@ -241,7 +276,7 @@ struct LibraryCard: View {
                                     }
                                 }
                             } else if imageName == "reid_library" {
-                                if let reidImage = UIImage(named: "library2.png") {
+                                if let reidImage = UIImage(named: "library-488690.jpg") {
                                     Image(uiImage: reidImage)
                                         .resizable()
                                         .aspectRatio(contentMode: .fill)
@@ -414,31 +449,22 @@ Text(pcStatus)
                     }
                 }
                 Spacer()
-                
+          
                 HStack(spacing: 12) {
                     Spacer()
                     
-                    Button(action: {
-                    //                    Image(systemName: "map")
-                    //                        .font(.system(size: 10))
-                    //                        .foregroundColor(.gray)
-                        // TODO: Navigate to library details or map
-                    }) {
-                        Text("Get Directions")
-                            .font(.system(size: 14, weight: .medium))
-                            .foregroundColor(.white)
-                            .padding(.horizontal, 20)
-                            .padding(.vertical, 12)
-                            .background(Color.black)
-                            .cornerRadius(25)
-                    }
+//                    NavigationLink(destination: MapView(targetLocation: targetLocation)) {
+//                        Text("Directions")
+//                            .font(.system(size: 14, weight: .medium))
+//                            .foregroundColor(.white)
+//                            .padding(.horizontal, 20)
+//                            .padding(.vertical, 12)
+//                            .background(Color.black)
+//                            .cornerRadius(25)
+//                    }
                     
-                    Button(action: {
-                    //                    Image(systemName: "map")
-                    //                        .font(.system(size: 10))
-                    //                        .foregroundColor(.gray)
-                        // TODO: Navigate to library details or map
-                    }) {
+                  
+                    NavigationLink(destination: destinationView) {
                         Text("View Details")
                             .font(.system(size: 14, weight: .medium))
                             .foregroundColor(.white)
@@ -447,7 +473,6 @@ Text(pcStatus)
                             .background(Color.black)
                             .cornerRadius(25)
                     }
-                    
                     Spacer()
                 }
             }
