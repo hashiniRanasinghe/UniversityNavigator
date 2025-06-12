@@ -376,7 +376,7 @@ struct LectureHallCard: View {
                         HStack(spacing: 8) {
                             Image(systemName: "checkmark.circle")
                                 .font(.system(size: 14))
-                                .foregroundColor(.green)
+                                .foregroundColor(.black)
                             Text("Hall Available")
                                 .font(.system(size: 16, weight: .medium))
                                 .foregroundColor(.black)
