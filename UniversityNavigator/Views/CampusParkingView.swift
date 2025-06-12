@@ -4,8 +4,10 @@
 //
 //  Created by Developer on 2025-06-08.
 //
-//DONE -HASHINI
+//DONE
+
 import SwiftUI
+import CoreLocation
 
 struct CampusParkingView: View {
     @State private var selectedTab = "Parking"
@@ -65,7 +67,9 @@ struct CampusParkingView: View {
                             availableSpots: 5,
                             totalSpots: 50,
                             weekendStatus: "Available",
-                            weekendStatusColor: moderateColor
+                            weekendStatusColor: moderateColor,
+                            targetLocation: staffParkingLocation
+                            
                         )
                     }
                     
@@ -89,7 +93,9 @@ struct CampusParkingView: View {
                             availableSpots: 25,
                             totalSpots: 100,
                             weekendStatus: "Free",
-                            weekendStatusColor: freeColor
+                            weekendStatusColor: freeColor,
+                            
+                            targetLocation: studentParkingLocation
                         )
                     }
                 }
@@ -139,7 +145,19 @@ struct CampusParkingView: View {
         .navigationBarBackButtonHidden(true)
     }
 }
+        let staffParkingLocation = CampusLocation(
+    name: "Staff Parking",
+    category: .parking,
+    coordinate: CLLocationCoordinate2D(latitude: -31.9790, longitude: 115.8175),
+    description: "Staff parking adjacent to Reid Library"
+        )
 
+        let studentParkingLocation = CampusLocation(
+    name: "Student & Visitor Parking",
+    category: .parking,
+    coordinate: CLLocationCoordinate2D(latitude: -31.9795, longitude: 115.8180), 
+    description: "Student and visitor parking near Hackett Hall"
+        )
 struct ParkingCard: View {
     let imageName: String
     let status: String
@@ -151,6 +169,7 @@ struct ParkingCard: View {
     let totalSpots: Int
     let weekendStatus: String
     let weekendStatusColor: Color
+    let targetLocation: CampusLocation
     
     var body: some View {
         VStack(spacing: 0) {
@@ -289,7 +308,7 @@ struct ParkingCard: View {
                 
              
                 
-                HStack(alignment: .bottom) {
+                    HStack(alignment: .bottom) {
                     VStack(alignment: .leading, spacing: 4) {
                         Text("\(availableSpots)/\(totalSpots)")
                             .font(.system(size: 24, weight: .bold))
@@ -326,17 +345,15 @@ struct ParkingCard: View {
                     Spacer()
                     
             
-                        Button(action: {
-                        // TODO: Navigate to directions
-                    }) {
-                            Text("Get Directions")
-                            .font(.system(size: 14, weight: .medium))
-                            .foregroundColor(.white)
-                            .padding(.horizontal, 20)
-                            .padding(.vertical, 12)
-                            .background(Color.black)
-                            .cornerRadius(25)
-                    }
+                    NavigationLink(destination: MapView(targetLocation: targetLocation)) {
+                          Text("Get Directions")
+                              .font(.system(size: 14, weight: .medium))
+                              .foregroundColor(.white)
+                              .padding(.horizontal, 20)
+                              .padding(.vertical, 12)
+                              .background(Color.black)
+                              .cornerRadius(25)
+                      }
                 }
             }
             .padding(16)

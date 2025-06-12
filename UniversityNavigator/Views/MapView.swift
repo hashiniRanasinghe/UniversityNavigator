@@ -101,6 +101,11 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
 }
 
 struct MapView: View {
+    let targetLocation: CampusLocation?
+    
+    init(targetLocation: CampusLocation? = nil) {
+        self.targetLocation = targetLocation
+    }
     @StateObject private var locationManager = LocationManager()
     @State private var region = MKCoordinateRegion(
         center: CLLocationCoordinate2D(latitude: -31.9805, longitude: 115.8170), // UWA coordinates
@@ -344,6 +349,15 @@ struct MapView: View {
         }
         .onAppear {
             locationManager.startLocationUpdates()
+            
+    
+            
+            if let target = targetLocation {
+                withAnimation {
+                    region.center = target.coordinate
+                }
+                selectedLocation = target
+            }
         }
     }
     
@@ -493,22 +507,7 @@ struct LocationDetailView: View {
                     
                     // Action Buttons
                     VStack(spacing: 12) {
-                        Button(action: {
-                            onGetDirections()
-                            dismiss()
-                        }) {
-                            HStack {
-                                Image(systemName: "location.north.line.fill")
-                                    .font(.system(size: 16))
-                                Text("Get Walking Directions")
-                                    .font(.system(size: 14, weight: .medium))
-                            }
-                            .foregroundColor(.white)
-                            .frame(maxWidth: .infinity)
-                            .padding(.vertical, 12)
-                            .background(Color.black)
-                            .cornerRadius(25)
-                        }
+
                         
                         Button(action: openInMaps) {
                             HStack {
