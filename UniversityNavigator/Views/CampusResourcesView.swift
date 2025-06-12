@@ -61,12 +61,16 @@ struct CampusResourcesView: View {
                 VStack(spacing: 25) {
                     //program office
                         VStack(alignment: .leading, spacing: 15) {
-                        HStack {
-                            Text("Administration Building")
-                                .font(.system(size: 20, weight: .bold))
-                                .foregroundColor(.black)
-                            Spacer()
-                        }
+                            HStack {
+                                Text("Administration Building")
+                                    .font(.system(size: 20, weight: .bold))
+                                    .foregroundColor(.black)
+                                
+                                Spacer()
+                                
+                                
+                            }
+                         
                             .padding(.horizontal, 20)
                         
                         ResourceCard(
@@ -89,9 +93,11 @@ struct CampusResourcesView: View {
                             Text("Administration Office")
                                 .font(.system(size: 20, weight: .bold))
                                 .foregroundColor(.black)
+                            
                             Spacer()
+                          
                         }
-                    .padding(.horizontal, 20)
+                        .padding(.horizontal, 20)
                         
                         ResourceCard(
                             imageName: "admin_office",
