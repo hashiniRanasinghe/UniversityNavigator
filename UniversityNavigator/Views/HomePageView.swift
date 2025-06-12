@@ -138,7 +138,7 @@ struct HomePageView: View {
                                 )
                                 
                                 LocationCard(
-                                    title: "Ezora Canteen",status: "Moderate",
+                                    title: "Ezone Canteen",status: "Moderate",
                                     statusColor: moderateColor,spotsAvailable: "15/30 Spots Available",
                                     imageName: "cafe"
                                 )
@@ -317,7 +317,7 @@ struct HomePageView: View {
                                 }
                                 
                             } else if imageName == "cafe" {
-                                if let cafeImage = UIImage(named: "reid-library.png") {
+                                if let cafeImage = UIImage(named: "EzoneCafe.png") {
                                     Image(uiImage: cafeImage)
                                         .resizable()
                                         .aspectRatio(contentMode: .fill)
