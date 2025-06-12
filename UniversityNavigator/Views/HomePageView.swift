@@ -81,27 +81,29 @@ struct HomePageView: View {
                             NavigationLink(destination: CampusLibrariesView()) {
                                 CategoryButton(icon: "book", title: "Library", color: .blue)
                             }
+                            
                             NavigationLink(destination: CampusCafeteriasView()) {
                                 CategoryButton(icon: "cup.and.saucer", title: "Cafe", color: .blue)
                             }
+                            
                             NavigationLink(destination: CampusLectureHallsView()) {
                                 CategoryButton(icon: "building.2", title: "Halls", color: .blue)
                             }
+                            
                             NavigationLink(destination: GymPageView()) {
                                 CategoryButton(icon: "dumbbell", title: "Gym", color: .blue)
                             }
+                            
                             NavigationLink(destination: CampusParkingView()) {
                                 CategoryButton(icon: "car", title: "Parking", color: .blue)
                             }
+                            
                             NavigationLink(destination: CampusResourcesView()) {
                                 CategoryButton(icon: "globe", title: "Resources", color: .blue)
                             }
                         }
-                        .padding(.horizontal)
+                        .padding(.horizontal, 20)
                     }
-                    
-                    .padding(.horizontal, 20)
-                    
                     
                     
                     
@@ -129,7 +131,7 @@ struct HomePageView: View {
                                 )
                                 
                                 LocationCard(
-                                    title: "UWA Sports Centre",status: "Free",
+                                    title: "Sports Centre",status: "Free",
                                     statusColor: freeColor,
                                     spotsAvailable: "27/50 Spots Available",
                                     imageName: "gym"
@@ -142,6 +144,7 @@ struct HomePageView: View {
                                 )
                             }
                             .padding(.horizontal, 20)
+                            Spacer()
                         }
                     }
                     
@@ -179,7 +182,7 @@ struct HomePageView: View {
                     //                    }
                     //
                     
-                    
+//                    Spacer()
                     VStack(alignment: .leading, spacing: 15) {
                         HStack {
                             Text("Quick Directions")
@@ -192,7 +195,7 @@ struct HomePageView: View {
                         VStack(spacing: 12) {
                             HStack(spacing: 12) {
                                 QuickDirectionCard(title: "Reid Library", imageName: "library",      targetLocation: campusLocations.first { $0.name == "Reid Library" })
-                                QuickDirectionCard(title: "Administration Building", imageName: "office",                targetLocation: campusLocations.first { $0.name == "Administration Building" })
+                                QuickDirectionCard(title: "Administration", imageName: "office",                targetLocation: campusLocations.first { $0.name == "Administration Building" })
                             }
                             
                             HStack(spacing: 12) {
@@ -215,10 +218,10 @@ struct HomePageView: View {
             BottomNavigationBar(selectedTab: selectedTab) { tab in
                 selectedTab = tab
                 
-                // Add navigation logic based on selected tab
+                    
                 switch tab {
                 case "Home":
-                    // Already on home, no action needed
+                    HomePageView()
                     break
                 case "Map":
                     MapView()
@@ -229,15 +232,7 @@ struct HomePageView: View {
                 case "Cafe":
                     CampusCafeteriasView()
                     break
-                case "Halls":
-                    // Navigate to CampusLectureHallsView
-                    break
-                case "Gym":
-                    // Navigate to GymPageView
-                    break
-                case "Parking":
-                    // Navigate to CampusParkingView
-                    break
+               
                 default:
                     break
                     
