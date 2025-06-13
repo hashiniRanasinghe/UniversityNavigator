@@ -9,7 +9,7 @@ import SwiftUI
 import CoreLocation
 
 struct LawLectureRoomView: View {
-    @State private var selectedTab = "Halls"
+    //@State private var selectedTab = "Halls"
     @Environment(\.dismiss) private var dismiss
     
 
@@ -212,35 +212,7 @@ struct LawLectureRoomView: View {
             
             Spacer()
             
-            BottomNavigationBar(selectedTab: selectedTab) { tab in
-                selectedTab = tab
-                
-                switch tab {
-                case "Home":
-         
-                    break
-                case "Map":
-          
-                    break
-                case "Library":
 
-                    break
-                case "Cafe":
-                 
-                    break
-                case "Halls":
-    
-                    break
-                case "Gym":
-     
-                    break
-                case "Parking":
-           
-                    break
-                default:
-                    break
-                }
-            }
         }
 
         .background(Color.white)

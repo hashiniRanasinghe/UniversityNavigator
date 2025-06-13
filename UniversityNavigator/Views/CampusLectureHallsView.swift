@@ -12,7 +12,7 @@ import CoreLocation
 
 
 struct CampusLectureHallsView: View {
-    @State private var selectedTab = "Halls"
+    //@State private var selectedTab = "Halls"
     @State private var selectedCategory = "All Lecture Halls"
     @State private var searchText = ""
     @Environment(\.dismiss) private var dismiss
@@ -162,36 +162,7 @@ struct CampusLectureHallsView: View {
             
             Spacer()
             
-            BottomNavigationBar(selectedTab: selectedTab) { tab in
-                selectedTab = tab
-                
-              
-                switch tab {
-                case "Home":
-         
-                    break
-                case "Map":
-          
-                    break
-                case "Library":
 
-                    break
-                case "Cafe":
-                 
-                    break
-                case "Halls":
-    
-                    break
-                case "Gym":
-     
-                    break
-                case "Parking":
-           
-                    break
-                default:
-                    break
-                }
-            }
         }
         .background(Color.white)
         .ignoresSafeArea(.all, edges: .bottom)
