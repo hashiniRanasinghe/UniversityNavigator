@@ -13,13 +13,13 @@ struct BottomNavigationBar: View {
     let onTabSelected: (String) -> Void
     @State private var showMoreMenu = false
     
-    // Explicit public initializer
+    
     init(selectedTab: String, onTabSelected: @escaping (String) -> Void) {
         self.selectedTab = selectedTab
         self.onTabSelected = onTabSelected
     }
     
-    // Define which tabs should show in the main nav vs More menu
+    
     private var mainTabs = ["Home", "Map"]
     private var moreTabs = ["Library", "Cafe", "Halls", "Gym", "Parking","Resources"]
     
@@ -51,7 +51,7 @@ struct BottomNavigationBar: View {
                         onTabSelected("Map")
                     }
                 
-                // Dynamic third tab - shows current selection or "More"
+               
                 if isMoreTabSelected {
                     CustomBottomNavItem(
                         icon: iconForTab(selectedTab),
@@ -77,15 +77,16 @@ struct BottomNavigationBar: View {
             .background(Color.white)
             .shadow(color: .black.opacity(0.1), radius: 5, x: 0, y: -2)
             
-            // More Menu Dropdown
+            //dropdown
             if showMoreMenu {
                 VStack(spacing: 0) {
                     Spacer()
                     
                     VStack(spacing: 0) {
-                        // Menu Items
+                       
                         MoreMenuItem(
                             icon: "book.fill",
+                            //icon: "book-Vertical.fill",
                             title: "Library",
                             isSelected: selectedTab == "Library"
                         ) {
@@ -159,7 +160,7 @@ struct BottomNavigationBar: View {
                     .cornerRadius(12)
                     .shadow(color: .black.opacity(0.15), radius: 8, x: 0, y: -4)
                     .padding(.horizontal, 20)
-                    .padding(.bottom, 85) // Adjust based on your bottom nav height
+                    .padding(.bottom, 85)
                     .transition(.move(edge: .bottom).combined(with: .opacity))
                 }
                 .background(
@@ -174,7 +175,7 @@ struct BottomNavigationBar: View {
         }
     }
     
-    // Helper function to get icon for each tab
+    
     private func iconForTab(_ tab: String) -> String {
         switch tab {
         case "Library":
@@ -194,7 +195,7 @@ struct BottomNavigationBar: View {
         }
     }
 }
-
+//menu tabs
 struct MoreMenuItem: View {
     let icon: String
     let title: String
