@@ -252,3 +252,4 @@ struct CustomBottomNavItem: View {
         .frame(maxWidth: .infinity)
     }
 }
+

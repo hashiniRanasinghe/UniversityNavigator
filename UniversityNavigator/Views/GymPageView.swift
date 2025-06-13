@@ -82,12 +82,12 @@ struct GymPageView: View {
 
                                 Spacer()
 
-                                Text("Available")
+                                Text("Free")
                                     .font(.system(size: 12, weight: .medium))
                                     .foregroundColor(.white)
                                     .padding(.horizontal, 12)
                                     .padding(.vertical, 6)
-                                    .background(Color.orange)
+                                    .background(Color.green)
                                     .cornerRadius(12)
                             }
 

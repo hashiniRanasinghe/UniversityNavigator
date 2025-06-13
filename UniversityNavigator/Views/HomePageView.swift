@@ -138,8 +138,8 @@ struct HomePageView: View {
                                 )
                                 
                                 LocationCard(
-                                    title: "Ezone Canteen",status: "Moderate",
-                                    statusColor: moderateColor,spotsAvailable: "15/30 Spots Available",
+                                    title: "Ezone Canteen",status: "Busy",
+                                    statusColor: fullColor,spotsAvailable: "5/50 Spots Available",
                                     imageName: "cafe"
                                 )
                             }

@@ -60,7 +60,7 @@ struct CanteenMenuEzoneCafeView: View {
                             .foregroundColor(.white)
                             .padding(.horizontal, 12)
                             .padding(.vertical, 6)
-                            .background(Color.pink)
+                            .background(Color.red.opacity(0.9))
                             .cornerRadius(12)
                     }
 
@@ -108,10 +108,9 @@ struct CanteenMenuEzoneCafeView: View {
                             }
 
                             //progress bar
-                            ProgressView(value: 5, total: 50)
-                                .progressViewStyle(
-                                    LinearProgressViewStyle(tint: .pink)
-                                )
+                            ProgressView(value: 12, total: 75)
+                                .progressViewStyle(LinearProgressViewStyle())
+                                .tint(Color.red.opacity(0.9))
                                 .frame(width: 80, height: 7)
                                 .background(Color.gray.opacity(0.3))
                                 .cornerRadius(2)

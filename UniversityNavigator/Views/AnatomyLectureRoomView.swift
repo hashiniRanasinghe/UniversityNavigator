@@ -234,7 +234,7 @@ struct ScheduleItem: View {
     let statusColor: Color
     
     var body: some View {
-        HStack(spacing: 9) {
+        HStack(spacing: 8) {
             VStack(alignment: .leading, spacing: 4) {
                 Text(time)
                     .font(.system(size: 16, weight: .medium))

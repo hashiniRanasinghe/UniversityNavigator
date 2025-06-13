@@ -62,7 +62,8 @@ struct CanteenMenuBusinessSchoolCafeView: View {
                             .foregroundColor(.white)
                             .padding(.horizontal, 12)
                             .padding(.vertical, 6)
-                            .background(Color.pink)
+//                          .background(Color.pipnk)
+                            .background(Color.red.opacity(0.9))
                             .cornerRadius(12)
                     }
 
@@ -80,7 +81,7 @@ struct CanteenMenuBusinessSchoolCafeView: View {
                         Spacer()
                     }
 
-                    HStack(spacing: 20) {
+                    HStack(spacing: 19) {
                         HStack(spacing: 8) {
                             Image(systemName: "person.2")
                                 .font(.system(size: 13))
@@ -110,10 +111,13 @@ struct CanteenMenuBusinessSchoolCafeView: View {
                             }
 
                             //progress bar
+//                            ProgressView(value: 12, total: 75)
+//                                .progressViewStyle(
+//                                    LinearProgressViewStyle(tint: .red, 0.9)
+//                                )
                             ProgressView(value: 12, total: 75)
-                                .progressViewStyle(
-                                    LinearProgressViewStyle(tint: .pink)
-                                )
+                                .progressViewStyle(LinearProgressViewStyle())
+                                .tint(Color.red.opacity(0.9))
                                 .frame(width: 80, height: 7)
                                 .background(Color.gray.opacity(0.3))
                                 .cornerRadius(2)
