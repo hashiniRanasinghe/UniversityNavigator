@@ -18,7 +18,7 @@ struct GymPageView: View {
     let pastelOrange = Color(red: 1.0, green: 0.8, blue: 0.6)  // soft orange
 
     let gymLocation = CampusLocation(
-        name: "UWA Sports Centre",
+        name: "Sports Centre",
         category: .gym,
         coordinate: CLLocationCoordinate2D(latitude: -31.9820, longitude: 115.8190),
         description: "Main sports and fitness facilities"
@@ -37,10 +37,11 @@ struct GymPageView: View {
                         .foregroundColor(.black)
                 }
 
+                Spacer()
 
                 Text("Campus Gym")
-                    .font(.system(size: 24, weight: .bold))
-                   .foregroundColor(.black)
+                    .font(.system(size: 20, weight: .semibold))
+                    .foregroundColor(.black)
 
                 Spacer()
 
