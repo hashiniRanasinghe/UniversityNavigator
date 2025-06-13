@@ -16,6 +16,8 @@ struct CampusLocation: Identifiable, Hashable {
     let coordinate: CLLocationCoordinate2D
     let description: String
 
+
+    
     func hash(into hasher: inout Hasher) {
         hasher.combine(id)
     }
@@ -220,12 +222,34 @@ struct MapView: View {
 
         return locations
     }
+    @Environment(\.presentationMode) var presentationMode
+    @State private var navigateToHome = false
 
+    
+    private func handleBackButton() {
+        let impactFeedback = UIImpactFeedbackGenerator(style: .light)
+        impactFeedback.impactOccurred()
+        if presentationMode.wrappedValue.isPresented {
+            presentationMode.wrappedValue.dismiss()
+        } else {
+            navigateToHome = true
+        }
+    }
+    
     var body: some View {
-        VStack(spacing: 0) {
-            VStack(spacing: 0) {
-                HStack {
 
+        VStack(spacing: 0) {
+            
+            VStack(spacing: 0) {
+                HStack {      Button(action: {
+                    handleBackButton()
+                }) {
+                    Image(systemName: "chevron.left")
+                        .font(.system(size: 20, weight: .medium))
+                        .foregroundColor(.black)
+                }
+                    .buttonStyle(PlainButtonStyle())
+                    
                     Text("Campus Map")
                         .font(.system(size: 24, weight: .bold))
                         .foregroundColor(.black)
