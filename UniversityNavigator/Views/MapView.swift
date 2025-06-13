@@ -5,9 +5,9 @@
 //  Created by Hashini Ranasinghe on 2025-06-08.
 //
 
-import SwiftUI
-import MapKit
 import CoreLocation
+import MapKit
+import SwiftUI
 
 struct CampusLocation: Identifiable, Hashable {
     let id = UUID()
@@ -15,11 +15,11 @@ struct CampusLocation: Identifiable, Hashable {
     let category: LocationCategory
     let coordinate: CLLocationCoordinate2D
     let description: String
-    
+
     func hash(into hasher: inout Hasher) {
         hasher.combine(id)
     }
-    
+
     static func == (lhs: CampusLocation, rhs: CampusLocation) -> Bool {
         lhs.id == rhs.id
     }
@@ -32,7 +32,7 @@ enum LocationCategory: String, CaseIterable {
     case gym = "Gym"
     case parking = "Parking"
     case admin = "Administration"
-    
+
     var icon: String {
         switch self {
         case .library: return "book.fill"
@@ -43,7 +43,7 @@ enum LocationCategory: String, CaseIterable {
         case .admin: return "building.2.fill"
         }
     }
-    
+
     var color: Color {
         switch self {
         case .library: return .blue
@@ -60,37 +60,45 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
     private let manager = CLLocationManager()
     @Published var userLocation: CLLocationCoordinate2D?
     @Published var authorizationStatus: CLAuthorizationStatus = .notDetermined
-    
+
     override init() {
         super.init()
         manager.delegate = self
         manager.desiredAccuracy = kCLLocationAccuracyBest
         requestLocationPermission()
     }
-    
+
     func requestLocationPermission() {
         manager.requestWhenInUseAuthorization()
     }
-    
+
     func startLocationUpdates() {
-        guard authorizationStatus == .authorizedWhenInUse || authorizationStatus == .authorizedAlways else {
+        guard
+            authorizationStatus == .authorizedWhenInUse
+                || authorizationStatus == .authorizedAlways
+        else {
             return
         }
         manager.startUpdatingLocation()
     }
-    
+
     func stopLocationUpdates() {
         manager.stopUpdatingLocation()
     }
-    
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+
+    func locationManager(
+        _ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]
+    ) {
         guard let location = locations.last else { return }
         DispatchQueue.main.async {
             self.userLocation = location.coordinate
         }
     }
-    
-    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+
+    func locationManager(
+        _ manager: CLLocationManager,
+        didChangeAuthorization status: CLAuthorizationStatus
+    ) {
         DispatchQueue.main.async {
             self.authorizationStatus = status
             if status == .authorizedWhenInUse || status == .authorizedAlways {
@@ -102,13 +110,13 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
 
 struct MapView: View {
     let targetLocation: CampusLocation?
-    
+
     init(targetLocation: CampusLocation? = nil) {
         self.targetLocation = targetLocation
     }
     @StateObject private var locationManager = LocationManager()
     @State private var region = MKCoordinateRegion(
-        center: CLLocationCoordinate2D(latitude: -31.9805, longitude: 115.8170), // UWA coordinates
+        center: CLLocationCoordinate2D(latitude: -31.9805, longitude: 115.8170),  //coordinates og the uwa university
         span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01)
     )
     @State private var selectedLocation: CampusLocation?
@@ -119,91 +127,111 @@ struct MapView: View {
     @State private var searchText = ""
     @State private var selectedTab = "Map"
     @Environment(\.dismiss) private var dismiss
-    
-    // UWA Campus Locations
+
+    //uwa locations
     let campusLocations: [CampusLocation] = [
-        // Libraries
-        CampusLocation(name: "Reid Library", category: .library,
-                      coordinate: CLLocationCoordinate2D(latitude: -31.9790, longitude: 115.8175),
-                      description: "Main university library"),
-        CampusLocation(name: "Barry J Marshall Library", category: .library,
-                      coordinate: CLLocationCoordinate2D(latitude: -31.9805, longitude: 115.8190),
-                      description: "Medical and health sciences library"),
-        CampusLocation(name: "Beasley Law Library", category: .library,
-                      coordinate: CLLocationCoordinate2D(latitude: -31.9780, longitude: 115.8160),
-                      description: "Specialized law library"),
-        
-        // Lecture Halls
-        CampusLocation(name: "Anatomy Lecture Room 181", category: .lectureHall,
-                      coordinate: CLLocationCoordinate2D(latitude: -31.9795, longitude: 115.8170),
-                      description: "Historic main lecture hall"),
-        CampusLocation(name: "Law Lecture Room 2", category: .lectureHall,
-                      coordinate: CLLocationCoordinate2D(latitude: -31.9810, longitude: 115.8180),
-                      description: "Physics department lecture facilities"),
-        CampusLocation(name: "Engineering Lecture Theatre", category: .lectureHall,
-                      coordinate: CLLocationCoordinate2D(latitude: -31.9800, longitude: 115.8185),
-                      description: "Engineering faculty lecture halls"),
-        CampusLocation(name: "Business School Lecture Theatre", category: .lectureHall,
-                      coordinate: CLLocationCoordinate2D(latitude: -31.9785, longitude: 115.8165),
-                      description: "Business school lecture facilities"),
-        
-        // Cafeterias
-        CampusLocation(name: "Hackett Cafe", category: .cafeteria,
-                      coordinate: CLLocationCoordinate2D(latitude: -31.9795, longitude: 115.8180),
-                      description: "Main campus cafe and dining area"),
-        CampusLocation(name: "University Club", category: .cafeteria,
-                      coordinate: CLLocationCoordinate2D(latitude: -31.9790, longitude: 115.8165),
-                      description: "Fine dining and events venue"),
-        
-        // Gym and Sports
-        CampusLocation(name: "UWA Sports Centre", category: .gym,
-                      coordinate: CLLocationCoordinate2D(latitude: -31.9820, longitude: 115.8190),
-                      description: "Main sports and fitness facilities"),
-        
-        // Parking
-        CampusLocation(name: "Main Campus Parking", category: .parking,
-                      coordinate: CLLocationCoordinate2D(latitude: -31.9800, longitude: 115.8150),
-                      description: "Primary campus parking area"),
-        CampusLocation(name: "Sports Centre Parking", category: .parking,
-                      coordinate: CLLocationCoordinate2D(latitude: -31.9825, longitude: 115.8195),
-                      description: "Parking near sports facilities"),
-        
-        // Administration
-        CampusLocation(name: "Administration Building", category: .admin,
-                      coordinate: CLLocationCoordinate2D(latitude: -31.9785, longitude: 115.8175),
-                      description: "Main administration and student services")
+
+        CampusLocation(
+            name: "Reid Library", category: .library,
+            coordinate: CLLocationCoordinate2D(
+                latitude: -31.9790, longitude: 115.8175),
+            description: "Main university library"),
+        CampusLocation(
+            name: "Barry J Marshall Library", category: .library,
+            coordinate: CLLocationCoordinate2D(
+                latitude: -31.9805, longitude: 115.8190),
+            description: "Medical and health sciences library"),
+        CampusLocation(
+            name: "Beasley Law Library", category: .library,
+            coordinate: CLLocationCoordinate2D(
+                latitude: -31.9780, longitude: 115.8160),
+            description: "Specialized law library"),
+
+        CampusLocation(
+            name: "Anatomy Lecture Room 181", category: .lectureHall,
+            coordinate: CLLocationCoordinate2D(
+                latitude: -31.9795, longitude: 115.8170),
+            description: "Historic main lecture hall"),
+        CampusLocation(
+            name: "Law Lecture Room 2", category: .lectureHall,
+            coordinate: CLLocationCoordinate2D(
+                latitude: -31.9810, longitude: 115.8180),
+            description: "Physics department lecture facilities"),
+        CampusLocation(
+            name: "Engineering Lecture Theatre", category: .lectureHall,
+            coordinate: CLLocationCoordinate2D(
+                latitude: -31.9800, longitude: 115.8185),
+            description: "Engineering faculty lecture halls"),
+        CampusLocation(
+            name: "Business School Lecture Theatre", category: .lectureHall,
+            coordinate: CLLocationCoordinate2D(
+                latitude: -31.9785, longitude: 115.8165),
+            description: "Business school lecture facilities"),
+
+        CampusLocation(
+            name: "Hackett Cafe", category: .cafeteria,
+            coordinate: CLLocationCoordinate2D(
+                latitude: -31.9795, longitude: 115.8180),
+            description: "Main campus cafe and dining area"),
+        CampusLocation(
+            name: "Business Café", category: .cafeteria,
+            coordinate: CLLocationCoordinate2D(
+                latitude: -31.9790, longitude: 115.8165),
+            description: "Fine dining and events venue"),
+
+        CampusLocation(
+            name: "Sports Centre", category: .gym,
+            coordinate: CLLocationCoordinate2D(
+                latitude: -31.9820, longitude: 115.8190),
+            description: "Main sports and fitness facilities"),
+
+        CampusLocation(
+            name: "Staff Parking", category: .parking,
+            coordinate: CLLocationCoordinate2D(
+                latitude: -31.9800, longitude: 115.8150),
+            description: "Primary campus parking area"),
+        CampusLocation(
+            name: "Student & Visitor Parking", category: .parking,
+            coordinate: CLLocationCoordinate2D(
+                latitude: -31.9825, longitude: 115.8195),
+            description: "Parking near sports facilities"),
+
+        CampusLocation(
+            name: "Administration Building", category: .admin,
+            coordinate: CLLocationCoordinate2D(
+                latitude: -31.9785, longitude: 115.8175),
+            description: "Main administration and student services"),
     ]
-    
+
     var filteredLocations: [CampusLocation] {
         var locations = campusLocations
-        
+
         if let category = selectedCategory {
             locations = locations.filter { $0.category == category }
         }
-        
+
         if !searchText.isEmpty {
             locations = locations.filter {
-                $0.name.localizedCaseInsensitiveContains(searchText) ||
-                $0.description.localizedCaseInsensitiveContains(searchText)
+                $0.name.localizedCaseInsensitiveContains(searchText)
+                    || $0.description.localizedCaseInsensitiveContains(
+                        searchText)
             }
         }
-        
+
         return locations
     }
-    
+
     var body: some View {
         VStack(spacing: 0) {
-            // Header - consistent with CampusLibrariesView
             VStack(spacing: 0) {
                 HStack {
-                    
+
                     Text("Campus Map")
                         .font(.system(size: 24, weight: .bold))
                         .foregroundColor(.black)
-                    
+
                     Spacer()
-                    
-                    // Location List Button
+
                     Button(action: { showingLocationList.toggle() }) {
                         Image(systemName: "list.bullet")
                             .font(.system(size: 20, weight: .medium))
@@ -214,32 +242,38 @@ struct MapView: View {
                 .padding(.top, 20)
                 .padding(.bottom, 20)
             }
-            
-            // Category Filter - consistent style
+
+            //filters
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(spacing: 12) {
                     Button("All") {
                         selectedCategory = nil
                     }
-                    .buttonStyle(FilterButtonStyle(isSelected: selectedCategory == nil))
-                    
+                    .buttonStyle(
+                        FilterButtonStyle(isSelected: selectedCategory == nil))
+
                     ForEach(LocationCategory.allCases, id: \.self) { category in
                         Button(category.rawValue) {
-                            selectedCategory = selectedCategory == category ? nil : category
+                            selectedCategory =
+                                selectedCategory == category ? nil : category
                         }
-                        .buttonStyle(FilterButtonStyle(isSelected: selectedCategory == category))
+                        .buttonStyle(
+                            FilterButtonStyle(
+                                isSelected: selectedCategory == category))
                     }
                 }
                 .padding(.horizontal, 20)
             }
             .padding(.bottom, 15)
-            
-            // Map View
+
+            //map
             ZStack {
-                Map(coordinateRegion: $region,
+                Map(
+                    coordinateRegion: $region,
                     showsUserLocation: true,
                     userTrackingMode: .constant(.none),
-                    annotationItems: filteredLocations) { location in
+                    annotationItems: filteredLocations
+                ) { location in
                     MapAnnotation(coordinate: location.coordinate) {
                         VStack {
                             Image(systemName: location.category.icon)
@@ -253,7 +287,7 @@ struct MapView: View {
                                         .stroke(Color.white, lineWidth: 2)
                                 )
                                 .shadow(radius: 3)
-                            
+
                             Text(location.name)
                                 .font(.caption2)
                                 .fontWeight(.semibold)
@@ -272,13 +306,13 @@ struct MapView: View {
                         }
                     }
                 }
-                
-                // Bottom Controls
+
                 VStack {
                     Spacer()
-                    
+
                     HStack {
-                        // My Location Button
+                        //my location btn
+
                         Button(action: centerOnUserLocation) {
                             Image(systemName: "location.fill")
                                 .foregroundColor(.white)
@@ -288,10 +322,9 @@ struct MapView: View {
                                 .cornerRadius(22)
                                 .shadow(radius: 2)
                         }
-                        
+
                         Spacer()
-                        
-                        // Clear Route Button
+
                         if route != nil {
                             Button(action: clearRoute) {
                                 Text("Clear Route")
@@ -306,12 +339,12 @@ struct MapView: View {
                         }
                     }
                     .padding(.horizontal, 20)
-                    .padding(.bottom, 100) 
+                    .padding(.bottom, 100)
                 }
             }
-            
+
             Spacer()
-            
+
         }
         .background(Color.white)
         .navigationBarBackButtonHidden(true)
@@ -338,9 +371,7 @@ struct MapView: View {
         }
         .onAppear {
             locationManager.startLocationUpdates()
-            
-    
-            
+
             if let target = targetLocation {
                 withAnimation {
                     region.center = target.coordinate
@@ -349,40 +380,43 @@ struct MapView: View {
             }
         }
     }
-    
+
     private func centerOnUserLocation() {
         guard let userLocation = locationManager.userLocation else { return }
         withAnimation {
             region.center = userLocation
         }
     }
-    
+
     private func getDirections(to location: CampusLocation) {
         guard let userLocation = locationManager.userLocation else {
             print("User location not available")
             return
         }
-        
+
         let request = MKDirections.Request()
-        request.source = MKMapItem(placemark: MKPlacemark(coordinate: userLocation))
-        request.destination = MKMapItem(placemark: MKPlacemark(coordinate: location.coordinate))
+        request.source = MKMapItem(
+            placemark: MKPlacemark(coordinate: userLocation))
+        request.destination = MKMapItem(
+            placemark: MKPlacemark(coordinate: location.coordinate))
         request.transportType = .walking
-        
+
         let directions = MKDirections(request: request)
         directions.calculate { response, error in
             if let error = error {
-                print("Error calculating directions: \(error.localizedDescription)")
+                print(
+                    "Error calculating directions: \(error.localizedDescription)"
+                )
                 return
             }
-            
+
             guard let route = response?.routes.first else {
                 print("No routes found")
                 return
             }
-            
+
             DispatchQueue.main.async {
                 self.route = route
-                // Adjust region to show the route
                 let rect = route.polyline.boundingMapRect
                 let region = MKCoordinateRegion(rect)
                 withAnimation {
@@ -391,7 +425,7 @@ struct MapView: View {
             }
         }
     }
-    
+
     private func clearRoute() {
         route = nil
     }
@@ -399,7 +433,7 @@ struct MapView: View {
 
 struct FilterButtonStyle: ButtonStyle {
     let isSelected: Bool
-    
+
     func makeBody(configuration: Configuration) -> some View {
         configuration.label
             .font(.system(size: 14, weight: .medium))
@@ -416,24 +450,25 @@ struct FilterButtonStyle: ButtonStyle {
     }
 }
 
-
 struct LocationDetailView: View {
     let location: CampusLocation
     let userLocation: CLLocationCoordinate2D?
     let onGetDirections: () -> Void
     @Environment(\.dismiss) private var dismiss
-    
+
     private var distance: String {
         guard let userLocation = userLocation else { return "Unknown" }
-        let userCLLocation = CLLocation(latitude: userLocation.latitude, longitude: userLocation.longitude)
-        let locationCLLocation = CLLocation(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude)
+        let userCLLocation = CLLocation(
+            latitude: userLocation.latitude, longitude: userLocation.longitude)
+        let locationCLLocation = CLLocation(
+            latitude: location.coordinate.latitude,
+            longitude: location.coordinate.longitude)
         let distanceInMeters = userCLLocation.distance(from: locationCLLocation)
         return String(format: "%.0fm away", distanceInMeters)
     }
-    
+
     var body: some View {
         VStack(spacing: 0) {
-            // Header - consistent styling
             VStack(spacing: 0) {
                 HStack {
                     Button(action: {
@@ -443,21 +478,22 @@ struct LocationDetailView: View {
                             .font(.system(size: 20, weight: .medium))
                             .foregroundColor(.black)
                     }
-                    
+
                     Text("Location Details")
                         .font(.system(size: 24, weight: .bold))
                         .foregroundColor(.black)
-                    
+
                     Spacer()
                 }
                 .padding(.horizontal, 20)
                 .padding(.top, 20)
                 .padding(.bottom, 20)
             }
-            
+
             ScrollView {
                 VStack(alignment: .leading, spacing: 25) {
-                    // Location Info Card
+                    //location info card
+
                     VStack(alignment: .leading, spacing: 15) {
                         HStack {
                             Image(systemName: location.category.icon)
@@ -466,7 +502,7 @@ struct LocationDetailView: View {
                                 .frame(width: 50, height: 50)
                                 .background(location.category.color)
                                 .cornerRadius(25)
-                            
+
                             VStack(alignment: .leading, spacing: 4) {
                                 Text(location.name)
                                     .font(.system(size: 20, weight: .bold))
@@ -480,10 +516,10 @@ struct LocationDetailView: View {
                                         .foregroundColor(.blue)
                                 }
                             }
-                            
+
                             Spacer()
                         }
-                        
+
                         Text(location.description)
                             .font(.system(size: 14))
                             .foregroundColor(.gray)
@@ -493,11 +529,10 @@ struct LocationDetailView: View {
                     .background(Color.white)
                     .cornerRadius(12)
                     .shadow(color: .black.opacity(0.1), radius: 5, x: 0, y: 2)
-                    
-                    // Action Buttons
+
+                    //action btns
                     VStack(spacing: 12) {
 
-                        
                         Button(action: openInMaps) {
                             HStack {
                                 Image(systemName: "map.fill")
@@ -520,31 +555,29 @@ struct LocationDetailView: View {
         .background(Color.white)
         .navigationBarHidden(true)
     }
-    
+
     private func openInMaps() {
         let placemark = MKPlacemark(coordinate: location.coordinate)
         let mapItem = MKMapItem(placemark: placemark)
         mapItem.name = location.name
-        
-        // Fixed: Use proper launch options
+
         let launchOptions = [
-            MKLaunchOptionsDirectionsModeKey: MKLaunchOptionsDirectionsModeWalking
+            MKLaunchOptionsDirectionsModeKey:
+                MKLaunchOptionsDirectionsModeWalking
         ]
-        
+
         mapItem.openInMaps(launchOptions: launchOptions)
     }
 }
 
-// MARK: - Location List View - Updated styling
 struct LocationListView: View {
     let locations: [CampusLocation]
     @Binding var searchText: String
     let onLocationSelected: (CampusLocation) -> Void
     @Environment(\.dismiss) private var dismiss
-    
+
     var body: some View {
         VStack(spacing: 0) {
-            // Header
             VStack(spacing: 0) {
                 HStack {
                     Button(action: {
@@ -554,29 +587,28 @@ struct LocationListView: View {
                             .font(.system(size: 20, weight: .medium))
                             .foregroundColor(.black)
                     }
-                    
+
                     Text("Campus Locations")
                         .font(.system(size: 24, weight: .bold))
                         .foregroundColor(.black)
-                    
+
                     Spacer()
                 }
                 .padding(.horizontal, 20)
                 .padding(.top, 20)
                 .padding(.bottom, 20)
             }
-            
-            // Search Bar
+
             SearchBar(text: $searchText)
                 .padding(.bottom, 15)
-            
-            // Locations List
+
             List(locations) { location in
                 LocationRow(location: location) {
                     onLocationSelected(location)
                 }
                 .listRowSeparator(.hidden)
-                .listRowInsets(EdgeInsets(top: 5, leading: 20, bottom: 5, trailing: 20))
+                .listRowInsets(
+                    EdgeInsets(top: 5, leading: 20, bottom: 5, trailing: 20))
             }
             .listStyle(PlainListStyle())
         }
@@ -585,21 +617,20 @@ struct LocationListView: View {
     }
 }
 
-// MARK: - Search Bar - Updated styling
 struct SearchBar: View {
     @Binding var text: String
-    
+
     var body: some View {
-        
+
         HStack {
             Image(systemName: "magnifyingglass")
                 .foregroundColor(.gray)
                 .padding(.leading, 15)
-            
+
             TextField("Search locations...", text: $text)
                 .font(.system(size: 16))
                 .padding(.vertical, 12)
-            
+
             Spacer()
         }
         .background(Color.gray.opacity(0.1))
@@ -609,31 +640,30 @@ struct SearchBar: View {
                 .stroke(Color.gray.opacity(0.3), lineWidth: 1)
         )
         .padding(.horizontal, 20)
-        
-//        HStack {
-//            Image(systemName: "magnifyingglass")
-//                .foregroundColor(.gray)
-//            
-//            TextField("Search locations...", text: $text)
-//                .font(.system(size: 14))
-//        }
-//        .padding(.horizontal, 16)
-//        .padding(.vertical, 10)
-//        .background(Color.gray.opacity(0.1))
-//        .cornerRadius(20)
-//        .overlay(
-//            RoundedRectangle(cornerRadius: 20)
-//                .stroke(Color.black, lineWidth: 1)
-//        )
+
+        //        HStack {
+        //            Image(systemName: "magnifyingglass")
+        //                .foregroundColor(.gray)
+        //
+        //            TextField("Search locations...", text: $text)
+        //                .font(.system(size: 14))
+        //        }
+        //        .padding(.horizontal, 16)
+        //        .padding(.vertical, 10)
+        //        .background(Color.gray.opacity(0.1))
+        //        .cornerRadius(20)
+        //        .overlay(
+        //            RoundedRectangle(cornerRadius: 20)
+        //                .stroke(Color.black, lineWidth: 1)
+        //        )
         .padding(.horizontal, 20)
     }
 }
 
-
 struct LocationRow: View {
     let location: CampusLocation
     let onTap: () -> Void
-    
+
     var body: some View {
         Button(action: onTap) {
             HStack(spacing: 12) {
@@ -641,35 +671,35 @@ struct LocationRow: View {
                     .foregroundColor(.white)
                     .frame(width: 40, height: 40)
                     .background(location.category.color)
-                    .clipShape(Circle())  // Use clipShape for perfect circle
-                
+                    .clipShape(Circle())
+
                 VStack(alignment: .leading, spacing: 4) {
                     Text(location.name)
                         .font(.system(size: 16, weight: .semibold))
                         .foregroundColor(.black)
                         .lineLimit(1)
                         .truncationMode(.tail)
-                    
+
                     Text(location.category.rawValue)
                         .font(.system(size: 12))
                         .foregroundColor(.gray)
                         .lineLimit(1)
-                    
+
                     Text(location.description)
                         .font(.system(size: 12))
                         .foregroundColor(.gray)
                         .lineLimit(2)
-                        .fixedSize(horizontal: false, vertical: true) // allow multiline but no truncation cutting off early
+                        .fixedSize(horizontal: false, vertical: true)
                 }
-                
+
                 Spacer()
-                
+
                 Image(systemName: "chevron.right")
                     .foregroundColor(.gray)
                     .font(.system(size: 14, weight: .semibold))
             }
             .padding(12)
-            .contentShape(Rectangle()) // makes entire HStack tappable
+            .contentShape(Rectangle())  //makes entire hstack tappable
         }
         .buttonStyle(PlainButtonStyle())
         .background(Color.white)
@@ -678,8 +708,6 @@ struct LocationRow: View {
         .padding(.horizontal, 10)
     }
 }
-
-
 
 struct MapView_Previews: PreviewProvider {
     static var previews: some View {

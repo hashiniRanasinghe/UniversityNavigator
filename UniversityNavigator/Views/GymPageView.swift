@@ -37,11 +37,10 @@ struct GymPageView: View {
                         .foregroundColor(.black)
                 }
 
-                Spacer()
 
                 Text("Campus Gym")
-                    .font(.system(size: 20, weight: .semibold))
-                    .foregroundColor(.black)
+                    .font(.system(size: 24, weight: .bold))
+                   .foregroundColor(.black)
 
                 Spacer()
 
