@@ -9,7 +9,7 @@ import SwiftUI
 import CoreLocation
 
 struct BarryJLibraryView: View {
-    @State private var selectedTab = "Library"
+    //@State private var selectedTab = "Library"
     @Environment(\.dismiss) private var dismiss
 
     let barryMarshallLibraryLocation = CampusLocation(
@@ -262,36 +262,36 @@ struct BarryJLibraryView: View {
             Spacer()
 
             
-            BottomNavigationBar(selectedTab: selectedTab) { tab in
-                selectedTab = tab
-                
-              
-                switch tab {
-                case "Home":
-         
-                    break
-                case "Map":
-          
-                    break
-                case "Library":
-
-                    break
-                case "Cafe":
-                 
-                    break
-                case "Halls":
-    
-                    break
-                case "Gym":
-     
-                    break
-                case "Parking":
-           
-                    break
-                default:
-                    break
-                }
-            }
+//            BottomNavigationBar(selectedTab: selectedTab) { tab in
+//                selectedTab = tab
+//                
+//              
+//                switch tab {
+//                case "Home":
+//         
+//                    break
+//                case "Map":
+//          
+//                    break
+//                case "Library":
+//
+//                    break
+//                case "Cafe":
+//                 
+//                    break
+//                case "Halls":
+//    
+//                    break
+//                case "Gym":
+//     
+//                    break
+//                case "Parking":
+//           
+//                    break
+//                default:
+//                    break
+//                }
+//            }
         }
 
         .background(Color.white)

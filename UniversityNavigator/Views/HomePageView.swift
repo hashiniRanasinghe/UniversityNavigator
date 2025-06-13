@@ -11,7 +11,7 @@ import CoreLocation
 
 struct HomePageView: View {
     @State private var searchText = ""
-    @State private var selectedTab = "Home"
+    //@State private var selectedTab = "Home"
     
     let pastelGreen = Color(red: 0.6, green: 0.85, blue: 0.7)    // soft green
     let pastelRed = Color(red: 1.0, green: 0.7, blue: 0.7)       // soft red
@@ -182,7 +182,7 @@ struct HomePageView: View {
                     //                    }
                     //
                     
-//                    Spacer()
+                    //                    Spacer()
                     VStack(alignment: .leading, spacing: 15) {
                         HStack {
                             Text("Quick Directions")
@@ -215,29 +215,30 @@ struct HomePageView: View {
             Spacer()
             
             
-            BottomNavigationBar(selectedTab: selectedTab) { tab in
-                selectedTab = tab
-                
-                    
-                switch tab {
-                case "Home":
-                    HomePageView()
-                    break
-                case "Map":
-                    MapView()
-                    break
-                case "Library":
-                    CampusLibrariesView()
-                    break
-                case "Cafe":
-                    CampusCafeteriasView()
-                    break
-               
-                default:
-                    break
-                    
-                }
-            }}
+            //            BottomNavigationBar(selectedTab: selectedTab) { tab in
+            //                selectedTab = tab
+            //
+            //
+            //                switch tab {
+            //                case "Home":
+            //                    HomePageView()
+            //                    break
+            //                case "Map":
+            //                    MapView()
+            //                    break
+            //                case "Library":
+            //                    CampusLibrariesView()
+            //                    break
+            //                case "Cafe":
+            //                    CampusCafeteriasView()
+            //                    break
+            //
+            //                default:
+            //                    break
+            //
+            //                }
+            //            }
+        }
             .background(Color.white)
             .ignoresSafeArea(.all, edges: .bottom)
             .navigationBarBackButtonHidden(true)
@@ -496,5 +497,3 @@ struct HomePageView: View {
             HomePageView()
         }
     }
-    
-

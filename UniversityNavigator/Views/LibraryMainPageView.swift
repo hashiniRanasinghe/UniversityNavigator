@@ -11,7 +11,7 @@
 import SwiftUI
 import CoreLocation
 struct CampusLibrariesView: View {
-    @State private var selectedTab = "Library"
+    //@State private var selectedTab = "Library"
     @State private var selectedCategory = "All Libraries"
     @Environment(\.dismiss) private var dismiss
     @State private var showingMapView = false
@@ -177,36 +177,36 @@ struct CampusLibrariesView: View {
 //            BottomNavigationBar(selectedTab: selectedTab) { tab in
 //                selectedTab = tab
 //            }
-            BottomNavigationBar(selectedTab: selectedTab) { tab in
-                selectedTab = tab
-                
-              
-                switch tab {
-                case "Home":
-         
-                    break
-                case "Map":
-          
-                    break
-                case "Library":
-
-                    break
-                case "Cafe":
-                 
-                    break
-                case "Halls":
-    
-                    break
-                case "Gym":
-     
-                    break
-                case "Parking":
-           
-                    break
-                default:
-                    break
-                }
-            }
+//            BottomNavigationBar(selectedTab: selectedTab) { tab in
+//                selectedTab = tab
+//                
+//              
+//                switch tab {
+//                case "Home":
+//         
+//                    break
+//                case "Map":
+//          
+//                    break
+//                case "Library":
+//
+//                    break
+//                case "Cafe":
+//                 
+//                    break
+//                case "Halls":
+//    
+//                    break
+//                case "Gym":
+//     
+//                    break
+//                case "Parking":
+//           
+//                    break
+//                default:
+//                    break
+//                }
+//            }
         }
 
         .background(Color.white)

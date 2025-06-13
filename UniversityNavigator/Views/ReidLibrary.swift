@@ -10,7 +10,7 @@ import SwiftUI
 import CoreLocation
 
 struct ReidLibrary: View {
-    @State private var selectedTab = "Home"
+    //@State private var selectedTab = "Library"
     @Environment(\.dismiss) private var dismiss
 
     let reidLibraryLocation = CampusLocation(
@@ -261,10 +261,10 @@ struct ReidLibrary: View {
 
             Spacer()
 
-            BottomNavigationBar(selectedTab: selectedTab) { tab in
-                selectedTab = tab
-
-            }
+//            BottomNavigationBar(selectedTab: selectedTab) { tab in
+//                selectedTab = tab
+//
+//            }
         }
         .background(Color.white)
         .ignoresSafeArea(.all, edges: .bottom)

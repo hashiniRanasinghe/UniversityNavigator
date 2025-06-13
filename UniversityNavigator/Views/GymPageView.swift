@@ -9,7 +9,7 @@ import SwiftUI
 import CoreLocation
 
 struct GymPageView: View {
-    @State private var selectedTab = "Gym"
+    //@State private var selectedTab = "Gym"
     @State private var emailText = ""
     @Environment(\.dismiss) private var dismiss
 
@@ -269,36 +269,36 @@ struct GymPageView: View {
 //            BottomNavigationBar(selectedTab: selectedTab) { tab in
 //                selectedTab = tab
 //            }
-            BottomNavigationBar(selectedTab: selectedTab) { tab in
-                selectedTab = tab
-                
-              
-                switch tab {
-                case "Home":
-         
-                    break
-                case "Map":
-          
-                    break
-                case "Library":
-
-                    break
-                case "Cafe":
-                 
-                    break
-                case "Halls":
-    
-                    break
-                case "Gym":
-     
-                    break
-                case "Parking":
-           
-                    break
-                default:
-                    break
-                }
-            }
+//            BottomNavigationBar(selectedTab: selectedTab) { tab in
+//                selectedTab = tab
+//                
+//              
+//                switch tab {
+//                case "Home":
+//         
+//                    break
+//                case "Map":
+//          
+//                    break
+//                case "Library":
+//
+//                    break
+//                case "Cafe":
+//                 
+//                    break
+//                case "Halls":
+//    
+//                    break
+//                case "Gym":
+//     
+//                    break
+//                case "Parking":
+//           
+//                    break
+//                default:
+//                    break
+//                }
+//            }
         }
         .background(Color.white)
         .navigationBarBackButtonHidden(true)

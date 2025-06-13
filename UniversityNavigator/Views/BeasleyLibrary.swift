@@ -9,7 +9,7 @@ import SwiftUI
 import CoreLocation
 
 struct BeasleyLibrary: View {
-    @State private var selectedTab = "Library"
+    //@State private var selectedTab = "Library"
     @Environment(\.dismiss) private var dismiss
 
     let beasleyLawLibraryLocation = CampusLocation(
@@ -266,36 +266,36 @@ struct BeasleyLibrary: View {
 //
 //            }
             
-            BottomNavigationBar(selectedTab: selectedTab) { tab in
-                selectedTab = tab
-                
-                // Handle navigation based on selected tab
-                switch tab {
-                case "Home":
-                    // Navigate to home
-                    break
-                case "Map":
-                    // Navigate to map
-                    break
-                case "Library":
-                    // Navigate to library
-                    break
-                case "Cafe":
-                    // Navigate to cafe
-                    break
-                case "Halls":
-                    // Navigate to halls
-                    break
-                case "Gym":
-                    // Navigate to gym
-                    break
-                case "Parking":
-                    // Navigate to parking
-                    break
-                default:
-                    break
-                }
-            }
+//            BottomNavigationBar(selectedTab: selectedTab) { tab in
+//                selectedTab = tab
+//                
+//                // Handle navigation based on selected tab
+//                switch tab {
+//                case "Home":
+//                    // Navigate to home
+//                    break
+//                case "Map":
+//                    // Navigate to map
+//                    break
+//                case "Library":
+//                    // Navigate to library
+//                    break
+//                case "Cafe":
+//                    // Navigate to cafe
+//                    break
+//                case "Halls":
+//                    // Navigate to halls
+//                    break
+//                case "Gym":
+//                    // Navigate to gym
+//                    break
+//                case "Parking":
+//                    // Navigate to parking
+//                    break
+//                default:
+//                    break
+//                }
+//            }
         }
         .background(Color.white)
         .ignoresSafeArea(.all, edges: .bottom)
