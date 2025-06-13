@@ -134,10 +134,10 @@ struct MapView: View {
                       description: "Specialized law library"),
         
         // Lecture Halls
-        CampusLocation(name: "Winthrop Hall", category: .lectureHall,
+        CampusLocation(name: "Anatomy Lecture Room 181", category: .lectureHall,
                       coordinate: CLLocationCoordinate2D(latitude: -31.9795, longitude: 115.8170),
                       description: "Historic main lecture hall"),
-        CampusLocation(name: "Physics Building Lecture Theatre", category: .lectureHall,
+        CampusLocation(name: "Law Lecture Room 2", category: .lectureHall,
                       coordinate: CLLocationCoordinate2D(latitude: -31.9810, longitude: 115.8180),
                       description: "Physics department lecture facilities"),
         CampusLocation(name: "Engineering Lecture Theatre", category: .lectureHall,
