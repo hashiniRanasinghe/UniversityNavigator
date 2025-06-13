@@ -58,7 +58,7 @@ struct ReidLibrary: View {
                     VStack(spacing: 0) {
 
                         ZStack {
-                            if let libraryImg = UIImage(named: "library2.png") {
+                            if let libraryImg = UIImage(named: "library-488690.jpg") {
                                 Image(uiImage: libraryImg)
                                     .resizable()
                                     .aspectRatio(contentMode: .fill)

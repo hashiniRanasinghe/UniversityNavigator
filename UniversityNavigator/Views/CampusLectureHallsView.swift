@@ -8,6 +8,8 @@
 //import SwiftUI
 //
 import SwiftUI
+import CoreLocation
+
 
 struct CampusLectureHallsView: View {
     //@State private var selectedTab = "Halls"
@@ -17,6 +19,18 @@ struct CampusLectureHallsView: View {
     
     let categories = ["All Lecture Halls", "Occupied", "Free"]
     
+    
+    let lectureHallLocations: [CampusLocation] = [
+        CampusLocation(name: "Anatomy Lecture Room 181", category: .lectureHall,
+                      coordinate: CLLocationCoordinate2D(latitude: -31.9785, longitude: 115.8170),
+                      description: "Anatomy Lecture Room 181 - 344 Building"),
+        CampusLocation(name: "Law Lecture Room2", category: .lectureHall,
+                      coordinate: CLLocationCoordinate2D(latitude: -31.9780, longitude: 115.8160),
+                      description: "Law Lecture Room2 - 338 Law Building"),
+        CampusLocation(name: "Engineering Lecture Hall A", category: .lectureHall,
+                      coordinate: CLLocationCoordinate2D(latitude: -31.9800, longitude: 115.8185),
+                      description: "Engineering Lecture Hall A - 330 Building")
+    ]
 
     let freeColor = Color(red: 0.3, green: 0.8, blue: 0.5)     // soft green
     let scheduledColor = Color(red: 1.0, green: 0.7, blue: 0.3) // soft orange
@@ -24,7 +38,7 @@ struct CampusLectureHallsView: View {
 
     var body: some View {
         VStack(spacing: 0) {
-            // Header section
+    
             VStack(spacing: 0) {
                 HStack {
                     Button(action: {
@@ -45,7 +59,8 @@ struct CampusLectureHallsView: View {
                 .padding(.bottom, 20)
             }
             
-            // Fixed search bar and categories section
+
+            
             VStack(spacing: 15) {
                 HStack {
                     Image(systemName: "magnifyingglass")
@@ -64,7 +79,7 @@ struct CampusLectureHallsView: View {
                 .padding(.horizontal, 20)
                 .padding(.bottom, 10)
                 
-                // filter categories
+                //filters
                 ScrollView(.horizontal, showsIndicators: false) {
                     HStack(spacing: 12) {
                         ForEach(categories, id: \.self) { category in
@@ -93,7 +108,7 @@ struct CampusLectureHallsView: View {
             
             .background(Color.white)
             
-            // Scrollable view -Start
+ 
             ScrollView {
                 VStack(alignment: .leading, spacing: 15) {
                     
@@ -107,7 +122,8 @@ struct CampusLectureHallsView: View {
                         imageName: "anatomy_hall",
                         status: "Occupied",
                         statusColor: occupiedColor,
-                        nextClass: nil
+                        nextClass: nil,
+                        targetLocation: lectureHallLocations.first { $0.name == "Anatomy Lecture Room 181" }
                     )
                     
                     LectureHallCard(
@@ -120,10 +136,11 @@ struct CampusLectureHallsView: View {
                         imageName: "law_hall",
                         status: "Scheduled",
                         statusColor: scheduledColor,
-                        nextClass: "Next Class at 2.00 PM"
+                        nextClass: "Next Class at 2.00 PM",
+                        targetLocation: lectureHallLocations.first { $0.name == "Law Lecture Room2" }
                     )
                     
-                    // maybe add more halls later
+                    
                     LectureHallCard(
                         name: "Engineering Lecture Hall A",
                         building: "330 - Engineering, Floor 2",
@@ -134,49 +151,18 @@ struct CampusLectureHallsView: View {
                         imageName: "engineering_hall",
                         status: "Free",
                         statusColor: freeColor,
-                        nextClass: "Available until 4.00 PM"
+                        nextClass: "Available until 4.00 PM",
+                        targetLocation: lectureHallLocations.first { $0.name == "Engineering Lecture Hall A" }
                     )
                     
-                    // additional hall for testing
-                    // LectureHallCard(...)
+                    
                 }
                 .padding(.top, 10)
-                .padding(.bottom, 120) // space for bottom nav
-            }
+                .padding(.bottom, 120) }
             
             Spacer()
             
-            // bottom navigation
-//            BottomNavigationBar(selectedTab: selectedTab) { tab in
-//                selectedTab = tab
-//                
-//                // Handle navigation based on selected tab
-//                switch tab {
-//                case "Home":
-//                    // Navigate to home
-//                    break
-//                case "Map":
-//                    // Navigate to map
-//                    break
-//                case "Library":
-//                    // Navigate to library
-//                    break
-//                case "Cafe":
-//                    // Navigate to cafe
-//                    break
-//                case "Halls":
-//                    // Navigate to halls
-//                    break
-//                case "Gym":
-//                    // Navigate to gym
-//                    break
-//                case "Parking":
-//                    // Navigate to parking
-//                    break
-//                default:
-//                    break
-//                }
-//            }
+
         }
         .background(Color.white)
         .ignoresSafeArea(.all, edges: .bottom)
@@ -195,11 +181,24 @@ struct LectureHallCard: View {
     let status: String
     let statusColor: Color
     let nextClass: String?
+    let targetLocation: CampusLocation?
     
+
+    private var destinationView: some View {
+        switch name {
+        case "Anatomy Lecture Room 181":
+            return AnyView(AnatomyLectureRoomView())
+        case "Law Lecture Room2":
+            return AnyView(LawLectureRoomView())
+        default:
+            return AnyView(EmptyView())
+        }
+    }
+
     var body: some View {
         VStack(spacing: 0) {
             
-            // image section with status overlay
+
             ZStack(alignment: .topTrailing) {
                 Rectangle()
                     .fill(Color.gray.opacity(0.3))
@@ -208,7 +207,7 @@ struct LectureHallCard: View {
                     .overlay(
                         Group {
                             if imageName == "anatomy_hall" {
-                                // try to load anatomy hall image
+            
                                 if let anatomyImage = UIImage(named: "AnatomyLectureRoom.jpg") {
                                     Image(uiImage: anatomyImage)
                                         .resizable()
@@ -217,7 +216,7 @@ struct LectureHallCard: View {
                                         .frame(maxWidth: .infinity)
                                         .clipShape(UnevenRoundedRectangle(topLeadingRadius: 12, topTrailingRadius: 12))
                                 } else {
-                                    // fallback for anatomy hall
+                               
                                     ZStack {
                                         Color.gray.opacity(0.3)
                                         VStack {
@@ -239,7 +238,8 @@ struct LectureHallCard: View {
                                         .frame(maxWidth: .infinity)
                                         .clipShape(UnevenRoundedRectangle(topLeadingRadius: 12, topTrailingRadius: 12))
                                 } else {
-                                    // fallback for law hall
+                        
+                                    
                                     ZStack {
                                         Color.gray.opacity(0.4)
                                         VStack {
@@ -253,7 +253,7 @@ struct LectureHallCard: View {
                                     }
                                 }
                             } else if imageName == "engineering_hall" {
-                                // engineering hall image
+                                // engineering hall
                                 if let engImage = UIImage(named: "EngineeringLectureHall.jpg") {
                                     Image(uiImage: engImage)
                                         .resizable()
@@ -262,7 +262,6 @@ struct LectureHallCard: View {
                                         .frame(maxWidth: .infinity)
                                         .clipShape(UnevenRoundedRectangle(topLeadingRadius: 12, topTrailingRadius: 12))
                                 } else {
-                                    // fallback for engineering
                                     ZStack {
                                         Color.gray.opacity(0.4)
                                         VStack {
@@ -276,7 +275,6 @@ struct LectureHallCard: View {
                                     }
                                 }
                             } else {
-                                // generic fallback image
                                 ZStack {
                                     Color.gray.opacity(0.3)
                                     Image(systemName: "building.2")
@@ -286,8 +284,7 @@ struct LectureHallCard: View {
                             }
                         }
                     )
-                
-                // status badge in top right
+
                 Text(status)
                     .font(.system(size: 12, weight: .medium))
                     .foregroundColor(.white)
@@ -298,11 +295,13 @@ struct LectureHallCard: View {
                     .padding(.top, 12)
                     .padding(.trailing, 12)
             }
+            Spacer()
             
-            // content section
+            // content
             VStack(alignment: .leading, spacing: 12) {
                 
-                // hall name and building
+       
+            
                 VStack(alignment: .leading, spacing: 4) {
                     Text(name)
                         .font(.system(size: 18, weight: .semibold))
@@ -324,8 +323,7 @@ struct LectureHallCard: View {
                     .padding(.bottom, 20)
                     
                 }
-                
-                // current lecture info or next class info
+            
                 if let lecture = currentLecture {
                     VStack(alignment: .leading, spacing: 6) {
                         HStack(spacing: 14) {
@@ -362,7 +360,6 @@ struct LectureHallCard: View {
                         }
                     }
                 } else {
-                    // when no current lecture
                     if status == "Scheduled" {
                         HStack(spacing: 8) {
                             Image(systemName: "calendar.badge.clock")
@@ -384,7 +381,7 @@ struct LectureHallCard: View {
                     }
                 }
                 
-                // next class info
+                //next classes
                 if let nextClassInfo = nextClass {
                     HStack(spacing: 8) {
                         Image(systemName: "clock")
@@ -398,37 +395,34 @@ struct LectureHallCard: View {
                 
                 Spacer()
                 
-                // action buttons at bottom
                 HStack(spacing: 12) {
-                    Spacer()
-                    
-                    // view button with location icon
-                    Button(action: {
-                        // TODO: navigate to hall details or map view
-                        // print("view button tapped for \(name)")
-                    }) {
-                        HStack(spacing: 6) {
-                            Image(systemName: "location")
-                                .font(.system(size: 12))
-                            Text("View")
-                                .font(.system(size: 14, weight: .medium))
-                        }
-                        .foregroundColor(.white)
-//                        .padding(.horizontal, 20)
-//                        .padding(.vertical, 12)
-//                        .background(Color.black)
-//                        .cornerRadius(25)
-                        .frame(maxWidth: .infinity)
-                        .padding(.vertical, 16)
-                        .background(Color.black)
-                        .cornerRadius(25)
-                    }
-                    
-                    Spacer()
-                }
+                      Spacer()
+                      
+                      NavigationLink(destination: MapView(targetLocation: targetLocation)) {
+                          Text("Directions")
+                              .font(.system(size: 14, weight: .medium))
+                              .foregroundColor(.white)
+                              .padding(.horizontal, 20)
+                              .padding(.vertical, 12)
+                              .background(Color.black)
+                              .cornerRadius(25)
+                      }
+                      
+                      NavigationLink(destination: destinationView) {
+                          Text("View Details")
+                              .font(.system(size: 14, weight: .medium))
+                              .foregroundColor(.white)
+                              .padding(.horizontal, 20)
+                              .padding(.vertical, 12)
+                              .background(Color.black)
+                              .cornerRadius(25)
+                      }
+                      
+                      Spacer()
+                  }
+              }
             }
             .padding(20)
-        }
         .background(Color.white)
         .cornerRadius(12)
         .shadow(color: .black.opacity(0.1), radius: 5, x: 0, y: 2)

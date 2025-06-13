@@ -6,25 +6,33 @@
 //
 
 import SwiftUI
+import CoreLocation
 
 struct LawLectureRoomView: View {
     //@State private var selectedTab = "Halls"
     @Environment(\.dismiss) private var dismiss
     
-    // Static values instead of parameters
+
+    let hallLocation = CampusLocation(
+        name: "Law Lecture Room 2",
+        category: .library,
+        coordinate: CLLocationCoordinate2D(latitude: -31.9810, longitude: 115.8180),
+        description: "Physics department lecture facilities"
+    )
+    
+    let freeColor = Color(red: 0.3, green: 0.8, blue: 0.5)     // soft green
+    let scheduledColor = Color(red: 1.0, green: 0.7, blue: 0.3) // soft orange
+    
     private let hallName = "Law Lecture Room 2"
     private let building = "338 - Law, Floor 1"
     private let seats = 120
     private let imageName = "LawLectureRoom"
     
-    // Status colors
-    let freeColor = Color(red: 0.3, green: 0.8, blue: 0.5)     // soft green
-    let scheduledColor = Color(red: 1.0, green: 0.7, blue: 0.3) // soft orange
-    let occupiedColor = Color(red: 0.9, green: 0.4, blue: 0.4) // soft red
+
     
     var body: some View {
         VStack(spacing: 0) {
-            // Header
+
             HStack {
                 Button(action: {
                     dismiss()
@@ -46,7 +54,7 @@ struct LawLectureRoomView: View {
             
             ScrollView {
                 VStack(spacing: 25) {
-                    // Hall image
+            
                     ZStack {
                         Rectangle()
                             .fill(Color.gray.opacity(0.3))
@@ -62,7 +70,7 @@ struct LawLectureRoomView: View {
                                             .frame(maxWidth: .infinity)
                                             .cornerRadius(12)
                                     } else {
-                                        // Fallback image
+                                
                                         ZStack {
                                             Color.gray.opacity(0.3)
                                             VStack {
@@ -81,7 +89,6 @@ struct LawLectureRoomView: View {
                     }
                     .padding(.horizontal, 20)
                     
-                    // Location and Seats info
                     HStack(spacing: 0) {
                         HStack(spacing: 8) {
                             Image(systemName: "location")
@@ -107,7 +114,6 @@ struct LawLectureRoomView: View {
                     }
                     .padding(.horizontal, 20)
                     
-                    // Availability Schedule Card
                     VStack(alignment: .leading, spacing: 15) {
                         HStack {
                             Text("Availability Schedule")
@@ -117,7 +123,7 @@ struct LawLectureRoomView: View {
                         }
                         .padding(.horizontal, 20)
                         
-                        // Schedule Card
+                        
                         VStack(spacing: 12) {
                             ScheduleItem(
                                 time: "9.00 - 14.00",
@@ -150,7 +156,6 @@ struct LawLectureRoomView: View {
                         .padding(.horizontal, 20)
                     }
                     
-                    // Resources
                     VStack(alignment: .leading, spacing: 15) {
                         HStack {
                             Text("Resources")
@@ -188,83 +193,33 @@ struct LawLectureRoomView: View {
                         .padding(.horizontal, 0)
                     }
                     .padding(.horizontal, 20)
-                    
-                    // Get Directions Button
-//                    Button(action: {
-//                        getDirections()
-//                    }) {
-//                        Text("Get Directions")
-//                            .font(.system(size: 18, weight: .semibold))
-//                            .foregroundColor(.white)
-//                            .frame(maxWidth: .infinity)
-//                            .padding(.vertical, 16)
-//                            .background(Color.black)
-//                            .cornerRadius(25)
-//                    }
-//                    .padding(.horizontal, 20)
-//                    .padding(.bottom, 120) // Space for bottom navigation
-                    Button(action: {
-                
-                                    }) {
-                                        Text("Get Directions")
-                                            .font(.system(size: 16, weight: .semibold))
-                                            .foregroundColor(.white)
-                                            .frame(maxWidth: .infinity)
-                                            .padding(.vertical, 16)
-                                            .background(Color.black)
-                                            .cornerRadius(25)
-                                    }
-                                    .padding(.horizontal, 100)
-                                    .padding(.bottom, 20)
-                                    .padding(.top, 10)
+            
+                  
+                    NavigationLink(destination: MapView(targetLocation: hallLocation)) {
+                        Text("Get Directions")
+                            .font(.system(size: 14, weight: .medium))
+                            .foregroundColor(.white)
+                            .padding(.vertical, 10)
+                            .padding(.horizontal, 20)
+                            .background(Color.black)
+                            .cornerRadius(20)
+                    }
+                    .padding(.horizontal, 100)
+                    .padding(.bottom, 20)
+                    .padding(.top, 0)
                 }
             }
             
             Spacer()
             
-            // Bottom Navigation
-//            BottomNavigationBar(selectedTab: selectedTab) { tab in
-//                selectedTab = tab
-//                
-//                // Handle navigation based on selected tab
-//                switch tab {
-//                case "Home":
-//                    // Navigate to home
-//                    break
-//                case "Map":
-//                    // Navigate to map
-//                    break
-//                case "Library":
-//                    // Navigate to library
-//                    break
-//                case "Cafe":
-//                    // Navigate to cafe
-//                    break
-//                case "Halls":
-//                    // Navigate to halls
-//                    break
-//                case "Gym":
-//                    // Navigate to gym
-//                    break
-//                case "Parking":
-//                    // Navigate to parking
-//                    break
-//                default:
-//                    break
-//                }
-//            }
+
         }
+
         .background(Color.white)
         .ignoresSafeArea(.all, edges: .bottom)
         .navigationBarBackButtonHidden(true)
     }
-    
-//    private func getDirections() {
-//        // TODO: Implement navigation to maps or directions
-//        print("Getting directions to \(hallName)")
-//        // You can add navigation to maps here
-//        // For example, open Apple Maps or Google Maps with the hall location
-//    }
+
 }
 
 struct ScheduleItemLawLectureRoom: View {
@@ -334,35 +289,7 @@ struct ResourceItemLawLectureRoom: View {
     }
 }
 
-// Bottom Navigation Bar (assuming you have this component)
-//struct BottomNavigationBar: View {
-//    let selectedTab: String
-//    let onTabSelected: (String) -> Void
-//
-//    var body: some View {
-//        HStack {
-//            NavItem(icon: "house", title: "Home", isSelected: selectedTab == "Home") {
-//                onTabSelected("Home")
-//            }
-//
-//            NavItem(icon: "map", title: "Map", isSelected: selectedTab == "Map") {
-//                onTabSelected("Map")
-//            }
-//
-//            NavItem(icon: "building.2", title: "Places", isSelected: selectedTab == "Places") {
-//                onTabSelected("Places")
-//            }
-//
-//            NavItem(icon: "person.circle", title: "Profile", isSelected: selectedTab == "Profile") {
-//                onTabSelected("Profile")
-//            }
-//        }
-//        .padding(.horizontal, 20)
-//        .padding(.vertical, 10)
-//        .background(Color.white)
-//        .shadow(color: .black.opacity(0.1), radius: 5, x: 0, y: -2)
-//    }
-//}
+
 
 struct NavItemLawLectureRoom: View {
     let icon: String
@@ -386,7 +313,6 @@ struct NavItemLawLectureRoom: View {
     }
 }
 
-// Preview
 struct LawLectureRoomViewPreviews: PreviewProvider {
     static var previews: some View {
         LawLectureRoomView()
