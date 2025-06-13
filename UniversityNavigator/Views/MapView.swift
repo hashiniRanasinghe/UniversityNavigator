@@ -196,13 +196,6 @@ struct MapView: View {
             // Header - consistent with CampusLibrariesView
             VStack(spacing: 0) {
                 HStack {
-                    Button(action: {
-                        dismiss()
-                    }) {
-                        Image(systemName: "chevron.left")
-                            .font(.system(size: 20, weight: .medium))
-                            .foregroundColor(.black)
-                    }
                     
                     Text("Campus Map")
                         .font(.system(size: 24, weight: .bold))
@@ -313,16 +306,12 @@ struct MapView: View {
                         }
                     }
                     .padding(.horizontal, 20)
-                    .padding(.bottom, 100) // Account for bottom navigation
+                    .padding(.bottom, 100) 
                 }
             }
             
             Spacer()
             
-            // Bottom Navigation - consistent with other screens map view
-            BottomNavigationBar(selectedTab: selectedTab) { tab in
-                selectedTab = tab
-            }
         }
         .background(Color.white)
         .navigationBarBackButtonHidden(true)
