@@ -9,7 +9,7 @@ import CoreLocation
 import SwiftUI
 
 struct CanteenMenuBusinessSchoolCafeView: View {
-    @State private var selectedTab = "Cafe"
+    //@State private var selectedTab = "Cafe"
     @State private var selectedCategory = "All Foods"
     @State private var searchText = ""
     @Environment(\.dismiss) private var dismiss
@@ -271,35 +271,35 @@ struct CanteenMenuBusinessSchoolCafeView: View {
                 //                }
                 //            }
 
-                BottomNavigationBar(selectedTab: selectedTab) { tab in
-                    selectedTab = tab
-
-                    switch tab {
-                    case "Home":
-
-                        break
-                    case "Map":
-
-                        break
-                    case "Library":
-
-                        break
-                    case "Cafe":
-
-                        break
-                    case "Halls":
-
-                        break
-                    case "Gym":
-
-                        break
-                    case "Parking":
-
-                        break
-                    default:
-                        break
-                    }
-                }
+//                BottomNavigationBar(selectedTab: selectedTab) { tab in
+//                    selectedTab = tab
+//
+//                    switch tab {
+//                    case "Home":
+//
+//                        break
+//                    case "Map":
+//
+//                        break
+//                    case "Library":
+//
+//                        break
+//                    case "Cafe":
+//
+//                        break
+//                    case "Halls":
+//
+//                        break
+//                    case "Gym":
+//
+//                        break
+//                    case "Parking":
+//
+//                        break
+//                    default:
+//                        break
+//                    }
+//                }
             }
             .background(Color.white)
             .ignoresSafeArea(.all, edges: .bottom)

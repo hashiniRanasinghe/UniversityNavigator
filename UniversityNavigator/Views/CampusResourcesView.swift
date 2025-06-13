@@ -10,7 +10,7 @@ import SwiftUI
 import CoreLocation
 
 struct CampusResourcesView: View {
-    @State private var selectedTab = "Places"
+    //@State private var selectedTab = "Places"
     @Environment(\.dismiss) private var dismiss
     
 
@@ -118,9 +118,9 @@ struct CampusResourcesView: View {
             Spacer()
             
 
-                BottomNavigationBar(selectedTab: selectedTab) { tab in
-                selectedTab = tab
-            }
+//                BottomNavigationBar(selectedTab: selectedTab) { tab in
+//                selectedTab = tab
+//            }
         }
         .background(Color.white)
         .ignoresSafeArea(.all, edges: .bottom)
