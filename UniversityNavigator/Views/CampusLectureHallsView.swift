@@ -93,9 +93,9 @@ struct CampusLectureHallsView: View {
                                     .padding(.horizontal, 16)
                                     .padding(.vertical, 10)
                                     .background(selectedCategory == category ? Color.black : Color.clear)
-                                    .cornerRadius(8)
+                                    .cornerRadius(20)
                                     .overlay(
-                                        RoundedRectangle(cornerRadius: 8)
+                                        RoundedRectangle(cornerRadius: 20)
                                             .stroke(Color.black, lineWidth: 1)
                                     )
                             }

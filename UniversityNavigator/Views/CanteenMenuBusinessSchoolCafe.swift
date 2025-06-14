@@ -63,7 +63,7 @@ struct CanteenMenuBusinessSchoolCafeView: View {
                             .padding(.horizontal, 12)
                             .padding(.vertical, 6)
                             .background(Color.pink)
-                            .cornerRadius(12)
+                            .cornerRadius(6)
                     }
 
                     HStack(spacing: 20) {

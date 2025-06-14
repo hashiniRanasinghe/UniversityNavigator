@@ -70,28 +70,30 @@ struct CampusCafeteriasView: View {
                 VStack(spacing: 25) {
                     
                     ScrollView(.horizontal, showsIndicators: false) {
-                        HStack(spacing: 12) {
-                            ForEach(categories, id: \.self) { category in
-                                Button(action: {
-                                    selectedCategory = category
-                                }) {
-                                    Text(category)
-                                        .font(.system(size: 14, weight: .medium))
-                                        .foregroundColor(selectedCategory == category ? .white : .black)
-                                        .padding(.horizontal, 16)
-                                        .padding(.vertical, 10)
-                                        .background(selectedCategory == category ? Color.black : Color.clear)
-                                        .cornerRadius(8)
-                                        .overlay(
-                                            RoundedRectangle(cornerRadius: 8)
-                                                .stroke(Color.black, lineWidth: 1)
-                                        )
-                                }
-                            }
-                        }
-                        .padding(.horizontal, 20)
-                    }
-                    
+                         HStack(spacing: 12) {
+                             ForEach(categories, id: \.self) { category in
+                                 Button(action: {
+                                     selectedCategory = category
+                                 }) {
+                                     Text(category)
+                                         .font(.system(size: 14, weight: .medium))
+                                         .foregroundColor(selectedCategory == category ? .white : .black)
+                                         .padding(.horizontal, 16)
+                                         .padding(.vertical, 10)
+                                         .background(selectedCategory == category ? Color.black : Color.clear)
+                                         .cornerRadius(20)
+                                         .overlay(
+                                             RoundedRectangle(cornerRadius: 20)
+                                                 .stroke(Color.black, lineWidth: 1)
+                                         )
+                                 }
+                             }
+                         }
+                         .padding(.horizontal, 20)
+                     }
+             
+                 .padding(.bottom, 15)
+                 .background(Color.white)
                     //cafe cards
                     VStack(alignment: .leading, spacing: 15) {
                         
