@@ -182,7 +182,7 @@ struct MapView: View {
             description: "Fine dining and events venue"),
 
         CampusLocation(
-            name: "Sports Centre", category: .gym,
+            name: "Fitness Centre", category: .gym,
             coordinate: CLLocationCoordinate2D(
                 latitude: -31.9820, longitude: 115.8190),
             description: "Main sports and fitness facilities"),
@@ -465,9 +465,9 @@ struct FilterButtonStyle: ButtonStyle {
             .padding(.horizontal, 16)
             .padding(.vertical, 10)
             .background(isSelected ? Color.black : Color.clear)
-            .cornerRadius(8)
+            .cornerRadius(20)
             .overlay(
-                RoundedRectangle(cornerRadius: 8)
+                RoundedRectangle(cornerRadius: 20)
                     .stroke(Color.black, lineWidth: 1)
             )
             .scaleEffect(configuration.isPressed ? 0.95 : 1.0)
@@ -567,7 +567,7 @@ struct LocationDetailView: View {
                             .foregroundColor(.white)
                             .frame(maxWidth: .infinity)
                             .padding(.vertical, 12)
-                            .background(Color.green)
+                            .background(Color.black)
                             .cornerRadius(8)
                         }
                     }

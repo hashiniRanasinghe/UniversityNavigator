@@ -18,7 +18,7 @@ struct GymPageView: View {
     let pastelOrange = Color(red: 1.0, green: 0.8, blue: 0.6)  // soft orange
 
     let gymLocation = CampusLocation(
-        name: "Sports Centre",
+        name: "Fitness Centre",
         category: .gym,
         coordinate: CLLocationCoordinate2D(latitude: -31.9820, longitude: 115.8190),
         description: "Main sports and fitness facilities"

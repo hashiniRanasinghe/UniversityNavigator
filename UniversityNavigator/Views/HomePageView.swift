@@ -131,7 +131,7 @@ struct HomePageView: View {
                                 )
                                 
                                 LocationCard(
-                                    title: "Sports Centre",status: "Free",
+                                    title: "Fitness Centre",status: "Free",
                                     statusColor: freeColor,
                                     spotsAvailable: "27/50 Spots Available",
                                     imageName: "gym"

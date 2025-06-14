@@ -210,7 +210,7 @@ struct ResourceCard: View {
                     .padding(.horizontal, 12)
                     .padding(.vertical, 6)
                     .background(statusColor)
-                    .cornerRadius(12)
+                    .cornerRadius(6)
                     .padding(.top, 12)
                     .padding(.trailing, 12)
             }
@@ -236,7 +236,7 @@ struct ResourceCard: View {
                         .padding(.horizontal, 8)
                         .padding(.vertical, 4)
                         .background(availabilityColor)
-                        .cornerRadius(8)
+                        .cornerRadius(6)
                 }
                 
                 // location
@@ -288,7 +288,7 @@ struct ResourceCard: View {
                             .padding(.horizontal, 20)
                             .padding(.vertical, 12)
                             .background(Color.black)
-                            .cornerRadius(25)
+                            .cornerRadius(8)
                     }
                 }}
             

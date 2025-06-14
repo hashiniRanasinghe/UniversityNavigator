@@ -156,9 +156,9 @@ struct CanteenMenuHackettCafeView: View {
                                     selectedCategory == category
                                         ? Color.black : Color.clear
                                 )
-                                .cornerRadius(8)
+                                .cornerRadius(20)
                                 .overlay(
-                                    RoundedRectangle(cornerRadius: 8)
+                                    RoundedRectangle(cornerRadius: 20)
                                         .stroke(Color.black, lineWidth: 1)
                                 )
                         }
