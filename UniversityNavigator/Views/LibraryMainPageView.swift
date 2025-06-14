@@ -4,7 +4,6 @@
 //
 //  Created by Developer on 2025-06-07.
 //
-
 //import SwiftUI
 
 //DONE
@@ -15,6 +14,7 @@ struct CampusLibrariesView: View {
     @State private var selectedCategory = "All Libraries"
     @Environment(\.dismiss) private var dismiss
     @State private var showingMapView = false
+    @State private var selectedTab = "Library"
     
     let categories = ["All Libraries", "Open Now", "PC Available"]
     
@@ -78,9 +78,9 @@ struct CampusLibrariesView: View {
                                         .padding(.horizontal, 16)
                                         .padding(.vertical, 10)
                                         .background(selectedCategory == category ? Color.black : Color.clear)
-                                        .cornerRadius(20)
+                                        .cornerRadius(8)
                                         .overlay(
-                                            RoundedRectangle(cornerRadius: 20)
+                                            RoundedRectangle(cornerRadius: 8)
                                                 .stroke(Color.black, lineWidth: 1)
                                         )
                                 }
@@ -172,41 +172,36 @@ struct CampusLibrariesView: View {
             }
             
             Spacer()
-            
-        
-//            BottomNavigationBar(selectedTab: selectedTab) { tab in
-//                selectedTab = tab
-//            }
-//            BottomNavigationBar(selectedTab: selectedTab) { tab in
-//                selectedTab = tab
-//                
-//              
-//                switch tab {
-//                case "Home":
-//         
-//                    break
-//                case "Map":
-//          
-//                    break
-//                case "Library":
-//
-//                    break
-//                case "Cafe":
-//                 
-//                    break
-//                case "Halls":
-//    
-//                    break
-//                case "Gym":
-//     
-//                    break
-//                case "Parking":
-//           
-//                    break
-//                default:
-//                    break
-//                }
-//            }
+                        BottomNavigationBar(selectedTab: selectedTab) { tab in
+                selectedTab = tab
+                
+              
+                switch tab {
+                case "Home":
+         
+                    break
+                case "Map":
+          
+                    break
+                case "Library":
+
+                    break
+                case "Cafe":
+                 
+                    break
+                case "Halls":
+    
+                    break
+                case "Gym":
+     
+                    break
+                case "Parking":
+           
+                    break
+                default:
+                    break
+                }
+            }
         }
 
         .background(Color.white)
@@ -348,7 +343,7 @@ struct LibraryCard: View {
                     .padding(.horizontal, 12)
                     .padding(.vertical, 6)
                     .background(isOpen ? Color.green : Color.red)
-                    .cornerRadius(12)
+                    .cornerRadius(6)
                     .padding(.top, 12)
                     .padding(.trailing, 12)
             }
@@ -387,7 +382,7 @@ Text(pcStatus)
                             .padding(.horizontal, 8)
                             .padding(.vertical, 4)
                             .background(pcStatusColor)
-                            .cornerRadius(8)
+                            .cornerRadius(6)
                     }
                 }
                 
@@ -470,7 +465,7 @@ Text(pcStatus)
                             .padding(.horizontal, 20)
                             .padding(.vertical, 12)
                             .background(Color.black)
-                            .cornerRadius(25)
+                            .cornerRadius(8)
                     }
                     
                   
@@ -481,7 +476,7 @@ Text(pcStatus)
                             .padding(.horizontal, 20)
                             .padding(.vertical, 12)
                             .background(Color.black)
-                            .cornerRadius(25)
+                            .cornerRadius(8)
                     }
                     Spacer()
                 }

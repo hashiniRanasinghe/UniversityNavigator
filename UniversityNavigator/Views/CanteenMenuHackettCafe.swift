@@ -61,7 +61,7 @@ struct CanteenMenuHackettCafeView: View {
                             .padding(.horizontal, 12)
                             .padding(.vertical, 6)
                             .background(Color.green)
-                            .cornerRadius(12)
+                            .cornerRadius(6)
                     }
 
                     HStack(spacing: 20) {
@@ -156,9 +156,9 @@ struct CanteenMenuHackettCafeView: View {
                                     selectedCategory == category
                                         ? Color.black : Color.clear
                                 )
-                                .cornerRadius(20)
+                                .cornerRadius(8)
                                 .overlay(
-                                    RoundedRectangle(cornerRadius: 20)
+                                    RoundedRectangle(cornerRadius: 8)
                                         .stroke(Color.black, lineWidth: 1)
                                 )
                         }
@@ -180,9 +180,9 @@ struct CanteenMenuHackettCafeView: View {
                 Spacer()
             }
             .background(Color.gray.opacity(0.1))
-            .cornerRadius(25)
+            .cornerRadius(10)
             .overlay(
-                RoundedRectangle(cornerRadius: 25)
+                RoundedRectangle(cornerRadius: 10)
                     .stroke(Color.gray.opacity(0.3), lineWidth: 1)
             )
             .padding(.horizontal, 20)
@@ -252,7 +252,7 @@ struct CanteenMenuHackettCafeView: View {
                         .padding(.vertical, 10)
                         .padding(.horizontal, 20)
                         .background(Color.black)
-                        .cornerRadius(20)
+                        .cornerRadius(8)
                 }.frame(maxWidth: 200)
 
                     .padding(.horizontal, 20)

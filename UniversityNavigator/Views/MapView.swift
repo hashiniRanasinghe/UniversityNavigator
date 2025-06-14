@@ -465,9 +465,9 @@ struct FilterButtonStyle: ButtonStyle {
             .padding(.horizontal, 16)
             .padding(.vertical, 10)
             .background(isSelected ? Color.black : Color.clear)
-            .cornerRadius(20)
+            .cornerRadius(8)
             .overlay(
-                RoundedRectangle(cornerRadius: 20)
+                RoundedRectangle(cornerRadius: 8)
                     .stroke(Color.black, lineWidth: 1)
             )
             .scaleEffect(configuration.isPressed ? 0.95 : 1.0)
@@ -568,7 +568,7 @@ struct LocationDetailView: View {
                             .frame(maxWidth: .infinity)
                             .padding(.vertical, 12)
                             .background(Color.green)
-                            .cornerRadius(25)
+                            .cornerRadius(8)
                         }
                     }
                 }
@@ -658,12 +658,12 @@ struct SearchBar: View {
             Spacer()
         }
         .background(Color.gray.opacity(0.1))
-        .cornerRadius(25)
+        .cornerRadius(10)
         .overlay(
-            RoundedRectangle(cornerRadius: 25)
+            RoundedRectangle(cornerRadius: 10)
                 .stroke(Color.gray.opacity(0.3), lineWidth: 1)
         )
-        .padding(.horizontal, 20)
+        .padding(.horizontal, 10)
 
         //        HStack {
         //            Image(systemName: "magnifyingglass")
@@ -727,7 +727,7 @@ struct LocationRow: View {
         }
         .buttonStyle(PlainButtonStyle())
         .background(Color.white)
-        .cornerRadius(12)
+        .cornerRadius(10)
         .shadow(color: Color.black.opacity(0.1), radius: 4, x: 0, y: 2)
         .padding(.horizontal, 10)
     }

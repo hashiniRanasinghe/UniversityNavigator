@@ -81,7 +81,7 @@ struct BeasleyLibrary: View {
                                         .padding(.horizontal, 12)
                                         .padding(.vertical, 6)
                                         .background(Color.green)
-                                        .cornerRadius(12)
+                                        .cornerRadius(6)
                                 }
                                 Spacer()
                             }
@@ -245,15 +245,14 @@ struct BeasleyLibrary: View {
 
                     NavigationLink(destination: MapView(targetLocation: beasleyLawLibraryLocation)) {
                         Text("Get Directions")
-                            .font(.system(size: 14, weight: .medium))
+                            .font(.system(size: 16, weight: .semibold))
                             .foregroundColor(.white)
-                            .padding(.vertical, 10)
-                            .padding(.horizontal, 20)
+                            .padding(.vertical, 12)
+                            .padding(.horizontal, 40)
                             .background(Color.black)
-                            .cornerRadius(20)
+                            .cornerRadius(8)
                     }
-                    .padding(.horizontal, 100)
-                    .padding(.bottom, 20)
+                    .padding(.horizontal, 60)                    .padding(.bottom, 20)
                     .padding(.top, 0)
                 }
                 .padding(.bottom, 100)

@@ -203,14 +203,14 @@ struct AnatomyLectureRoomView: View {
                     .padding(.horizontal, 20)
                     NavigationLink(destination: MapView(targetLocation: location)) {
                         Text("Get Directions")
-                            .font(.system(size: 14, weight: .medium))
+                            .font(.system(size: 16, weight: .semibold))
                             .foregroundColor(.white)
-                            .padding(.vertical, 10)
-                            .padding(.horizontal, 20)
+                            .padding(.vertical, 12)
+                            .padding(.horizontal, 40)
                             .background(Color.black)
-                            .cornerRadius(20)
-                    }                    .padding(.horizontal, 100)
-                    .padding(.bottom, 20)
+                            .cornerRadius(8)
+                    }
+                    .padding(.horizontal, 60)                    .padding(.bottom, 20)
                     .padding(.top, 0)
                 }
             }
@@ -262,7 +262,7 @@ struct ScheduleItem: View {
 //                .padding(.vertical, 6)
                 .frame(width: 90, height: 28)
                 .background(statusColor)
-                .cornerRadius(12)
+                .cornerRadius(6)
         }
         .padding(.vertical, 8)
     }
@@ -289,7 +289,7 @@ struct ResourceItem: View {
         .padding(.horizontal, 16)
         .padding(.vertical, 12)
         .background(Color.gray.opacity(0.1))
-        .cornerRadius(8)
+        .cornerRadius(12)
     }
 }
 

@@ -66,8 +66,8 @@ struct CampusParkingView: View {
                             location: "Adjacent to the Reid Library",
                             availableSpots: 5,
                             totalSpots: 50,
-                            weekendStatus: "Available",
-                            weekendStatusColor: moderateColor,
+                            weekendStatus: "Free",
+                            weekendStatusColor: freeColor,
                             targetLocation: staffParkingLocation
                             
                         )
@@ -92,8 +92,8 @@ struct CampusParkingView: View {
                             location: "Near Hackett Hall",
                             availableSpots: 25,
                             totalSpots: 100,
-                            weekendStatus: "Free",
-                            weekendStatusColor: freeColor,
+                            weekendStatus: "Moderate",
+                            weekendStatusColor: moderateColor,
                             
                             targetLocation: studentParkingLocation
                         )
@@ -250,7 +250,7 @@ struct ParkingCard: View {
                     .padding(.horizontal, 12)
                     .padding(.vertical, 6)
                     .background(statusColor)
-                    .cornerRadius(12)
+                    .cornerRadius(6)
                     .padding(.top, 12)
                     .padding(.trailing, 12)
             }
@@ -290,7 +290,7 @@ struct ParkingCard: View {
                             .padding(.horizontal, 8)
                             .padding(.vertical, 4)
                             .background(weekendStatusColor)
-                            .cornerRadius(8)
+                            .cornerRadius(6)
                     }
                 }
                 
@@ -353,7 +353,7 @@ struct ParkingCard: View {
                               .padding(.horizontal, 20)
                               .padding(.vertical, 12)
                               .background(Color.black)
-                              .cornerRadius(25)
+                              .cornerRadius(8)
                       }
                 }
             }
