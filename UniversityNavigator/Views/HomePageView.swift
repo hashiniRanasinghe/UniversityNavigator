@@ -63,9 +63,9 @@ struct HomePageView: View {
                     Spacer()
                 }
                 .background(Color.gray.opacity(0.1))
-                .cornerRadius(25)
+                .cornerRadius(10)
                 .overlay(
-                    RoundedRectangle(cornerRadius: 25)
+                    RoundedRectangle(cornerRadius: 10)
                         .stroke(Color.gray.opacity(0.3), lineWidth: 1)
                 )
             }
@@ -353,7 +353,7 @@ struct HomePageView: View {
                             .padding(.horizontal, 8)
                             .padding(.vertical, 4)
                             .background(statusColor)
-                            .cornerRadius(8)
+                            .cornerRadius(6)
                     }
                     
                     Text(spotsAvailable)
@@ -460,7 +460,7 @@ struct HomePageView: View {
                             .padding(.horizontal, 16)
                             .padding(.vertical, 6)
                             .background(Color.black)
-                            .cornerRadius(15)
+                            .cornerRadius(8)
                     }
                 }
                 .padding(12)

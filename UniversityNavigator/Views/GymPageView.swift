@@ -88,7 +88,7 @@ struct GymPageView: View {
                                     .padding(.horizontal, 12)
                                     .padding(.vertical, 6)
                                     .background(Color.orange)
-                                    .cornerRadius(12)
+                                    .cornerRadius(6)
                             }
 
                             //hrs
@@ -253,7 +253,7 @@ struct GymPageView: View {
                             .frame(maxWidth: .infinity)
                             .padding(.vertical, 16)
                             .background(Color.black)
-                            .cornerRadius(25)
+                            .cornerRadius(8)
                     }
                     .padding(.horizontal, 100)
                     .padding(.bottom, 20)

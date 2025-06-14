@@ -183,9 +183,9 @@ struct CanteenMenuBusinessSchoolCafeView: View {
                 Spacer()
             }
             .background(Color.gray.opacity(0.1))
-            .cornerRadius(25)
+            .cornerRadius(10)
             .overlay(
-                RoundedRectangle(cornerRadius: 25)
+                RoundedRectangle(cornerRadius: 10)
                     .stroke(Color.gray.opacity(0.3), lineWidth: 1)
             )
             .padding(.horizontal, 20)
@@ -257,7 +257,7 @@ struct CanteenMenuBusinessSchoolCafeView: View {
                         .padding(.vertical, 10)
                         .padding(.horizontal, 20)
                         .background(Color.black)
-                        .cornerRadius(20)
+                        .cornerRadius(8)
                 }
                 .frame(maxWidth: 200)
 

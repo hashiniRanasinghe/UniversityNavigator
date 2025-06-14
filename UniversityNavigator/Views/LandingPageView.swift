@@ -37,7 +37,7 @@ struct LandingPageView: View {
                     .frame(maxWidth: .infinity)
                     .frame(height: 56)
                     .background(Color.black)
-                    .cornerRadius(28)
+                    .cornerRadius(6)
             }
             .padding(.horizontal, 40)
             .padding(.bottom, 50)

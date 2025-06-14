@@ -93,9 +93,9 @@ struct CampusLectureHallsView: View {
                                     .padding(.horizontal, 16)
                                     .padding(.vertical, 10)
                                     .background(selectedCategory == category ? Color.black : Color.clear)
-                                    .cornerRadius(20)
+                                    .cornerRadius(8)
                                     .overlay(
-                                        RoundedRectangle(cornerRadius: 20)
+                                        RoundedRectangle(cornerRadius: 8)
                                             .stroke(Color.black, lineWidth: 1)
                                     )
                             }
@@ -291,7 +291,7 @@ struct LectureHallCard: View {
                     .padding(.horizontal, 12)
                     .padding(.vertical, 6)
                     .background(statusColor)
-                    .cornerRadius(12)
+                    .cornerRadius(6)
                     .padding(.top, 12)
                     .padding(.trailing, 12)
             }
@@ -405,7 +405,7 @@ struct LectureHallCard: View {
                               .padding(.horizontal, 20)
                               .padding(.vertical, 12)
                               .background(Color.black)
-                              .cornerRadius(25)
+                              .cornerRadius(8)
                       }
                       
                       NavigationLink(destination: destinationView) {
@@ -415,7 +415,7 @@ struct LectureHallCard: View {
                               .padding(.horizontal, 20)
                               .padding(.vertical, 12)
                               .background(Color.black)
-                              .cornerRadius(25)
+                              .cornerRadius(8)
                       }
                       
                       Spacer()
